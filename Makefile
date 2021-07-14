@@ -18,12 +18,16 @@ website: pull PushForWebsite
 pull:
 	git pull origin main
 
+
 PushForWebsite:
+ifeq ($(MESSAGE),)
+	echo "emtpy message!"
+else
 	git add .
-	git commit -m "update website"
+	git commit -m "$(MESSAGE)"
 	git push -u origin main
+endif
 
 test:
-	make test
-
+	echo "test"
 
