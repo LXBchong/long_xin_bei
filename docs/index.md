@@ -2,7 +2,7 @@
 >
 > 详情请访问我们的[github网站](https://github.com/LXBchong/long_xin_bei/)
 >
-> 我们小组成员：唐思源、、、
+小组成员：唐思源、戴旭书、、
 
 
 
