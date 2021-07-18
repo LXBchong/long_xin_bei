@@ -1,33 +1,27 @@
-#建议第一次部署网站的时候一步步执行，然后之后再用make website快捷部署
+MESSAGE := $(m)
+BRANCH  := $(b)
 
-MESSAGE=$(m)
+test:
+	echo "$(MESSAGE):$(m)"
+	echo "$(BRANCH):$(b)"
 
 push: pull
 ifeq ($(MESSAGE),)
-	echo "empty message!"
+	@echo "error: empty commit message!"
+	@exit 1
 else
-	git add .
-	git commit -m "$(MESSAGE)"
-	git push -u origin main
+	@git add .
+	@git commit -m "$(MESSAGE)"
+	@git push -u origin $(BRANCH)
 endif
-
-
-website: pull PushForWebsite
-	mkdocs gh-deploy
 
 pull:
-	git pull origin main
-
-
-PushForWebsite:
-ifeq ($(MESSAGE),)
-	echo "emtpy message!"
+ifeq ($(BRANCH),)
+	@echo "error: branch not given"
+	@exit 1
 else
-	git add .
-	git commit -m "$(MESSAGE)"
-	git push -u origin main
+	@git pull origin $(BRANCH)
 endif
 
-test:
-	echo "test"
-
+website:
+	@make push m="$(MESSAGE)" b="main"
