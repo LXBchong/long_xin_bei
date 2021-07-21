@@ -1,7 +1,7 @@
 `include "def.svh"
 
 
-module D_data #(
+module D_meta #(
     parameter int NUM_BYTES = 64,  // 16, 32 or 64
 
     localparam int BYTE_WIDTH = 8,
@@ -11,6 +11,8 @@ module D_data #(
     localparam int NUM_WORDS  = NUM_BYTES * BYTE_WIDTH / WORD_WIDTH,
     localparam int ADDR_WIDTH = 4,
     localparam int LANE_WIDTH = WORD_WIDTH, 
+    localparam int NUM_LANES  = 1,
+    localparam int NUM_BITS   = NUM_BYTES * BYTE_WIDTH 
 ) (
     input logic clk,en,
 
