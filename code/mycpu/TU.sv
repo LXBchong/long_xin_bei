@@ -15,7 +15,7 @@ assign d_uncached = dreq.addr[31:28] == 4'ha || dreq.addr[31:28] == 4'hb ? 1'b1:
 
 always_comb begin
     t_dreq.valid=dreq.valid;        // in request?
-    t_dreq.is_write=dreq.is_write;          // number of bytes in one burst
+    t_dreq.is_write=dreq.is_write;  // write or not
     t_dreq.strobe=dreq.strobe;      // which bytes are enabled?
     t_dreq.data=dreq.data;          // the data to write
 

@@ -4,6 +4,16 @@
 
 `define instr_num 4
 
+`define Dcacheline_len 4      //4 words in one Dcacheline
+`define Dcache_offset_len 4   //bits of offset
+
+`define Dcache_set_num 4 
+`define Dcache_set_len 2      //bits of index
+
+`define Dcache_way_num 4      //4 way
+
+`define Dcache_tag_bits 26    //bits of tag
+
 typedef logic[31:0] word_t;
 typedef logic[4:0] strobe_t;
 typedef logic[31:0] addr_t;

@@ -10,11 +10,17 @@ module MMU (
     output ibus_resp_t iresp,
 
     output dbus_req_t t_dreq, //translated dreq
-    output ibus_req_t t_ireq  //translated ireq
+    output ibus_req_t t_ireq,  //translated ireq
+
+    input dbus_resp_t cache_dresp
 );
 
 logic i_uncached,d_uncached;
 
+assign dresp = cache_dresp;
+
 TU TU_inst(.*);
+DCache DCache_inst(.*);
+
     
 endmodule
