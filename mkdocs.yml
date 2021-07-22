@@ -2,7 +2,7 @@ site_name: 2021龙芯杯
 
 nav:
   - 首页: index.md
-  - 资料汇总: competition/龙兴杯资料汇总.md
+  - 资料汇总: competition/龙芯杯资料汇总.md
   - 总体架构: competition/总体架构.md
   - 其它资料: 
     - 超标量处理器笔记: competition/超标量处理器笔记.md
