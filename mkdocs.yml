@@ -24,6 +24,7 @@ theme:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
 
+
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
