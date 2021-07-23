@@ -10,7 +10,7 @@
 
 ​		由于在初赛中并不要求对于外设等设备的接入，因此初赛Soc设计侧重于对于FPGA上的资源应用，架构如下图。
 
-<img src="/Users/dongshilong/Desktop/summer holiday/longxinbei/mainbranch/long_xin_bei/docs/competition/资料图片/Soc_arch.png" alt="image-20210724031945889" style="zoom:67%;" />
+<img src="资料图片/Soc_arch.png" alt="image-20210724031945889" style="zoom:67%;" />
 
 #### 1.1 CPU Top设计
 
