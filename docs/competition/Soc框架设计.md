@@ -16,7 +16,7 @@
 
 ​		初赛部分的重点为CPU Top部分的设计。Core Top部分为设计的CPU主体部分，我们的架构为顺序双发射CPU，具体报告见CPU设计文档。
 
-​		CPU的Core Top层面通过四个信号与MMU部分进行交互，进行指令与数据的传输。MMU通过对请求的地址等信息进行解析，确定其响应路径为ibus，dbus或者uncached bus。其中L1i Cache实现为ICache，L1d Cache实现为DCache，Uncached实现为Uncached Buffer。具体报告见Cache设计文档。
+​		CPU在Core Top层面通过四个信号与MMU部分进行交互，进行指令与数据的传输。MMU通过对请求的地址等信息进行解析，确定其响应路径为ibus，dbus或者uncached bus。其中L1i Cache实现为ICache，L1d Cache实现为DCache，Uncached实现为Uncached Buffer。具体报告见Cache设计文档。
 
 ​		上述三条响应总线路径均为自定义类SRAM总线，在经过ICacheDCache，Uncached Buffer后转化成符合AXI 4标准的总线，并从Xilinx Vivado提供的IP核AXI Crossbar的Slave端输入，在Master端输出为符合AXI4标准的总线。另外AXI Crossbar提供仲裁功能，三条Slave总线的优先级顺序为uncached bus > dbus > ibus.
 

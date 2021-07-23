@@ -8,8 +8,38 @@
 
 ### 1. Cache与CPU的交互行为
 
+![Cache](资料图片/Cache.png)
 
-### Dcache架构
+
+
+​		CPU在Core Top层面通过四个信号与MMU部分进行交互，进行指令与数据的传输。MMU通过对请求的地址等信息进行解析，确定其响应路径为ibus，dbus或者uncached bus。其中L1i Cache实现为ICache，L1d Cache实现为DCache，Uncached实现为Uncached Buffer。
+
+​		上述三条总线均为类SRAM总线，由于比赛要求封装为AXI总线，因此在分别经过ICache，DCache和Uncached Buffer之后均被转换成AXI 4 总线。
+
+
+
+### 2. MMU 架构
+
+//TODO
+
+#### 缓存相关指令
+
+见 [支持操作系统的额外指令](https://lxbchong.github.io/long_xin_bei/competition/materials/%E6%94%AF%E6%8C%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%A2%9D%E5%A4%96%E6%8C%87%E4%BB%A4.html)
+
+#### CACHE
+
++ vAddr ← GPR[base] + sign_extend(offset) 
++ (pAddr, uncached) ← AddressTranslation(vAddr, DataReadReference) 
++ CacheOp(op, vAddr, pAddr)
++ 待实现
+
+#### pref
+
++ 待定
+
+
+
+### 3. Dcache架构
 
 #### Meta
 
@@ -62,28 +92,12 @@ Skid buffer 是插入在总线之间的。它的效果是切断 `valid` 和 `add
 
 另外考虑
 
-#### AXI接口（参考）
 
-1. 2019 年龙芯杯清华队伍：[“NSCSCC 2019 Final Report”](https://fducslg.github.io/ICS-2021Spring-FDU/misc/external.html#其它)
-2. 第四届“龙芯杯” 复旦大学FDU1.1队参赛作品  [CacheBusToAXI.sv](https://github.com/NSCSCC-2020-Fudan/FDU1.1-NSCSCC/blob/master/cache/src/util/CacheBusToAXI.sv)
 
-<br>
+### 4. ICache 架构
 
-### MMU架构
+### 5. Uncached Buffer架构
 
-#### 缓存相关指令
+### 6. 类SRAM总线与AXI 4总线转换
 
-见 [支持操作系统的额外指令](https://lxbchong.github.io/long_xin_bei/competition/materials/%E6%94%AF%E6%8C%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%A2%9D%E5%A4%96%E6%8C%87%E4%BB%A4.html)
-
-#### CACHE
-
-+ vAddr ← GPR[base] + sign_extend(offset) 
-+ (pAddr, uncached) ← AddressTranslation(vAddr, DataReadReference) 
-+ CacheOp(op, vAddr, pAddr)
-+ 待实现
-
-#### pref
-
-+ 待定
-
-<br>
+//TODO: 突发传输(INCR or WRAP)以及axi_wrap.v

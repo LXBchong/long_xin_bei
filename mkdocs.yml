@@ -3,7 +3,7 @@ site_name: 2021龙芯杯
 nav:
   - 首页: index.md
   - 资料汇总: competition/龙芯杯资料汇总.md
-  - 总体架构: competition/总体架构.md
+  - CPU设计: competition/CPU设计.md
   - Cache设计: competition/Cache设计.md
   - Soc框架设计: competition/Soc框架设计.md
   - 其它资料: 
