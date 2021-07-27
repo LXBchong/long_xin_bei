@@ -17,18 +17,18 @@ module MMU (
 
 logic i_uncached,d_uncached;
 
-logic skid_free;
-dbus_req_t skid_buffer;
+logic d_skid_free;
+dbus_req_t d_skid_buffer;
 
 
 dbus_req_t t_dreq;
 ibus_req_t t_ireq;
 
-assign cache_dreq = skid_free ? t_dreq : skid_buffer ;
+assign cache_dreq = d_skid_free ? t_dreq : d_skid_buffer ;
 
 always_comb begin
     dresp = cache_dresp;
-    dresp.addr_ok = dreq.valid?skid_free:1'b0;;
+    dresp.addr_ok = dreq.valid?d_skid_free:1'b0;;
 end
 
 TU TU_inst(.*);   // Translation Unit
@@ -36,15 +36,15 @@ DCache DCache_inst(.*);
 
 always_ff @(posedge clk) begin
     if(resetn) begin
-        if(cache_dresp.addr_ok) skid_free<=1'b1;
-        else if(dreq.valid && skid_free) begin
-            skid_free  <=1'b0;
-            skid_buffer<=t_dreq;
+        if(cache_dresp.addr_ok) d_skid_free<=1'b1;
+        else if(dreq.valid && d_skid_free) begin
+            d_skid_free  <=1'b0;
+            d_skid_buffer<=t_dreq;
         end
     end
     else begin
-        skid_free<=1'b1;
-        skid_buffer<='0;
+        d_skid_free<=1'b1;
+        d_skid_buffer<='0;
     end
 end
 
