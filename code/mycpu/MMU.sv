@@ -28,7 +28,7 @@ assign cache_dreq = skid_free ? t_dreq : skid_buffer ;
 
 always_comb begin
     dresp = cache_dresp;
-    dresp.addr_ok = skid_free;
+    dresp.addr_ok = dreq.valid?skid_free:1'b0;;
 end
 
 TU TU_inst(.*);   // Translation Unit
