@@ -7,7 +7,7 @@ nav:
   - Cache设计: competition/Cache设计.md
   - Soc框架设计: competition/Soc框架设计.md
   - 其它资料: 
-    - 超标量处理器笔记: competition/超标量处理器笔记.md
+    - 《超标量处理器》笔记: competition/超标量处理器笔记.md
     - 指令集: competition/materials/指令集.md
     - 支持操作系统的额外指令: competition/materials/支持操作系统的额外指令.md
 
