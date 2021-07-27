@@ -10,7 +10,7 @@ module MMU (
     output ibus_resp_t iresp,
 
     output dbus_req_t cache_dreq,
-    output ibus_req_t cache_ireq,  //translated ireq
+    output ibus_req_t cache_ireq,  
 
     input dbus_resp_t cache_dresp
 );
@@ -20,7 +20,7 @@ logic i_uncached,d_uncached;
 logic d_skid_free;
 dbus_req_t d_skid_buffer;
 
-
+//translated request
 dbus_req_t t_dreq;
 ibus_req_t t_ireq;
 
