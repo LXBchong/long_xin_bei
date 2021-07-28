@@ -11,7 +11,7 @@ module branch_predict(
     input addr_t EPC
 );
     always_comb begin
-        next_PC = cur_PC + 32'd16;
+        next_PC = cur_PC + 32'd8;
         if(cp0_flush)
             next_PC = 32'hbfc00380;
         else if(eret)

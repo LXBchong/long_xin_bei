@@ -2,11 +2,7 @@
 `include "instr.svh"
 
 module commit(
-    input exec_reg_t exec_reg1, exec_reg2,
-    input word_t ALU1_result, ALU2_result, MMU_out, HILO_result, COP0_result,
-    input addr_t BRU_link_PC,
-    input logic[63:0] MLT_result, DIV_result,
-    input logic write_hi_hl, write_lo_hl,
+    input exec_result_t exec_result,
 
     output regid_t wa5, wa6,
     output word_t wd5, wd6,  
@@ -26,6 +22,25 @@ module commit(
     output logic[4:0] debug_wb_rf_wnum    ,
     output logic[31:0] debug_wb_rf_wdata  
 );
+
+    exec_reg_t exec_reg1, exec_reg2;
+    word_t ALU1_result, ALU2_result, MMU_out, HILO_result, COP0_result;
+    addr_t BRU_link_PC;
+    logic[63:0] MLT_result, DIV_result;
+    logic write_hi_hl, write_lo_hl;
+
+    assign exec_reg1 = exec_result.exec_reg1;
+    assign exec_reg2 = exec_result.exec_reg2;
+    assign ALU1_result = exec_result.ALU1_result;
+    assign ALU2_result = exec_result.ALU2_result;
+    assign MMU_out = exec_result.MMU_result;
+    assign HILO_result = exec_result.HILO_result;
+    assign BRU_link_PC = exec_result.BRU_link_PC;
+    assign MLT_result = exec_result.MLT_result;
+    assign DIV_result = exec_result.DIV_result;
+    assign write_hi_hl = exec_result.write_hi;
+    assign write_lo_hl = exec_result.write_lo;
+
 
         //hanlde exception
     logic exception1_en, exception2_en, BD;

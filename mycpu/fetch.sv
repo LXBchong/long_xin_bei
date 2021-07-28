@@ -3,8 +3,8 @@
 
 module fetch(
     input logic clk, resetn       ,
-    output addr_t[3:0] PC         ,
-    output instr_t[3:0] instr     ,
+    output addr_t[1:0] PC         ,
+    output instr_t[1:0] instr     ,
     output logic fetch_halt       , 
 
     output ibus_req_t ireq        ,
@@ -19,9 +19,9 @@ module fetch(
     logic branch_taken, flush_token;
     addr_t cur_PC, next_PC, work_PC, work_PC_nxt;
 
-    addr_t[3:0] PC_temp, PC_temp_nxt;
-    instr_t[3:0] instr_temp, instr_temp_nxt;
-    logic[2:0] tag, tag_nxt;
+    addr_t[1:0] PC_temp, PC_temp_nxt;
+    instr_t[1:0] instr_temp, instr_temp_nxt;
+    logic[1:0] tag, tag_nxt;
 
     //no cache bit
     assign work_PC_nxt = work_PC + 32'd4;
@@ -37,7 +37,7 @@ module fetch(
     assign ireq.valid = 1;
     assign ireq.addr = work_PC;
 
-    assign fetch_halt = tag == 3'd4 ? 0 : 1;
+    assign fetch_halt = tag == 2'd2 ? 0 : 1;
 
     branch_predict branch_predict_ins(.*);
     

@@ -197,6 +197,7 @@ typedef enum i4{
 typedef struct packed{
     logic pending;
     function_unit_t fu;
+    logic[1:0] phase;
 }scoreboard_t;
 
 typedef struct packed{
@@ -272,7 +273,46 @@ typedef struct packed {
     logic RI;
 }exec_reg_t;
 
+typedef struct packed {
+    ALU_input_t ALU1_input;
+    ALU_input_t ALU2_input;
+    BRU_input_t BRU_input;
+    MMU_input_t MMU_input;
+    MLT_input_t MLT_input;
+    DIV_input_t DIV_input;
+    HILO_input_t HILO_input;
+    exec_reg_t exec_reg1;
+    exec_reg_t exec_reg2;
+}exec_input_t;
 
+typedef struct packed {   
+    word_t ALU1_result;   
+    word_t ALU2_result;   
+    addr_t BRU_link_PC;  
+    word_t MMU_result;  
+    MLT_input_t MLT_in; 
+    word_t[3:0] MLT_p;    
+    logic[63:0] DIV_result;
+    exec_reg_t exec_reg1; 
+    exec_reg_t exec_reg2; 
+    logic write_hi;
+    logic write_lo;
+    word_t HILO_result;
+}exec_pipeline_reg_t;  
+
+typedef struct packed {
+    word_t ALU1_result;
+    word_t ALU2_result;
+    addr_t BRU_link_PC;   
+    word_t MMU_result;  
+    logic[63:0] MLT_result;
+    logic[63:0] DIV_result;
+    logic write_hi;
+    logic write_lo;
+    word_t HILO_result;
+    exec_reg_t exec_reg1; 
+    exec_reg_t exec_reg2;
+}exec_result_t;
 
 //cp0 defs
 typedef enum i5 {

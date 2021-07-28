@@ -4,22 +4,24 @@
 module issue(
     logic clk, resetn,
     input decode_t[1:0] issue_instr,
-    output ALU_input_t  ALU1_input, ALU2_input,
-    output BRU_input_t  BRU_input,
-    output MMU_input_t  MMU_input,
-    output HILO_input_t HILO_input,
-    output MLT_input_t MLT_input,
-    output DIV_input_t DIV_input,
-    output COP0_input_t COP0_input,
-    output exec_reg_t   exec_reg1, exec_reg2,
+    output exec_input_t exec_input,
     output logic[1:0]   issue_cnt,
     output regid_t ra1, ra2, ra3, ra4,
     input word_t rd1, rd2, rd3, rd4,
-    input logic queue_empty, fetch_halt, mem_halt, queue_full, mlt_halt, div_halt
+    input logic queue_empty, fetch_halt, mem_halt, queue_full, div_halt
 );
     logic first_instr_ready, second_instr_ready;
+    ALU_input_t  ALU1_input, ALU2_input;
+    BRU_input_t  BRU_input;
+    MMU_input_t  MMU_input;
+    HILO_input_t HILO_input;
+    MLT_input_t MLT_input;
+    DIV_input_t DIV_input;
+    COP0_input_t COP0_input;
+    exec_reg_t   exec_reg1, exec_reg2;
 
     scoreboard_t[31:0] scoreboard, scoreboard_nxt;
+    scoreboard_t scoreboard_hi, scoreboard_lo, scoreboard_hi_nxt, scoreboard_lo_nxt;
     
     //is regA and regB ready for first/second instr?
     always_comb begin
@@ -28,12 +30,17 @@ module issue(
         for (int i = 1; i <= 31; i ++) begin
             if(scoreboard[i].pending 
                 && ((issue_instr[0].read_en_A && issue_instr[0].regA == i) || (issue_instr[0].read_en_B && issue_instr[0].regB == i))
-                || issue_instr[0].PC == '0)
+                || issue_instr[0].PC == '0
+                || (issue_instr[0].read_hi && scoreboard_hi.pending)
+                || (issue_instr[0].read_lo && scoreboard_lo.pending))
                 first_instr_ready = 0;
 
             if(scoreboard[i].pending 
             && ((issue_instr[1].read_en_A && issue_instr[1].regA == i) || (issue_instr[1].read_en_B && issue_instr[1].regB == i))
-            || issue_instr[1].PC == '0)
+            || issue_instr[1].PC == '0                
+            || (issue_instr[1].read_hi && scoreboard_hi.pending)
+            || (issue_instr[1].read_lo && scoreboard_lo.pending)
+            || ((issue_instr[1].read_hi || issue_instr[1].read_lo) && issue_instr[0].unit == U_MLT))
                 second_instr_ready = 0;
         
         end
@@ -49,7 +56,7 @@ module issue(
         exec_reg1 = '0;
         exec_reg2 = '0;
 
-        if(~first_instr_ready || queue_empty || mem_halt || mlt_halt || div_halt
+        if(~first_instr_ready || queue_empty || mem_halt || div_halt
             || (issue_instr[0].unit == U_BRANCH && (issue_instr[1].PC == '0 || ~second_instr_ready))) begin
             issue_cnt = '0;
 
@@ -186,18 +193,81 @@ module issue(
 
     //assign scoreboard_nxt
     always_comb begin
-        scoreboard_nxt = '0;
+        scoreboard_nxt = scoreboard;
         for (int i = 1; i <= 31; i ++) begin
             if(i == exec_reg1.target_reg) begin
                 scoreboard_nxt[i].pending = 1;
                 scoreboard_nxt[i].fu = exec_reg1.fu;
+                scoreboard_nxt[i].phase = 1;
             end
 
             if(i == exec_reg2.target_reg) begin
                 scoreboard_nxt[i].pending = 1;
                 scoreboard_nxt[i].fu = exec_reg2.fu;
+                scoreboard_nxt[i].phase = 1;
+            end
+
+            if(scoreboard[i].pending == 1) begin
+                if(scoreboard[i].phase == 2'd3)
+                    scoreboard_nxt[i] = '0;
+                else
+                    scoreboard_nxt[i].phase = scoreboard[i].phase + 2'd1;
             end
         end
+    end
+    
+    always_comb begin
+        scoreboard_hi_nxt = scoreboard_hi;
+        scoreboard_lo_nxt = scoreboard_lo;
+        if(exec_reg1.fu == DIV || exec_reg2.fu == DIV) begin
+            scoreboard_hi_nxt.pending = 1;
+            scoreboard_hi_nxt.fu = DIV;
+            scoreboard_hi_nxt.phase = 1;
+            scoreboard_lo_nxt.pending = 1;
+            scoreboard_lo_nxt.fu = DIV;
+            scoreboard_lo_nxt.phase = 1;
+         end
+         if(exec_reg1.fu == MLT || exec_reg2.fu == MLT) begin
+            scoreboard_hi_nxt.pending = 1;
+            scoreboard_hi_nxt.fu = MLT;
+            scoreboard_hi_nxt.phase = 1;
+            scoreboard_lo_nxt.pending = 1;
+            scoreboard_lo_nxt.fu = DIV;
+            scoreboard_lo_nxt.phase = 1;
+         end
+         if(issue_instr[0].write_hi) begin
+            scoreboard_hi_nxt.pending = 1;
+            scoreboard_hi_nxt.fu = HILO;
+            scoreboard_hi_nxt.phase = 1;
+         end
+         if(issue_instr[1].write_hi) begin
+            scoreboard_hi_nxt.pending = 1;
+            scoreboard_hi_nxt.fu = HILO;
+            scoreboard_hi_nxt.phase = 1;
+         end
+         if(issue_instr[0].write_lo) begin
+            scoreboard_lo_nxt.pending = 1;
+            scoreboard_lo_nxt.fu = HILO;
+            scoreboard_lo_nxt.phase = 1;
+         end
+         if(issue_instr[1].write_lo) begin
+            scoreboard_lo_nxt.pending = 1;
+            scoreboard_lo_nxt.fu = HILO;
+            scoreboard_lo_nxt.phase = 1;
+         end
+         
+         if(scoreboard_hi.pending == 1) begin
+                if(scoreboard_hi_nxt.phase == 2'd3)
+                    scoreboard_hi_nxt = '0;
+                else
+                    scoreboard_hi_nxt.phase = scoreboard_hi.phase + 2'd1;
+          end
+          if(scoreboard_lo.pending == 1) begin
+                if(scoreboard_lo_nxt.phase == 2'd3)
+                    scoreboard_lo_nxt = '0;
+                else
+                    scoreboard_lo_nxt.phase = scoreboard_lo.phase + 2'd1;
+          end
     end
 
     //assign fu input
@@ -378,13 +448,28 @@ module issue(
         endcase 
     end
 
+    assign exec_input.ALU1_input = ALU1_input;
+    assign exec_input.ALU2_input = ALU2_input;
+    assign exec_input.BRU_input = BRU_input;
+    assign exec_input.MMU_input = MMU_input;
+    assign exec_input.MLT_input = MLT_input;
+    assign exec_input.DIV_input = DIV_input;
+    assign exec_input.HILO_input = HILO_input;
+    assign exec_input.exec_reg1 = exec_reg1;
+    assign exec_input.exec_reg2 = exec_reg2;
+ 
+
     always_ff @(posedge clk) begin
         if(~resetn) begin
             scoreboard <= '0;
-        end else if(mem_halt || mlt_halt || div_halt) begin
+            scoreboard_hi <= '0;
+            scoreboard_lo <= '0;
+        end else if(mem_halt || div_halt) begin
             //do nothing
         end else begin
             scoreboard <= scoreboard_nxt;
+            scoreboard_hi <= scoreboard_hi_nxt;
+            scoreboard_lo <= scoreboard_lo_nxt;
         end
     end
 
