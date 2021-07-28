@@ -142,7 +142,7 @@ typedef struct packed {
 typedef struct packed {
     logic  addr_ok;  // is the address accepted by cache?
     logic  data_ok;  // is the field "data" valid?
-    word_t[1:0] data;     // the data read from cache
+    word_t data;     // the data read from cache
 } dbus_resp_t;
 
 /**
@@ -155,9 +155,15 @@ typedef struct packed {
 typedef struct packed {
     logic  valid;  // in request?
     addr_t addr;   // target address
+    logic is_stall;
 } ibus_req_t;
 
-typedef dbus_resp_t ibus_resp_t;
+typedef struct packed {
+    logic  addr_ok;  // is the address accepted by cache?
+    logic  data_ok;  // is the field "data" valid?
+    logic   is_branch;
+    word_t[1:0] data;     // the data read from cache
+} ibus_resp_t;
 
 `define IREQ_TO_DREQ(ireq) \
     {ireq, MSIZE4, 4'b0, 32'b0}

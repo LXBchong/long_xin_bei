@@ -1,3 +1,4 @@
+
 `include "common.svh"
 `include "instr.svh"
 
@@ -7,8 +8,9 @@ module issue(
     output exec_input_t exec_input,
     output logic[1:0]   issue_cnt,
     output regid_t ra1, ra2, ra3, ra4,
-    input word_t rd1, rd2, rd3, rd4,
-    input logic queue_empty, fetch_halt, mem_halt, queue_full, div_halt
+    input word_t rd1_reg, rd2_reg, rd3_reg, rd4_reg,
+    input logic queue_empty, fetch_halt, mem_halt, queue_full, div_halt,
+    input word_t ALU1_bypass_p1, ALU1_bypass_p2, ALU1_bypass_p3, ALU2_bypass_p1, ALU2_bypass_p2, ALU2_bypass_p3
 );
     logic first_instr_ready, second_instr_ready;
     ALU_input_t  ALU1_input, ALU2_input;
@@ -22,13 +24,14 @@ module issue(
 
     scoreboard_t[31:0] scoreboard, scoreboard_nxt;
     scoreboard_t scoreboard_hi, scoreboard_lo, scoreboard_hi_nxt, scoreboard_lo_nxt;
+    word_t rd1, rd2, rd3, rd4;
     
     //is regA and regB ready for first/second instr?
     always_comb begin
         first_instr_ready = 1;
         second_instr_ready = 1;
         for (int i = 1; i <= 31; i ++) begin
-            if(scoreboard[i].pending 
+            if((scoreboard[i].pending && scoreboard[i].fu != ALU1 && scoreboard[i].fu != ALU2) 
                 && ((issue_instr[0].read_en_A && issue_instr[0].regA == i) || (issue_instr[0].read_en_B && issue_instr[0].regB == i))
                 || issue_instr[0].PC == '0
                 || (issue_instr[0].read_hi && scoreboard_hi.pending)
@@ -268,6 +271,94 @@ module issue(
                 else
                     scoreboard_lo_nxt.phase = scoreboard_lo.phase + 2'd1;
           end
+    end
+    
+    always_comb begin
+        rd1 = rd1_reg;
+        rd2 = rd2_reg;
+        rd3 = rd3_reg;
+        rd4 = rd4_reg;
+        for(int j = 1; j <= 31; j++) begin
+            if(j == ra1 && scoreboard[j].pending && scoreboard[j].fu == ALU1) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd1 = ALU1_bypass_p1;
+                    2'd2:
+                        rd1 = ALU1_bypass_p2;
+                    2'd3:
+                        rd1 = ALU1_bypass_p3;
+                endcase 
+            end else if(j == ra1 && scoreboard[j].pending && scoreboard[j].fu == ALU2) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd1 = ALU2_bypass_p1;
+                    2'd2:
+                        rd1 = ALU2_bypass_p2;
+                    2'd3:
+                        rd1 = ALU2_bypass_p3;
+                endcase 
+            end
+            
+            if(j == ra2 && scoreboard[j].pending && scoreboard[j].fu == ALU1) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd2 = ALU1_bypass_p1;
+                    2'd2:
+                        rd2 = ALU1_bypass_p2;
+                    2'd3:
+                        rd2 = ALU1_bypass_p3;
+                endcase 
+            end else if(j == ra2 && scoreboard[j].pending && scoreboard[j].fu == ALU2) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd2 = ALU2_bypass_p1;
+                    2'd2:
+                        rd2 = ALU2_bypass_p2;
+                    2'd3:
+                        rd2 = ALU2_bypass_p3;
+                endcase 
+            end
+            
+            if(j == ra3 && scoreboard[j].pending && scoreboard[j].fu == ALU1) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd3 = ALU1_bypass_p1;
+                    2'd2:
+                        rd3 = ALU1_bypass_p2;
+                    2'd3:
+                        rd3 = ALU1_bypass_p3;
+                endcase 
+            end else if(j == ra3 && scoreboard[j].pending && scoreboard[j].fu == ALU2) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd3 = ALU2_bypass_p1;
+                    2'd2:
+                        rd3 = ALU2_bypass_p2;
+                    2'd3:
+                        rd3 = ALU2_bypass_p3;
+                endcase 
+            end
+            
+            if(j == ra4 && scoreboard[j].pending && scoreboard[j].fu == ALU1) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd4 = ALU1_bypass_p1;
+                    2'd2:
+                        rd4 = ALU1_bypass_p2;
+                    2'd3:
+                        rd4 = ALU1_bypass_p3;
+                endcase 
+            end else if(j == ra4 && scoreboard[j].pending && scoreboard[j].fu == ALU2) begin
+                unique case(scoreboard[j].phase)
+                    2'd1:
+                        rd4 = ALU2_bypass_p1;
+                    2'd2:
+                        rd4 = ALU2_bypass_p2;
+                    2'd3:
+                        rd4 = ALU2_bypass_p3;
+                endcase 
+            end
+        end
     end
 
     //assign fu input

@@ -44,6 +44,8 @@ module MyCore(
     exec_input_t exec_input, exec_input_nxt;
     exec_result_t exec_result, exec_result_nxt;
     
+    word_t ALU1_bypass_p1, ALU2_bypass_p1,ALU1_bypass_p2, ALU2_bypass_p2,ALU1_bypass_p3, ALU2_bypass_p3;
+    
     cp0_reg_input_t cp0_reg_input;
     cp0_regfile_t cp0_reg;
     logic[7:0] cp0_wregsel;
@@ -65,7 +67,7 @@ module MyCore(
     assign decode_en[1] = decode_info[1].PC != '0 ? 1 : 0;
     
     queue issue_queue_ins(clk, resetn, flush, decode_info, decode_en, issue_instr, issue_cnt, queue_full, queue_empty, fetch_halt);
-    issue issue_ins(clk, resetn, issue_instr, exec_input_nxt, issue_cnt, ra1, ra2, ra3, ra4, rd1, rd2, rd3, rd4, queue_empty, fetch_halt, mem_halt, queue_full, div_halt);
+    issue issue_ins(clk, resetn, issue_instr, exec_input_nxt, issue_cnt, ra1, ra2, ra3, ra4, rd1, rd2, rd3, rd4, queue_empty, fetch_halt, mem_halt, queue_full, div_halt, ALU1_bypass_p1, ALU2_bypass_p1, ALU1_bypass_p2, ALU2_bypass_p2, ALU1_bypass_p3, ALU2_bypass_p3);
 
     regfile regfile_ins(.*);
     hilo_reg hilo_reg_ins(.*);
@@ -110,7 +112,12 @@ module MyCore(
     assign exec_result_nxt.exec_reg1 = exec_p23.exec_reg1;
     assign exec_result_nxt.exec_reg2 = exec_p23.exec_reg2;
     //TODO more result to be done 
-
+    assign ALU1_bypass_p1 = ALU1_result;
+    assign ALU2_bypass_p1 = ALU2_result;
+    assign ALU1_bypass_p2 = exec_p12.ALU1_result;
+    assign ALU2_bypass_p2 = exec_p12.ALU2_result;
+    assign ALU1_bypass_p3 = exec_p23.ALU1_result;
+    assign ALU2_bypass_p3 = exec_p23.ALU2_result;
 
     ALU ALU1_ins(exec_input.ALU1_input, ALU1_result, exception_collector_nxt.ALU1_OV, exception_collector_nxt.ALU1_SYS, exception_collector_nxt.ALU1_BR);
     ALU ALU2_ins(exec_input.ALU2_input, ALU2_result, exception_collector_nxt.ALU2_OV, exception_collector_nxt.ALU2_SYS, exception_collector_nxt.ALU2_BR);

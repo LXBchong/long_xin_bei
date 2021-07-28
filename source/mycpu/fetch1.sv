@@ -12,7 +12,8 @@ module fetch1(
     input logic branch_predict_fail,
     input logic queue_full, flush,
     input logic eret, cp0_flush,
-    input addr_t EPC
+    input addr_t EPC,
+    input logic fetch_halt
 );
     logic branch_taken, fetch1_halt;
     addr_t cur_PC, next_PC;
@@ -20,6 +21,7 @@ module fetch1(
     //assign ireq
     assign ireq.valid = 1;
     assign ireq.addr = cur_PC;
+    assign ireq.is_stall = fetch_halt;
 
     assign fetch1_halt =  ~iresp.addr_ok;
 
