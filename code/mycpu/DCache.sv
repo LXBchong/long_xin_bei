@@ -43,7 +43,7 @@ dbus_req_t dreq_two;
 
 logic [Dcache_set_len-1:0] position_one;
 
-logic stall_one,stall_two,resp_ok,step_two_ok,uncached_two;
+logic stall_one,stall_two,resp_ok,resp_addr_ok,step_two_ok,uncached_two;
 
 logic last_pass;  // a new request go to step_two this cycle
 
