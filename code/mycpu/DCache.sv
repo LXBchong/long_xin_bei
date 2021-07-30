@@ -88,6 +88,7 @@ assign data_strobe  = stall_two ? data_strobe_two:'0;
 assign stall_two = dreq_two.valid & (~step_two_ok);
 assign stall_one = stall_two;
 
+assign cache_dresp.addr_ok  = resp_addr_ok;
 assign cache_dresp.data_ok  = resp_ok;
 assign cache_dresp.data     = uncached_two? dcresp.data:new_data[offset_two[Dcache_offset_len-1:2]];
 
@@ -435,7 +436,7 @@ always_ff @(posedge clk) begin
         if(~stall_one) begin
             last_pass   <=1'b1;
 
-            if(cache_dreq.valid) cache_dresp.addr_ok<=1'b1;
+            if(cache_dreq.valid) resp_addr_ok<=1'b1;
 
             dreq_two    <=cache_dreq;
             uncached_two<=d_uncached;
@@ -451,7 +452,7 @@ always_ff @(posedge clk) begin
         end
         else begin
             last_pass   <=1'b0;
-            cache_dresp.addr_ok <=1'b0;
+            resp_addr_ok <=1'b0;
         end
 
 
@@ -482,7 +483,25 @@ always_ff @(posedge clk) begin
 
     end
     else begin
+        last_pass   <='0;
+        resp_addr_ok<='0;
+        dreq_two    <='0;
+        uncached_two<='0;
+        hit_two     <='0;
+        meta_two    <='0;
+        state_two   <=r_meta[31:29];
+
+        meta_addr_two   <='0;
+        data_raddr_two  <='0;
+        data_waddr_two  <='0;
         LRU<='0;
+
+        data_reg    <='0;
+        hit_two     <='0;
+        state_two   <='0;
+        r_count     <='0;
+        w_count     <='0;
+        wb_addr     <='0;
     end
 end
 
