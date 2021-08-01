@@ -7,7 +7,19 @@
 `define WRITING 3'b100
 `define DONE    3'b101
 
-module Dache(
+module Dache #(
+    parameter int instr_num = 4,
+
+    parameter int Dcacheline_len = 4,     //4 words in one Dcacheline
+    parameter int Dcache_offset_len = 4 ,  //bits of offset
+
+    parameter int Dcache_set_num = 4 ,
+    parameter int Dcache_set_len =  2 ,    //bits of index
+
+    parameter int Dcache_way_num = 4,      //4 way
+
+    parameter int Dcache_tag_bits =  26   //bits of tag
+)(
     input logic clk,resetn,d_uncached,
     input dbus_req_t cache_dreq,
     output dbus_resp_t cache_dresp,
@@ -21,23 +33,26 @@ logic [3:0] meta_addr_one,meta_addr_two;
 logic [3:0] data_raddr_one,data_raddr_two;
 logic [3:0] data_waddr_two;
 
+logic is_write;
+
 
 logic [3:0] meta_strobe,meta_strobe_two;
 logic [15:0] data_strobe,data_strobe_two; 
 
-word_t r_meta,w_meta,w_meta_two;
+word_t r_meta,w_meta,w_meta_two,meta_two;
 
 typedef logic [2:0] LRU_tag;
 LRU_tag [Dcache_set_num-1:0] LRU;
 
 LRU_tag new_LRU_tag;
 
+logic [3:0] r_count,w_count;
 
 logic [Dcache_tag_bits-1:0] tag,tag_two;
 logic [Dcache_offset_len -1:0] offset,offset_two;
 logic [Dcache_set_len-1:0] index,index_two;
 
-logic hit_one,hit_two;
+logic hit_one,hit_two,new_hit_two;
 
 dbus_req_t dreq_two;
 
@@ -70,6 +85,8 @@ BRAM    D_data(.clk(clk),
             .wdata(w_data),
             .rdata(r_data));
 
+
+assign is_write = dreq_two.strobe[0] | dreq_two.strobe[1] | dreq_two.strobe[2] | dreq_two.strobe[3] ;
 
 assign {tag,index,offset} = cache_dreq.addr;
 assign {tag_two,index_two,offset_two} = dreq_two.addr;
@@ -164,13 +181,13 @@ always_comb begin
 
 dcreq.valid     = '0;
 dcreq.is_write  = '0;
-dcreq.size      = '0;
+dcreq.size      = MSIZE1;
 dcreq.addr      = '0;
 dcreq.strobe    = '0;
 dcreq.data      = '0;
-dcreq.len       = '0;
+dcreq.len       = MLEN1;
 
-new_state_two   = DONE;
+new_state_two   = `DONE;
 resp_ok         ='0;
 data_strobe_two ='0;
 meta_strobe_two ='0;
@@ -186,8 +203,8 @@ if(dreq_two.valid & ~uncached_two)begin
     new_hit_two     = 1'b1;
     unique case(state_two)
 
-        INVALID:begin  
-            new_state_two=READING
+        `INVALID:begin  
+            new_state_two=`READING;
             //read from memory
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
@@ -198,16 +215,16 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.len      = MLEN4;
             
         end
-        VALID:begin
+        `VALID:begin
             resp_ok=1'b1;
-            if(dreq_two.is_write)begin
-                new_state_two   = DONE;
+            if(is_write)begin
+                new_state_two   = `DONE;
 
                 data_strobe_two = 16'hffff;
                 meta_strobe_two = 4'b1111;
 
                 w_data_two      = new_data;
-                w_meta_two      = {DIRTY,'0,tag_two};
+                w_meta_two      = {`DIRTY,'0,tag_two};
 
                 new_word[7:0]  =dreq_two.strobe[0]?dreq_two.data[7:0]  :current_data[offset_two[Dcache_offset_len-1:2]][7:0];
                 new_word[15:8] =dreq_two.strobe[1]?dreq_two.data[15:8] :current_data[offset_two[Dcache_offset_len-1:2]][15:8];
@@ -233,17 +250,17 @@ if(dreq_two.valid & ~uncached_two)begin
                 endcase
             end
         end
-        DIRTY:begin
+        `DIRTY:begin
             resp_ok=1'b1;
-            if(dreq_two.is_write)begin
+            if(is_write)begin
 
-                new_state_two   = DIRTY;
+                new_state_two   = `DIRTY;
 
                 data_strobe_two = 16'hffff;
                 meta_strobe_two = 4'b1111;
 
                 w_data_two      = new_data;
-                w_meta_two      = {DIRTY,'0,tag_two};
+                w_meta_two      = {`DIRTY,'0,tag_two};
 
                 new_word[7:0]  =dreq_two.strobe[0]?dreq_two.data[7:0]  :current_data[offset_two[Dcache_offset_len-1:2]][7:0];
                 new_word[15:8] =dreq_two.strobe[1]?dreq_two.data[15:8] :current_data[offset_two[Dcache_offset_len-1:2]][15:8];
@@ -269,7 +286,7 @@ if(dreq_two.valid & ~uncached_two)begin
                 endcase
             end
         end
-        READING:begin //wait
+        `READING:begin //wait
             if(dcresp.ready)begin
                 new_word = dresp.data;
                 unique case (r_count)
@@ -303,11 +320,11 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.data     = '0;
             dcreq.len      = MLEN4;
 
-            if(dcresp.last) new_state_two = VALID;
-            else new_state_two = READING;
+            if(dcresp.last) new_state_two = `VALID;
+            else new_state_two = `READING;
 
         end
-        WRITING:begin
+        `WRITING:begin
 
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b1;
@@ -317,21 +334,21 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.data     = current_data[w_count];
             dcreq.len      = MLEN4;
 
-            if(dcresp.last) new_state_two = INVALID;
-            else new_state_two = WRITING;
+            if(dcresp.last) new_state_two = `INVALID;
+            else new_state_two = `WRITING;
 
             last_wb_addr = dcreq.addr;
         end
-        DONE:begin
+        `DONE:begin
             step_two_ok=1'b1;
 
             dcreq.valid    = '0;
             dcreq.is_write = '0;
-            dcreq.size     = '0;
+            dcreq.size     = MSIZE1;
             dcreq.addr     = '0;
             dcreq.strobe   = '0;
             dcreq.data     = '0;
-            dcreq.len      = '0;
+            dcreq.len      = MLEN1;
         end
         default:begin
             new_data='0;
@@ -349,9 +366,9 @@ if(dreq_two.valid & ~uncached_two)begin
         dcreq.len      = MLEN4;
 
         unique case(state_two)
-        INVALID:begin
+        `INVALID:begin
             new_hit_two=1'b1;
-            new_state_two=READING;
+            new_state_two=`READING;
             //read from memeory
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
@@ -362,9 +379,9 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.len      = MLEN4;
         end
 
-        VALID:begin
+        `VALID:begin
             new_hit_two = 1'b1;
-            new_state_two = READING;
+            new_state_two = `READING;
             //read from memeory
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
@@ -375,9 +392,9 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.len      = MLEN4;
         end
 
-        DIRTY:begin
+        `DIRTY:begin
             new_hit_two = 1'b1;
-            new_state_two = WRITING;
+            new_state_two = `WRITING;
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b1;
             dcreq.size     = MSIZE4;
@@ -405,7 +422,7 @@ else if(dreq_two.valid & uncached_two)begin
     else resp_ok    = 1'b0;
 
     dcreq.valid     = 1'b1;
-    dcreq.is_write  = dreq_two.is_write;
+    dcreq.is_write  = is_write;
     dcreq.size      = dreq_two.size;
     dcreq.addr      = dreq_two.addr;
     dcreq.strobe    = dreq_two.strobe;
@@ -418,13 +435,13 @@ else begin
     new_hit_two     = 1'b0;
     last_wb_addr    = '0;
 
-    dcreq.valid     = '0
-    dcreq.is_write  = '0
-    dcreq.size      = '0
-    dcreq.addr      = '0
-    dcreq.strobe    = '0
-    dcreq.data      = '0
-    dcreq.len       = '0
+    dcreq.valid     = '0;
+    dcreq.is_write  = '0;
+    dcreq.size      = MSIZE1;
+    dcreq.addr      = '0;
+    dcreq.strobe    = '0;
+    dcreq.data      = '0;
+    dcreq.len       = MLEN1;
 end
 end
 
@@ -469,7 +486,7 @@ always_ff @(posedge clk) begin
             else if(dcreq.valid && dcreq.is_write) ;
             else w_count<='0;
 
-            if(new_state_two == WRITING) wb_addr<=last_wb_addr;
+            if(new_state_two ==` WRITING) wb_addr<=last_wb_addr;
             else wb_addr <='0;
         end
         else begin
