@@ -45,4 +45,4 @@ jobs:
           sudo dpkg -i verilator4.deb
           sudo ln -s /usr/local/share/verilator /usr/share/
       - name: Run cache tests
-        run: make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=refcpu/VCacheTop VSIM_ARGS='--no-status'
+        run: make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VCacheTop VSIM_ARGS='--no-status'
