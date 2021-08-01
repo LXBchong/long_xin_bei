@@ -1,52 +1,45 @@
 `include "def.svh"
 
-module MMU (
-    input logic clk,resetn,
-
+module TU(
     input dbus_req_t dreq,
     input ibus_req_t ireq,
 
-    output dbus_resp_t dresp, 
-    output ibus_resp_t iresp,
+    output dbus_req_t t_dreq,  //translated dreq
+    output ibus_req_t t_ireq,  //translated ireq
 
-    output dbus_req_t cache_dreq,
-    output ibus_req_t cache_ireq,  
-
-    input dbus_resp_t cache_dresp
+    output logic i_uncached,d_uncached
 );
 
-logic i_uncached,d_uncached;
-
-logic d_skid_free;
-dbus_req_t d_skid_buffer;
-
-//translated request
-dbus_req_t t_dreq;
-ibus_req_t t_ireq;
-
-assign cache_dreq = d_skid_free ? t_dreq : d_skid_buffer ;
+assign i_uncached = ireq.addr[31:28] == 4'ha || ireq.addr[31:28] == 4'hb ? 1'b1:1'b0;
+assign d_uncached = dreq.addr[31:28] == 4'ha || dreq.addr[31:28] == 4'hb ? 1'b1:1'b0;
 
 always_comb begin
-    dresp = cache_dresp;
-    dresp.addr_ok = dreq.valid?d_skid_free:1'b0;;
+    t_dreq.valid=dreq.valid;        // in request?
+    t_dreq.size=dreq.size;  // write or not
+    t_dreq.strobe=dreq.strobe;      // which bytes are enabled?
+    t_dreq.data=dreq.data;          // the data to write
+
+    unique case (dreq.addr[31:28])
+        4'h8: t_dreq.addr = {4'b0,dreq.addr[27:0]}; // kseg0
+        4'h9: t_dreq.addr = {4'b1,dreq.addr[27:0]}; // kseg0
+        4'ha: t_dreq.addr = {4'b0,dreq.addr[27:0]}; // kseg1
+        4'hb: t_dreq.addr = {4'b1,dreq.addr[27:0]}; // kseg1
+        default:t_dreq.addr= dreq.addr; // useg, ksseg, kseg3
+    endcase  
 end
 
-TU TU_inst(.*);   // Translation Unit
-DCache DCache_inst(.*);
+always_comb begin
+    t_ireq.valid=ireq.valid;        // in request?
 
-always_ff @(posedge clk) begin
-    if(resetn) begin
-        if(cache_dresp.addr_ok) d_skid_free<=1'b1;
-        else if(dreq.valid && d_skid_free) begin
-            d_skid_free  <=1'b0;
-            d_skid_buffer<=t_dreq;
-        end
-    end
-    else begin
-        d_skid_free<=1'b1;
-        d_skid_buffer<='0;
-    end
+    unique case (ireq.addr[31:28])
+        4'h8: t_ireq.addr = {4'b0,ireq.addr[27:0]}; // kseg0
+        4'h9: t_ireq.addr = {4'b1,ireq.addr[27:0]}; // kseg0
+        4'ha: t_ireq.addr = {4'b0,ireq.addr[27:0]}; // kseg1
+        4'hb: t_ireq.addr = {4'b1,ireq.addr[27:0]}; // kseg1
+        default:t_ireq.addr= ireq.addr; // useg, ksseg, kseg3
+    endcase  
 end
 
-    
+
+
 endmodule
