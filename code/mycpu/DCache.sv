@@ -1,25 +1,7 @@
 `include "def.svh"
 
-`define INVALID 3'b000
-`define VALID   3'b001
-`define DIRTY   3'b010
-`define READING 3'b011
-`define WRITING 3'b100
-`define DONE    3'b101
 
-module Dache #(
-    parameter int instr_num = 4,
-
-    parameter int Dcacheline_len = 4,     //4 words in one Dcacheline
-    parameter int Dcache_offset_len = 4 ,  //bits of offset
-
-    parameter int Dcache_set_num = 4 ,
-    parameter int Dcache_set_len =  2 ,    //bits of index
-
-    parameter int Dcache_way_num = 4,      //4 way
-
-    parameter int Dcache_tag_bits =  26   //bits of tag
-)(
+module Dache(
     input logic clk,resetn,d_uncached,
     input dbus_req_t cache_dreq,
     output dbus_resp_t cache_dresp,
@@ -27,6 +9,7 @@ module Dache #(
     output cbus_req_t dcreq,
     input cbus_resp_t dcresp
 );
+Dcache_offset_bits
 
 logic [3:0] meta_addr,data_raddr,data_waddr;
 logic [3:0] meta_addr_one,meta_addr_two;
@@ -49,14 +32,14 @@ LRU_tag new_LRU_tag;
 logic [3:0] r_count,w_count;
 
 logic [Dcache_tag_bits-1:0] tag,tag_two;
-logic [Dcache_offset_len -1:0] offset,offset_two;
-logic [Dcache_set_len-1:0] index,index_two;
+logic [Dcache_offset_bits -1:0] offset,offset_two;
+logic [Dcache_index_bits-1:0] index,index_two;
 
 logic hit_one,hit_two,new_hit_two;
 
 dbus_req_t dreq_two;
 
-logic [Dcache_set_len-1:0] position_one;
+logic [Dcache_index_bits-1:0] position_one;
 
 logic stall_one,stall_two,resp_ok,resp_addr_ok,step_two_ok,uncached_two;
 
@@ -71,13 +54,13 @@ logic [2:0] state_two,new_state_two;
 
 logic wb_addr,last_wb_addr;
 
-LUTRAM  D_meta(.clk(clk),
+D_LUTRAM  D_meta(.clk(clk),
             .addr(meta_addr),
             .strobe(meta_strobe),
             .wdata(w_meta),
             .rdata(r_meta));
 
-BRAM    D_data(.clk(clk),
+D_BRAM    D_data(.clk(clk),
             .reset(~resetn),
             .write_en(data_strobe),
             .raddr(data_raddr),
@@ -107,7 +90,9 @@ assign stall_one = stall_two;
 
 assign cache_dresp.addr_ok  = resp_addr_ok;
 assign cache_dresp.data_ok  = resp_ok;
-assign cache_dresp.data     = uncached_two? dcresp.data:new_data[offset_two[Dcache_offset_len-1:2]];
+
+assign cache_dresp.data     = uncached_two? 
+dcresp.data : new_data[offset_two[Dcache_offset_bits-1:2]];
 
 assign current_data = last_pass?r_data:data_reg;
 
@@ -209,7 +194,7 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
             dcreq.size     = MSIZE4;
-            dcreq.addr     = {dreq_two.addr[31:4],4'b0};
+            dcreq.addr     = {dreq_two.addr[31:Dcache_offset_bits],'0};
             dcreq.strobe   = 4'b0;
             dcreq.data     = '0;
             dcreq.len      = MLEN4;
@@ -218,6 +203,8 @@ if(dreq_two.valid & ~uncached_two)begin
         `VALID:begin
             resp_ok=1'b1;
             if(is_write)begin
+                new_data = current_data;
+
                 new_state_two   = `DONE;
 
                 data_strobe_two = 16'hffff;
@@ -226,34 +213,19 @@ if(dreq_two.valid & ~uncached_two)begin
                 w_data_two      = new_data;
                 w_meta_two      = {`DIRTY,'0,tag_two};
 
-                new_word[7:0]  =dreq_two.strobe[0]?dreq_two.data[7:0]  :current_data[offset_two[Dcache_offset_len-1:2]][7:0];
-                new_word[15:8] =dreq_two.strobe[1]?dreq_two.data[15:8] :current_data[offset_two[Dcache_offset_len-1:2]][15:8];
-                new_word[23:16]=dreq_two.strobe[2]?dreq_two.data[23:16]:current_data[offset_two[Dcache_offset_len-1:2]][23:16];
-                new_word[31:24]=dreq_two.strobe[3]?dreq_two.data[31:24]:current_data[offset_two[Dcache_offset_len-1:2]][31:24];
+                new_word[7:0]  =dreq_two.strobe[0]?dreq_two.data[7:0]  :current_data[offset_two[Dcache_offset_bits-1:2]][7:0];
+                new_word[15:8] =dreq_two.strobe[1]?dreq_two.data[15:8] :current_data[offset_two[Dcache_offset_bits-1:2]][15:8];
+                new_word[23:16]=dreq_two.strobe[2]?dreq_two.data[23:16]:current_data[offset_two[Dcache_offset_bits-1:2]][23:16];
+                new_word[31:24]=dreq_two.strobe[3]?dreq_two.data[31:24]:current_data[offset_two[Dcache_offset_bits-1:2]][31:24];
 
-                unique case(offset_two[Dcache_offset_len-1:2])
-                    2'b00:begin
-                        new_data={current_data[127:32],new_word};
-                    end
-                    2'b01:begin
-                        new_data={current_data[127:64],new_word,current_data[31:0]};
-                    end
-                    2'b10:begin
-                        new_data={current_data[127:96],new_word,current_data[63:0]};
-                    end
-                    2'b11:begin
-                        new_data={new_word,current_data[95:0]};
-                    end
-                    default:begin
-                        new_data='0;
-                    end
-                endcase
+                new_data[offset_two[Dcache_offset_bits-1:2]] = new_word;
             end
         end
         `DIRTY:begin
             resp_ok=1'b1;
             if(is_write)begin
-
+                new_data = current_data;
+                
                 new_state_two   = `DIRTY;
 
                 data_strobe_two = 16'hffff;
@@ -262,50 +234,20 @@ if(dreq_two.valid & ~uncached_two)begin
                 w_data_two      = new_data;
                 w_meta_two      = {`DIRTY,'0,tag_two};
 
-                new_word[7:0]  =dreq_two.strobe[0]?dreq_two.data[7:0]  :current_data[offset_two[Dcache_offset_len-1:2]][7:0];
-                new_word[15:8] =dreq_two.strobe[1]?dreq_two.data[15:8] :current_data[offset_two[Dcache_offset_len-1:2]][15:8];
-                new_word[23:16]=dreq_two.strobe[2]?dreq_two.data[23:16]:current_data[offset_two[Dcache_offset_len-1:2]][23:16];
-                new_word[31:24]=dreq_two.strobe[3]?dreq_two.data[31:24]:current_data[offset_two[Dcache_offset_len-1:2]][31:24];
+                new_word[7:0]  =dreq_two.strobe[0]?dreq_two.data[7:0]  :current_data[offset_two[Dcache_offset_bits-1:2]][7:0];
+                new_word[15:8] =dreq_two.strobe[1]?dreq_two.data[15:8] :current_data[offset_two[Dcache_offset_bits-1:2]][15:8];
+                new_word[23:16]=dreq_two.strobe[2]?dreq_two.data[23:16]:current_data[offset_two[Dcache_offset_bits-1:2]][23:16];
+                new_word[31:24]=dreq_two.strobe[3]?dreq_two.data[31:24]:current_data[offset_two[Dcache_offset_bits-1:2]][31:24];
 
-                unique case(offset_two[Dcache_offset_len-1:2])
-                    2'b00:begin
-                        new_data={current_data[127:32],new_word};
-                    end
-                    2'b01:begin
-                        new_data={current_data[127:64],new_word,current_data[31:0]};
-                    end
-                    2'b10:begin
-                        new_data={current_data[127:96],new_word,current_data[63:0]};
-                    end
-                    2'b11:begin
-                        new_data={new_word,current_data[95:0]};
-                    end
-                    default:begin
-                        new_data=current_data;
-                    end
-                endcase
+                new_data[offset_two[Dcache_offset_bits-1:2]] = new_word;
             end
         end
         `READING:begin //wait
             if(dcresp.ready)begin
                 new_word = dresp.data;
-                unique case (r_count)
-                    4'h0:begin
-                        new_data={current_data[127:32],new_word};
-                    end
-                    4'h1:begin
-                        new_data={current_data[127:64],new_word,current_data[31:0]};
-                    end
-                    4'h2:begin
-                        new_data={current_data[127:96],new_word,current_data[63:0]};
-                    end
-                    4'h3:begin
-                        new_data={new_word,current_data[95:0]};
-                    end
-                    default:begin
-                        new_data=current_data;
-                    end
-                endcase
+
+                new_data = current_data;
+                new_data[r_count] = new_word;
             end
             else begin
                 new_word='0;
@@ -315,7 +257,7 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
             dcreq.size     = MSIZE4;
-            dcreq.addr     = {dreq_two.addr[31:4],4'b0};
+            dcreq.addr     = {dreq_two.addr[31:Dcache_offset_bits],'0};
             dcreq.strobe   = 4'b0;
             dcreq.data     = '0;
             dcreq.len      = MLEN4;
@@ -360,7 +302,7 @@ if(dreq_two.valid & ~uncached_two)begin
         dcreq.valid    = 1'b0;
         dcreq.is_write = 1'b0;
         dcreq.size     = MSIZE4;
-        dcreq.addr     = {dreq_two.addr[31:4],4'b0};
+        dcreq.addr     = {dreq_two.addr[31:Dcache_offset_bits],'0};
         dcreq.strobe   = 4'b0;
         dcreq.data     = '0;
         dcreq.len      = MLEN4;
@@ -373,7 +315,7 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
             dcreq.size     = MSIZE4;
-            dcreq.addr     = {dreq_two.addr[31:4],4'b0};
+            dcreq.addr     = {dreq_two.addr[31:Dcache_offset_bits],'0};
             dcreq.strobe   = 4'b0;
             dcreq.data     = '0;
             dcreq.len      = MLEN4;
@@ -386,7 +328,7 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b0;
             dcreq.size     = MSIZE4;
-            dcreq.addr     = {dreq_two.addr[31:4],4'b0};
+            dcreq.addr     = {dreq_two.addr[31:Dcache_offset_bits],'0};
             dcreq.strobe   = 4'b0;
             dcreq.data     = '0;
             dcreq.len      = MLEN4;
@@ -398,12 +340,12 @@ if(dreq_two.valid & ~uncached_two)begin
             dcreq.valid    = 1'b1;
             dcreq.is_write = 1'b1;
             dcreq.size     = MSIZE4;
-            dcreq.addr     = {meta_two[Dcache_tag_bits-1:0],dreq_two.addr[5:4],4'b0};
+            dcreq.addr     = {meta_two[Dcache_tag_bits-1:0],index_two,'0};
             dcreq.strobe   = 4'b1111;
             dcreq.data     = current_data[w_count];
             dcreq.len      = MLEN4;
 
-            last_wb_addr = {meta_two[Dcache_tag_bits-1:0],dreq_two.addr[5:4],4'b0};
+            last_wb_addr = {meta_two[Dcache_tag_bits-1:0],index_two,'0};
         end
         default:begin
             new_state_two=state_two;
