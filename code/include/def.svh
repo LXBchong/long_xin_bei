@@ -2,17 +2,21 @@
 `define __def_SVH__
 
 
-`define instr_num 4
+`define INVALID 3'b000
+`define VALID   3'b001
+`define DIRTY   3'b010
+`define READING 3'b011
+`define WRITING 3'b100
+`define DONE    3'b101
 
-`define Dcacheline_len 4      //4 words in one Dcacheline
-`define Dcache_offset_len 4   //bits of offset
 
-`define Dcache_set_num 4 
-`define Dcache_set_len 2      //bits of index
+parameter int Dcacheline_len = 4 ;     //4 words in one cacheline
+parameter int Dcache_set_num = 4 ;     
+parameter int Dcache_way_num = 4 ;     
 
-`define Dcache_way_num 4      //4 way
-
-`define Dcache_tag_bits 26    //bits of tag
+parameter int Dcache_index_bits     =  2 ,  //bits of index
+parameter int Dcache_offset_bits    =  4 ,   //bits of offset
+parameter int Dcache_tag_bits       =  32-Dcache_index_bits-Dcache_offset_bits;   //bits of tag
 
 typedef logic[31:0] word_t;
 typedef logic[4:0] strobe_t;
@@ -37,7 +41,7 @@ typedef enum logic[3:0] {
 typedef struct packed {
     logic    valid;   // in request?
     addr_t   addr;    // target address
-    logic  is_write;    // write or not
+    msize_t  size;    // write or not
     strobe_t strobe;  // which bytes are enabled? set to zeros for read request
     word_t   data;    // the data to write
 } dbus_req_t;
@@ -58,5 +62,28 @@ typedef struct packed {
     logic  data_ok;  // is the field "data" valid?
     word_t [instr_num-1:0] data;     // the data read from cache
 } ibus_resp_t;
+
+typedef struct packed {
+    logic    valid;     // in request?
+    logic    is_write;  // is it a write transaction?
+    msize_t  size;      // number of bytes in one burst
+    addr_t   addr;      // start address
+    strobe_t strobe;    // which bytes are enabled?
+    word_t   data;      // the data to write
+    mlen_t   len;       // number of bursts
+} cbus_req_t;
+
+typedef struct packed {
+    logic  ready;  // is data arrived in this cycle?
+    logic  last;   // is it the last word?
+    word_t data;   // the data from AXI bus
+} cbus_resp_t;
+
+`ifdef VERILATOR
+`define STRING string
+`else
+`define STRING 
+`endif
+
 
 `endif
