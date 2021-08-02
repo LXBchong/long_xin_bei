@@ -1,4 +1,0 @@
-```shell
-make
-./a.out
-```
