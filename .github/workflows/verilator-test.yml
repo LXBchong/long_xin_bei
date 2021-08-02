@@ -21,4 +21,5 @@ jobs:
           sudo ln -s /usr/local/share/verilator /usr/share/
       - name: Run NSCSCC functional tests
         run: |
-          git branch && git checkout 5-stages-pipeline && make vsim -j USE_CLANG=1 VSIM_OPT=1 VSIM_ARGS='--no-status'
+          cd ./5-stages-pipeline
+          make vsim -j USE_CLANG=1 VSIM_OPT=1 VSIM_ARGS='--no-status'
