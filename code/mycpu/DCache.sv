@@ -1,7 +1,7 @@
 `include "def.svh"
 
 
-module Dache(
+module DCache(
     input logic clk,resetn,d_uncached,
     input dbus_req_t cache_dreq,
     output dbus_resp_t cache_dresp,
