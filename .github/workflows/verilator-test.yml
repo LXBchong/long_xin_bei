@@ -23,7 +23,6 @@ jobs:
         run: |
           git clone https://github.com/FDUCSLG/ICS-2021Spring-FDU.git
           cd ICS-2021Spring-FDU
-          rm -r ./source/include ./source/mycpu
-          cp -r ../5-stages-pipeline/source/include ./source
-          cp -r ../5-stages-pipeline/source/mycpu ./source
+          /bin/cp -f ../5-stages-pipeline/source/include/* ./source/include
+          /bin/cp -f ../5-stages-pipeline/source/mycpu/* ./source/mycpu
           make vsim -j USE_CLANG=1 VSIM_OPT=1 VSIM_ARGS='--no-status'
