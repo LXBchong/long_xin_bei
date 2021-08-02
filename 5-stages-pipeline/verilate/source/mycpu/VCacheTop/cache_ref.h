@@ -5,7 +5,7 @@
 #include "reference.h"
 
 const int OFFSET_BITS = 4;
-const int INDEX_BITS = 2;
+const int INDEX_BITS = 8;
 const int OAI_BITS = OFFSET_BITS + INDEX_BITS;
 const int TAG_BITS = 32 - OAI_BITS;
 const int WORDS_NUM = 1 << (OFFSET_BITS-2); 
