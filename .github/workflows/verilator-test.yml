@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - '5-stages-pipeline'
+      - 'main'
 
 jobs:
   ubuntu-18-functional-test:
@@ -10,6 +11,8 @@ jobs:
     steps:
       - name: Checkout -dev repository
         uses: actions/checkout@v2.3.4
+        with:
+          ref: 5-stages-pipeline
       - name: Install prerequisites
         run: |
           sudo apt install -y gtkwave make clang-10 libc++-10-dev libc++abi-10-dev libz-dev
@@ -17,38 +20,9 @@ jobs:
           sudo dpkg -i verilator4.deb
           sudo ln -s /usr/local/share/verilator /usr/share/
       - name: Run NSCSCC functional tests
-        run: 
-          cd ./5-stages-pipeline
+        run: |
+          git clone https://github.com/FDUCSLG/ICS-2021Spring-FDU.git
+          cd ICS-2021Spring-FDU
+          /bin/cp -f ../5-stages-pipeline/source/include/* ./source/include
+          /bin/cp -f ../5-stages-pipeline/source/mycpu/* ./source/mycpu
           make vsim -j USE_CLANG=1 VSIM_OPT=1 VSIM_ARGS='--no-status'
-
-  ubuntu-18-performance-test:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout -dev repository
-        uses: actions/checkout@v2.3.4
-      - name: Install prerequisites
-        run: |
-          sudo apt install -y gtkwave make clang-10 libc++-10-dev libc++abi-10-dev libz-dev
-          wget -O verilator4.deb https://github.com/sifive/verilator/releases/download/4.036-0sifive2/verilator_4.036-0sifive2_amd64.deb
-          sudo dpkg -i verilator4.deb
-          sudo ln -s /usr/local/share/verilator /usr/share/
-      - name: Run NSCSCC performance tests
-        run: 
-          cd ./5-stages-pipeline
-          make vsim -j USE_CLANG=1 VSIM_OPT=1 TEST=coremark VSIM_ARGS='--no-status'
-
-  ubuntu-18-cache-test:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout -dev repository
-        uses: actions/checkout@v2.3.4
-      - name: Install prerequisites
-        run: |
-          sudo apt install -y gtkwave make clang-10 libc++-10-dev libc++abi-10-dev libz-dev
-          wget -O verilator4.deb https://github.com/sifive/verilator/releases/download/4.036-0sifive2/verilator_4.036-0sifive2_amd64.deb
-          sudo dpkg -i verilator4.deb
-          sudo ln -s /usr/local/share/verilator /usr/share/
-      - name: Run cache tests
-        run: 
-          cd ./5-stages-pipeline
-          make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VCacheTop VSIM_ARGS='--no-status'
