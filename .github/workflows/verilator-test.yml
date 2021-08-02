@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - '5-stages-pipeline'
-      - 'main'
 
 jobs:
   ubuntu-18-functional-test:
