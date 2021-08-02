@@ -18,4 +18,5 @@ jobs:
           sudo dpkg -i verilator4.deb
           sudo ln -s /usr/local/share/verilator /usr/share/
       - name: Run NSCSCC functional tests
-        run: ls
+        run: |
+          git branch && git checkout 5-stages-pipeline && make vsim -j USE_CLANG=1 VSIM_OPT=1 VSIM_ARGS='--no-status'
