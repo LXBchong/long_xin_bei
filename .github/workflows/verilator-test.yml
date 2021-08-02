@@ -23,7 +23,7 @@ jobs:
         run: |
           git clone https://github.com/FDUCSLG/ICS-2021Spring-FDU.git
           cd ICS-2021Spring-FDU
-          mv -r source/include/refcpu ../5-stages-pipeline/source/include
+          mv source/include/refcpu ../5-stages-pipeline/source/include
           rm -r source/include source/mycpu
           cp -r ../5-stages-pipeline/source/include ./source/include
           cp -r ../5-stages-pipeline/source/mycpu ./source/mycpu
