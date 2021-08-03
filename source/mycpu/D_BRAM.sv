@@ -3,9 +3,9 @@
 //simplified dual port BRAM
 //Default configuration: 4KB / 32bit width / write-first
 
-module BRAM_un #(
-    parameter int DATA_WIDTH = 32*4,
-    parameter int ADDR_WIDTH = 4,
+module D_BRAM #(
+    parameter int DATA_WIDTH = 32 * Dcacheline_len * Dcache_way_num,
+    parameter int ADDR_WIDTH = Dcache_index_bits,
 
     parameter `STRING RESET_VALUE = "00000000",
     parameter `STRING WRITE_MODE  = "write_first",
@@ -13,17 +13,13 @@ module BRAM_un #(
     localparam int MEM_NUM_DATA   = 2**ADDR_WIDTH,
     localparam int BYTES_PER_DATA = DATA_WIDTH / 8,
     localparam int MEM_NUM_BYTES  = MEM_NUM_DATA * BYTES_PER_DATA,
-    localparam int MEM_NUM_BITS   = MEM_NUM_DATA * DATA_WIDTH,
+    localparam int MEM_NUM_BITS   = MEM_NUM_DATA * DATA_WIDTH
 
-    //localparam type addr_t  = logic  [ADDR_WIDTH     - 1:0],
-    //localparam type word_t  = logic  [DATA_WIDTH     - 1:0],
-    localparam type wrten_t = logic  [BYTES_PER_DATA - 1:0]
-    //localparam type view_t  = byte_t [BYTES_PER_DATA - 1:0]
 ) (
     input logic clk, reset,
 
-    input  addr_t  raddr, waddr,
-    input  wrten_t write_en,
+    input  logic[ADDR_WIDTH-1:0]  raddr, waddr,
+    input  logic[BYTES_PER_DATA - 1:0] write_en,
     input  logic[DATA_WIDTH-1:0]  wdata,
     output logic[DATA_WIDTH-1:0]  rdata
 );

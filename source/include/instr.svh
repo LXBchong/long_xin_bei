@@ -18,6 +18,40 @@ typedef enum i3{
     CMP_G, CMP_L, CMP_J
 } compare_t;
 
+//branch prediction defs
+typedef struct packed {
+    logic is_ret;
+} BIT_t;
+
+typedef struct packed {
+    addr_t PC;
+    logic[7:0] counter;
+} RAS_t;
+
+typedef struct packed {
+    logic branch_taken;
+    addr_t predict_PC;
+} branch_predict_t;
+
+typedef logic[1:0] PHT_t;
+//3-strong jump, 2-weak jump, 1-weak nojump, 0-strong nojump
+
+typedef struct packed {
+    logic branch_in_exec;
+    logic branch_result;
+    addr_t branch_ins_PC;
+    addr_t jump_PC; 
+    logic is_ret;
+    logic is_call;
+} BRU_BP_bypass_t;
+
+typedef struct packed {
+    logic valid;
+    addr_t PC;    
+    logic second_is_branch;
+    logic[1:0] is_ret;
+} fetch2_BP_bypass_t;
+
 typedef enum i6 {
     OP_RTYPE = 6'b000000,
     OP_BTYPE = 6'b000001,
@@ -35,6 +69,7 @@ typedef enum i6 {
     OP_ORI   = 6'b001101,
     OP_XORI  = 6'b001110,
     OP_LUI   = 6'b001111,
+    OP_SP2   = 6'b011100,
     OP_COP0  = 6'b010000,
     OP_LB    = 6'b100000,
     OP_LH    = 6'b100001,
@@ -151,10 +186,36 @@ typedef enum i3{
 } unit_t;
 
 typedef struct packed {
+    addr_t cur_PC;
+    branch_predict_t bp_info;
+    logic[1:0] PC_valid;
+    ibus_resp_t iresp;
+    logic is_DS;
+} fetch2_input_t;
+
+typedef struct packed {
+    logic[1:0] PC_valid;
+    branch_predict_t bp_info;
+    addr_t[1:0] PC;
+    instr_t[1:0] instr;
+    logic[1:0] is_ret;
+    logic[1:0] is_call;
+} decode_input_t;
+
+typedef struct packed {
+    logic en;
+    logic first;
+    addr_t PC;
+    instr_t instr;
+} decoder_input_t;
+
+typedef struct packed {
     addr_t PC;
     unit_t unit;
     instr_type_t instr_type;
     logic RI;
+    logic first;
+    branch_predict_t bp_info;
     //consider form regC <- regA op regB
     //      or form regA cmp regB
     //reg info
@@ -170,7 +231,9 @@ typedef struct packed {
     shamt_t shamt;
     //bru info 
     compare_t cmp;
-    word_t offset;
+    word_t jump_PC;
+    logic is_ret;
+    logic is_call;
     //mem info
     logic mem_read;
     logic mem_write;
@@ -191,7 +254,7 @@ typedef struct packed {
 } decode_t;
 
 typedef enum i4{
-    None, ALU1, BRU, MMU, ALU2, HILO, MLT, DIV, CP0
+    None, ALU1, BRU, AGU, ALU2, HILO, MLT, DIV, CP0
 }function_unit_t;
 
 typedef struct packed{
@@ -200,8 +263,28 @@ typedef struct packed{
     logic[1:0] phase;
 }scoreboard_t;
 
+typedef struct packed {
+    logic delay_opA;
+    logic delay_opB;
+    regid_t regA;
+    regid_t regB;
+    function_unit_t fuA;
+    function_unit_t fuB;
+} delay_exec_t;
+
+typedef struct packed {
+    logic valid;
+    logic is_ret;
+    logic is_call;
+    logic must_jump;
+    addr_t PC;
+    addr_t jump_PC;
+    opcode_t opcode;
+} branch_buffer_t;
+
 typedef struct packed{
     logic en;
+    //delay_exec_t delay_exec;
     word_t opA;
     word_t opB;
     shamt_t shamt;
@@ -210,12 +293,16 @@ typedef struct packed{
 
 typedef struct packed {
     logic en;
+    logic is_ret;
+    logic is_call;
+    //delay_exec_t delay_exec;
     word_t opA;
     word_t opB;
     compare_t operator;
     logic branch_taken;
     addr_t link_PC;
     addr_t jump_PC;
+    addr_t predict_PC;
     logic DS_RI;
 }BRU_input_t;
 
@@ -223,12 +310,13 @@ typedef struct packed {
     logic en;
     addr_t base;
     word_t offset;
+    addr_t jump_PC;
     logic mem_read;
     logic mem_write;
     logic unsign_en;
     msize_t msize;
     word_t data;
-}MMU_input_t;
+}AGU_input_t;
 
 typedef struct packed {
     logic en;
@@ -263,7 +351,27 @@ typedef struct packed{
     logic eret;
     logic first;
     logic second;
+    addr_t PC;
 }COP0_input_t;
+
+typedef struct packed{
+    logic ALU1_OV;
+    logic ALU2_OV;
+    logic AGU_AdEL;
+    logic BRU_AdEL;
+    logic COP0_AdEL;
+    logic AGU_AdES;
+    logic ALU1_SYS;
+    logic ALU2_SYS;
+    logic ALU1_BR;
+    logic ALU2_BR;
+    logic COP0_eret;
+    addr_t AGU_BadVAddr;
+    addr_t BRU_BadVAddr;
+    addr_t COP0_BadVAddr;
+    logic COP0_first;
+    logic COP0_second;
+} exception_collector_t;
 
 typedef struct packed {
     logic en;
@@ -277,10 +385,11 @@ typedef struct packed {
     ALU_input_t ALU1_input;
     ALU_input_t ALU2_input;
     BRU_input_t BRU_input;
-    MMU_input_t MMU_input;
+    AGU_input_t AGU_input;
     MLT_input_t MLT_input;
     DIV_input_t DIV_input;
     HILO_input_t HILO_input;
+    COP0_input_t COP0_input;
     exec_reg_t exec_reg1;
     exec_reg_t exec_reg2;
 }exec_input_t;
@@ -288,9 +397,11 @@ typedef struct packed {
 typedef struct packed {   
     word_t ALU1_result;   
     word_t ALU2_result;   
-    addr_t BRU_link_PC;  
-    word_t MMU_result;  
+    addr_t BRU_link_PC;
+    word_t COP0_result;
     MLT_input_t MLT_in; 
+    AGU_input_t AGU_input;
+    dbus_req_t dreq;
     word_t[3:0] MLT_p;    
     logic[63:0] DIV_result;
     exec_reg_t exec_reg1; 
@@ -298,13 +409,15 @@ typedef struct packed {
     logic write_hi;
     logic write_lo;
     word_t HILO_result;
+    exception_collector_t exception_collector;
 }exec_pipeline_reg_t;  
 
 typedef struct packed {
     word_t ALU1_result;
     word_t ALU2_result;
     addr_t BRU_link_PC;   
-    word_t MMU_result;  
+    word_t AGU_result;
+    word_t COP0_result;  
     logic[63:0] MLT_result;
     logic[63:0] DIV_result;
     logic write_hi;
@@ -312,6 +425,7 @@ typedef struct packed {
     word_t HILO_result;
     exec_reg_t exec_reg1; 
     exec_reg_t exec_reg2;
+    exception_collector_t exception_collector;
 }exec_result_t;
 
 //cp0 defs
@@ -441,25 +555,6 @@ typedef struct packed {
     word_t        Count;
     addr_t        BadVAddr;
 } cp0_regfile_t;
-
-typedef struct packed{
-    logic ALU1_OV;
-    logic ALU2_OV;
-    logic MMU_AdEL;
-    logic BRU_AdEL;
-    logic COP0_AdEL;
-    logic MMU_AdES;
-    logic ALU1_SYS;
-    logic ALU2_SYS;
-    logic ALU1_BR;
-    logic ALU2_BR;
-    logic COP0_eret;
-    logic COP0_first;
-    logic COP0_second;
-    addr_t MMU_BadVAddr;
-    addr_t BRU_BadVAddr;
-    addr_t COP0_BadVAddr;
-} exception_collector_t;
 
 typedef struct packed {
     logic exception_en;

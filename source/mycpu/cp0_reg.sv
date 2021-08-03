@@ -5,15 +5,16 @@ module cp0_reg(
     input logic clk, resetn,
     input cp0_reg_input_t cp0_reg_input,
     input logic[7:0] cp0_wregsel,
-    input word_t cp0_wdata,
+    input word_t cp0_wdata, cp0_wpc,
     input logic wfirst, wsecond,
     output cp0_regfile_t cp0_reg,
     input logic eret,
-    output logic cp0_flush
+    output logic cp0_flush,
+    output addr_t wPC
 );  
     cp0_regfile_t cp0_reg_nxt;
     logic ticker, BD, en;
-    addr_t EPC, BadVAddr;
+    addr_t EPC, BadVAddr, wPC_nxt;
     ecode_t ExeCode;
     word_t data, check;
     logic[7:0] regsel;
@@ -30,8 +31,10 @@ module cp0_reg(
         cp0_reg_nxt = cp0_reg;
         cp0_flush = 0;
         check = '0;
+        wPC_nxt = wPC;
         
         if(wsecond) begin
+            wPC_nxt = cp0_wpc;
             unique case(regsel)
                 RS_COUNT: cp0_reg_nxt.Count = data;
     
@@ -64,6 +67,7 @@ module cp0_reg(
         if(eret) cp0_reg_nxt.Status.EXL = 0;
 
         if(wfirst) begin
+            wPC_nxt = cp0_wpc;
             unique case(regsel)
                 RS_COUNT: cp0_reg_nxt.Count = data;
     
@@ -87,9 +91,11 @@ module cp0_reg(
 		if (~resetn) begin
 			cp0_reg <= '0;
             ticker <= 0;
+            wPC <= '0;
 		end else begin
 			cp0_reg <= cp0_reg_nxt;
             ticker <= ~ticker;
+            wPC <= wPC_nxt;
 		end
     end
 

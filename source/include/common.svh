@@ -5,6 +5,14 @@
 `ifndef __COMMON_SVH__
 `define __COMMON_SVH__
 
+
+`define INVALID 3'b000
+`define VALID   3'b001
+`define DIRTY   3'b010
+`define READING 3'b011
+`define WRITING 3'b100
+`define DONE    3'b101
+
 // Vivado does not support string parameters.
 `ifdef VERILATOR
 `define STRING string
@@ -22,6 +30,15 @@
 `else
 `define PACKED_UNION struct packed
 `endif
+
+
+parameter int Dcacheline_len = 4 ;     //4 words in one cacheline
+parameter int Dcache_set_num = 4 ;     
+parameter int Dcache_way_num = 4 ;     
+
+parameter int Dcache_index_bits     =  2;//bits of index
+parameter int Dcache_offset_bits    =  4;   //bits of offset
+parameter int Dcache_tag_bits       =  32-Dcache_index_bits-Dcache_offset_bits;   //bits of tag
 
 
 // simple compile-time assertion
@@ -71,6 +88,7 @@ typedef `BITS(68) i68;
 // all addresses and words are 32-bit
 typedef i32 addr_t;
 typedef i32 word_t;
+typedef i8 byte_t;
 
 // number of bytes transferred in one memory r/w
 typedef enum i3 {
@@ -155,15 +173,16 @@ typedef struct packed {
 typedef struct packed {
     logic  valid;  // in request?
     addr_t addr;   // target address
-    logic is_stall;
 } ibus_req_t;
 
-typedef struct packed {
+/*typedef struct packed {
     logic  addr_ok;  // is the address accepted by cache?
     logic  data_ok;  // is the field "data" valid?
-    logic   is_branch;
+    logic[1:0]  is_branch;
+    logic[1:0] is_ret;
+    logic[1:0] is_call;
     word_t[1:0] data;     // the data read from cache
-} ibus_resp_t;
+} ibus_resp_t; */
 
 `define IREQ_TO_DREQ(ireq) \
     {ireq, MSIZE4, 4'b0, 32'b0}
@@ -198,5 +217,74 @@ typedef enum i2 {
     AXI_BURST_WRAP,
     AXI_BURST_RESERVED
 } axi_burst_type_t;
+
+
+`define ICache_offset_bit 3     //8bytes in one cacheline, i.e 2 instrs
+`define ICache_index_bit 3      //8 cachesets
+`define ICache_position_bit 2   //4 cacheline in one cacheset
+`define ICache_instr_num (`ICache_offset_bit-1)
+
+parameter int INSTR_SIZE = `ICache_instr_num;
+parameter int INDEX_ROW = 1 << `ICache_index_bit;
+parameter int ASSOCIATIVITY = 1 << `ICache_position_bit;
+parameter int TAG_BIT = 32 - `ICache_index_bit - `ICache_offset_bit;
+
+typedef logic[TAG_BIT-1:0] tag_t;
+typedef logic[`ICache_index_bit-1:0] index_t;
+typedef logic[`ICache_offset_bit-1:0] offset_t;
+typedef logic[`ICache_position_bit-1:0] position_t;
+
+typedef enum logic { 
+    HIT,
+    MISS 
+} state_t;
+
+typedef enum logic {  
+    FULL,
+    AVAILABLE
+} capacity_t;
+
+typedef struct packed {
+    tag_t tag;
+    logic valid;
+} metaUnit_t;
+typedef word_t[INSTR_SIZE-1:0] cacheline_t;
+
+typedef metaUnit_t[ASSOCIATIVITY-1:0] meta_set_t;
+typedef cacheline_t[ASSOCIATIVITY-1:0] data_set_t;
+typedef enum logic[1:0] {
+    normal,
+    is_branch,
+    is_ret,
+    is_call
+} predecode_rslt_t;
+
+typedef union packed {
+    position_t hit_pos;
+    position_t available_pos;
+    position_t replace_pos;
+} pos_t;
+
+typedef struct packed {
+    index_t index;
+    pos_t pos;
+    state_t state;
+    capacity_t capacity;
+    ibus_req_t ireq;
+    logic addr_ok;
+} register_t;
+
+typedef enum logic { 
+    MODIFY, //hit or miss but available
+    REPLACE //miss and full
+} LRU_func_t;
+
+typedef struct packed {
+    logic  addr_ok;  // is the address accepted by cache?
+    logic  data_ok;  // is the field "data" valid?
+    predecode_rslt_t[`ICache_instr_num -1:0]  predecode;// the result of predecode
+    word_t [`ICache_instr_num -1:0] data;     // the data read from cache
+} ibus_resp_t;
+
 
 `endif

@@ -9,13 +9,14 @@ module issue(
     output logic[1:0]   issue_cnt,
     output regid_t ra1, ra2, ra3, ra4,
     input word_t rd1_reg, rd2_reg, rd3_reg, rd4_reg,
-    input logic queue_empty, fetch_halt, mem_halt, queue_full, div_halt,
-    input word_t ALU1_bypass_p1, ALU1_bypass_p2, ALU1_bypass_p3, ALU2_bypass_p1, ALU2_bypass_p2, ALU2_bypass_p3
+    input logic queue_empty, mem_halt, queue_full, div_halt,
+    input word_t ALU1_bypass_p1, ALU1_bypass_p2, ALU1_bypass_p3, ALU2_bypass_p1, ALU2_bypass_p2, ALU2_bypass_p3,
+    input logic stall_e1, stall_e2, stall_e3, exception_flag
 );
     logic first_instr_ready, second_instr_ready;
     ALU_input_t  ALU1_input, ALU2_input;
     BRU_input_t  BRU_input;
-    MMU_input_t  MMU_input;
+    AGU_input_t  AGU_input;
     HILO_input_t HILO_input;
     MLT_input_t MLT_input;
     DIV_input_t DIV_input;
@@ -60,7 +61,8 @@ module issue(
         exec_reg2 = '0;
 
         if(~first_instr_ready || queue_empty || mem_halt || div_halt
-            || (issue_instr[0].unit == U_BRANCH && (issue_instr[1].PC == '0 || ~second_instr_ready))) begin
+            || (issue_instr[0].unit == U_BRANCH && (issue_instr[1].PC == '0 || ~second_instr_ready))
+            || exception_flag) begin
             issue_cnt = '0;
 
         end else if (~second_instr_ready 
@@ -86,7 +88,7 @@ module issue(
                 end
 
                 U_MEMORY:begin
-                    exec_reg1.fu = MMU;
+                    exec_reg1.fu = AGU;
                 end
 
                 U_ALU:begin
@@ -133,7 +135,7 @@ module issue(
                 end
 
                 U_MEMORY:begin
-                    exec_reg1.fu = MMU;
+                    exec_reg1.fu = AGU;
                 end
 
                 U_ALU:begin
@@ -165,7 +167,7 @@ module issue(
                 end
 
                 U_MEMORY:begin
-                    exec_reg2.fu = MMU;
+                    exec_reg2.fu = AGU;
                 end
 
                 U_ALU:begin
@@ -197,7 +199,16 @@ module issue(
     //assign scoreboard_nxt
     always_comb begin
         scoreboard_nxt = scoreboard;
+        
         for (int i = 1; i <= 31; i ++) begin
+            if(scoreboard[i].pending == 1) begin
+                if(scoreboard[i].phase == 2'd3 && ~stall_e3)
+                    scoreboard_nxt[i] = '0;
+                else if(scoreboard[i].phase == 2'd2 && ~stall_e2)
+                    scoreboard_nxt[i].phase = 2'd3;
+                else if(scoreboard[i].phase == 2'd1 && ~stall_e1)
+                    scoreboard_nxt[i].phase = 2'd2;
+            end
             if(i == exec_reg1.target_reg) begin
                 scoreboard_nxt[i].pending = 1;
                 scoreboard_nxt[i].fu = exec_reg1.fu;
@@ -208,13 +219,6 @@ module issue(
                 scoreboard_nxt[i].pending = 1;
                 scoreboard_nxt[i].fu = exec_reg2.fu;
                 scoreboard_nxt[i].phase = 1;
-            end
-
-            if(scoreboard[i].pending == 1) begin
-                if(scoreboard[i].phase == 2'd3)
-                    scoreboard_nxt[i] = '0;
-                else
-                    scoreboard_nxt[i].phase = scoreboard[i].phase + 2'd1;
             end
         end
     end
@@ -260,17 +264,21 @@ module issue(
          end
          
          if(scoreboard_hi.pending == 1) begin
-                if(scoreboard_hi_nxt.phase == 2'd3)
+                if(scoreboard_hi.phase == 2'd3 && ~stall_e3)
                     scoreboard_hi_nxt = '0;
-                else
-                    scoreboard_hi_nxt.phase = scoreboard_hi.phase + 2'd1;
-          end
-          if(scoreboard_lo.pending == 1) begin
-                if(scoreboard_lo_nxt.phase == 2'd3)
+                else if(scoreboard_hi.phase == 2'd2 && ~stall_e2)
+                    scoreboard_hi_nxt.phase = 2'd3;
+                else if(scoreboard_hi.phase == 2'd1 && ~stall_e1)
+                    scoreboard_hi_nxt.phase = 2'd2;
+            end
+         if(scoreboard_lo.pending == 1) begin
+                if(scoreboard_lo.phase == 2'd3 && ~stall_e3)
                     scoreboard_lo_nxt = '0;
-                else
-                    scoreboard_lo_nxt.phase = scoreboard_lo.phase + 2'd1;
-          end
+                else if(scoreboard_lo.phase == 2'd2 && ~stall_e2)
+                    scoreboard_lo_nxt.phase = 2'd3;
+                else if(scoreboard_lo.phase == 2'd1 && ~stall_e1)
+                    scoreboard_lo_nxt.phase = 2'd2;
+            end
     end
     
     always_comb begin
@@ -366,7 +374,7 @@ module issue(
         ALU1_input = '0;
         ALU2_input = '0;
         BRU_input = '0;
-        MMU_input = '0;
+        AGU_input = '0;
         DIV_input = '0;
         MLT_input = '0;
         HILO_input = '0;
@@ -386,29 +394,34 @@ module issue(
                 BRU_input.opA = rd1;
                 BRU_input.opB = rd2;
                 BRU_input.operator = issue_instr[0].cmp;
-                BRU_input.branch_taken = 0;
+                BRU_input.branch_taken = issue_instr[0].first ? 
+                    issue_instr[0].bp_info.branch_taken : issue_instr[1].bp_info.branch_taken;
                 BRU_input.en = 1;
+                BRU_input.is_ret = issue_instr[0].is_ret;
+                BRU_input.is_call = issue_instr[0].is_call;
                 BRU_input.link_PC = issue_instr[0].PC + 32'd8;
                 BRU_input.DS_RI = issue_instr[1].RI ? 1: 0;
+                BRU_input.predict_PC = issue_instr[0].first ?
+                    issue_instr[0].bp_info.predict_PC : issue_instr[1].bp_info.predict_PC;
                 if(issue_instr[0].instr_type == INDEX) begin
                     BRU_input.jump_PC = issue_instr[0].imm;
                 end else if(issue_instr[0].instr_type == RTYPE) begin
                     BRU_input.jump_PC = rd1;
                 end else begin
-                    BRU_input.jump_PC = issue_instr[0].PC + issue_instr[0].offset + 32'd4;
+                    BRU_input.jump_PC = issue_instr[0].jump_PC;
                 end
             
             end
 
-            MMU:begin
-                MMU_input.base = rd1;
-                MMU_input.offset = issue_instr[0].imm[15] ? {16'hffff, issue_instr[0].imm[15:0]} : {16'h0000, issue_instr[0].imm[15:0]};
-                MMU_input.en = 1;
-                MMU_input.mem_read = issue_instr[0].mem_read;
-                MMU_input.mem_write = issue_instr[0].mem_write;
-                MMU_input.unsign_en = issue_instr[0].unsign_en;
-                MMU_input.msize = issue_instr[0].msize;
-                MMU_input.data = rd2;
+            AGU:begin
+                AGU_input.base = rd1;
+                AGU_input.offset = issue_instr[0].imm[15] ? {16'hffff, issue_instr[0].imm[15:0]} : {16'h0000, issue_instr[0].imm[15:0]};
+                AGU_input.en = 1;
+                AGU_input.mem_read = issue_instr[0].mem_read;
+                AGU_input.mem_write = issue_instr[0].mem_write;
+                AGU_input.unsign_en = issue_instr[0].unsign_en;
+                AGU_input.msize = issue_instr[0].msize;
+                AGU_input.data = rd2;
 
             end
 
@@ -452,6 +465,7 @@ module issue(
 
             CP0:begin
                 COP0_input.en = 1;
+                COP0_input.PC = issue_instr[0].PC;
                 COP0_input.mf = issue_instr[0].mf;
                 COP0_input.mt = issue_instr[0].mt;
                 COP0_input.write_data = issue_instr[0].mt ? rd1 : 0;
@@ -474,15 +488,15 @@ module issue(
 
             end
 
-            MMU:begin
-                MMU_input.base = rd3;
-                MMU_input.offset = issue_instr[1].imm[15] ? {16'hffff, issue_instr[1].imm[15:0]} : {16'h0000, issue_instr[1].imm[15:0]};
-                MMU_input.en = 1;
-                MMU_input.mem_read = issue_instr[1].mem_read;
-                MMU_input.mem_write = issue_instr[1].mem_write;
-                MMU_input.unsign_en = issue_instr[1].unsign_en;
-                MMU_input.msize = issue_instr[1].msize;
-                MMU_input.data = rd4;
+            AGU:begin
+                AGU_input.base = rd3;
+                AGU_input.offset = issue_instr[1].imm[15] ? {16'hffff, issue_instr[1].imm[15:0]} : {16'h0000, issue_instr[1].imm[15:0]};
+                AGU_input.en = 1;
+                AGU_input.mem_read = issue_instr[1].mem_read;
+                AGU_input.mem_write = issue_instr[1].mem_write;
+                AGU_input.unsign_en = issue_instr[1].unsign_en;
+                AGU_input.msize = issue_instr[1].msize;
+                AGU_input.data = rd4;
 
             end
 
@@ -526,6 +540,7 @@ module issue(
 
             CP0:begin
                 COP0_input.en = 1;
+                COP0_input.PC = issue_instr[1].PC;
                 COP0_input.mf = issue_instr[1].mf;
                 COP0_input.mt = issue_instr[1].mt;
                 COP0_input.write_data = issue_instr[1].mt ? rd3 : 0;
@@ -542,10 +557,11 @@ module issue(
     assign exec_input.ALU1_input = ALU1_input;
     assign exec_input.ALU2_input = ALU2_input;
     assign exec_input.BRU_input = BRU_input;
-    assign exec_input.MMU_input = MMU_input;
+    assign exec_input.AGU_input = AGU_input;
     assign exec_input.MLT_input = MLT_input;
     assign exec_input.DIV_input = DIV_input;
     assign exec_input.HILO_input = HILO_input;
+    assign exec_input.COP0_input = COP0_input;
     assign exec_input.exec_reg1 = exec_reg1;
     assign exec_input.exec_reg2 = exec_reg2;
  
@@ -555,7 +571,7 @@ module issue(
             scoreboard <= '0;
             scoreboard_hi <= '0;
             scoreboard_lo <= '0;
-        end else if(mem_halt || div_halt) begin
+        //end else if(mem_halt || div_halt) begin
             //do nothing
         end else begin
             scoreboard <= scoreboard_nxt;

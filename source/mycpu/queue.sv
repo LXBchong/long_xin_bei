@@ -11,8 +11,7 @@ module queue(
     input logic[1:0] issued_cnt,
 
     output logic queue_full,
-    output logic queue_empty,
-    input logic fetch_halt
+    output logic queue_empty
 );
     //issue queue
     decode_t[15:0] queue, queue_nxt;
@@ -30,7 +29,8 @@ module queue(
             if(i == head) out[0] = queue[i];
             if(head_plus_one == i) out[1] = queue[i];
         end
-
+        if(flush)
+            out = '0;
     end
     
     assign in_cnt = in_en[0] + in_en[1];
@@ -47,7 +47,8 @@ module queue(
         queue_nxt = queue;
         for (int j = 0; j <= 15; j ++) begin
             if(in_en[0] && tail == j && ~queue_full) queue_nxt[j] = in[0];
-            if(in_en[1] && tail_plus_one == j && ~queue_full) queue_nxt[j] = in[1];
+            if(~in_en[0] && in_en[1] && tail == j && ~queue_full) queue_nxt[j] = in[1];
+            if(in_en[0] && in_en[1] && tail_plus_one == j && ~queue_full) queue_nxt[j] = in[1];
             
             if(issued_cnt == 2'd1 && head == j) queue_nxt[j] = '0;
             if(issued_cnt == 2'd2 && head == j) queue_nxt[j] = '0;

@@ -1,25 +1,19 @@
 `include "common.svh"
 `include "instr.svh"
 
-module MMUfuck(
-    input MMU_input_t in,
-    output word_t    out,
-
+module AGU1(
+    input AGU_input_t in,
     output dbus_req_t dreq,
-    input dbus_resp_t dresp,
-
-    output logic mem_halt,
     output logic AdES, AdEL,
     output addr_t BadVAddr,
-    input logic cp0_flush
+    input logic cp0_flush,
+    input logic mem_exception
 );
     
     addr_t target_addr;
     logic valid;
     strobe_t strobe;
-    word_t data, out_temp;
-    logic[15:0] half_temp;
-    logic[7:0] byte_temp;
+    word_t data;
 
     assign target_addr = in.base + in.offset;
     
@@ -28,6 +22,7 @@ module MMUfuck(
         data = '0;
         AdES = 0;
         AdEL = 0;
+        valid = 0;
         if(in.mem_write) begin
             unique case(in.msize)
                 MSIZE4:begin
@@ -115,51 +110,11 @@ module MMUfuck(
     //assign dreq
     always_comb begin
         dreq = '0;
-        dreq.valid = in.en && valid && ~cp0_flush;
+        dreq.valid = in.en && valid && ~cp0_flush && ~mem_exception;
         dreq.addr = target_addr;
         dreq.size = in.msize;
         dreq.strobe = strobe;
         dreq.data = data;
-    end
-    
-    //assign mem_halt = in.en && dreq.valid && ~dresp.data_ok;
-    assign mem_halt = dreq.valid && ~dresp.data_ok;
-    assign out = out_temp;
-    
-    always_comb begin
-        out_temp = '0;
-        half_temp = '0;
-        byte_temp = '0;
-        if(in.mem_read)begin
-            unique case(in.msize)
-                MSIZE4:begin
-                    out_temp = dresp.data;
-                end
-                
-                MSIZE2:begin
-                    if(target_addr[1] == 1)begin
-                        half_temp = dresp.data[31:16];
-                    end else begin
-                        half_temp = dresp.data[15:0];
-                    end
-                    out_temp = in.unsign_en ? `ZERO_EXTEND(half_temp, 32) : `SIGN_EXTEND(half_temp, 32);
-                end
-                
-                MSIZE1:begin
-                    unique case(target_addr[1:0])
-                        2'b00:
-                            byte_temp = dresp.data[7:0];
-                        2'b01:
-                            byte_temp = dresp.data[15:8];
-                       2'b10:
-                            byte_temp = dresp.data[23:16];
-                       2'b11:
-                            byte_temp = dresp.data[31:24];
-                    endcase
-                    out_temp = in.unsign_en ? `ZERO_EXTEND(byte_temp, 32) : `SIGN_EXTEND(byte_temp, 32);
-                end
-            endcase
-        end
     end
 
     assign BadVAddr = AdEL | AdES ? target_addr : '0; 

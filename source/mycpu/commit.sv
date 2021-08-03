@@ -10,7 +10,6 @@ module commit(
     output word_t hi_data, lo_data,
     output logic write_hi, write_lo,
 
-    input exception_collector_t exception_collector,
     output cp0_reg_input_t cp0_reg_input,
     input logic[5:0] ext_int,
     input cp0_regfile_t cp0_reg,
@@ -20,27 +19,30 @@ module commit(
     output logic[31:0] debug_wb_pc        ,
     output logic[3:0] debug_wb_rf_wen     ,
     output logic[4:0] debug_wb_rf_wnum    ,
-    output logic[31:0] debug_wb_rf_wdata  
+    output logic[31:0] debug_wb_rf_wdata,
+    input addr_t wPC  
 );
 
     exec_reg_t exec_reg1, exec_reg2;
-    word_t ALU1_result, ALU2_result, MMU_out, HILO_result, COP0_result;
+    word_t ALU1_result, ALU2_result, AGU_result, HILO_result, COP0_result;
     addr_t BRU_link_PC;
     logic[63:0] MLT_result, DIV_result;
     logic write_hi_hl, write_lo_hl;
+    exception_collector_t exception_collector;
 
     assign exec_reg1 = exec_result.exec_reg1;
     assign exec_reg2 = exec_result.exec_reg2;
     assign ALU1_result = exec_result.ALU1_result;
     assign ALU2_result = exec_result.ALU2_result;
-    assign MMU_out = exec_result.MMU_result;
+    assign AGU_result = exec_result.AGU_result;
     assign HILO_result = exec_result.HILO_result;
     assign BRU_link_PC = exec_result.BRU_link_PC;
     assign MLT_result = exec_result.MLT_result;
     assign DIV_result = exec_result.DIV_result;
+    assign COP0_result = exec_result.COP0_result;
     assign write_hi_hl = exec_result.write_hi;
     assign write_lo_hl = exec_result.write_lo;
-
+    assign exception_collector = exec_result.exception_collector;
 
         //hanlde exception
     logic exception1_en, exception2_en, BD;
@@ -62,11 +64,11 @@ module commit(
 
         if(interrupt_info && exec_reg1.en && ~cp0_reg.Status.EXL) begin
             exception1_en = 1;
-            EPC = exec_reg1.PC + 32'd4;
+            EPC = wPC + 32'd4;
             ExeCode = EX_INT;
         end else if(exec_reg1.en && exception_collector.BRU_AdEL
             && (~exception_collector.ALU2_BR && ~exception_collector.ALU2_SYS && ~exception_collector.ALU2_OV
-            && ~exception_collector.COP0_AdEL && ~exception_collector.MMU_AdEL && ~exception_collector.MMU_AdES
+            && ~exception_collector.COP0_AdEL && ~exception_collector.AGU_AdEL && ~exception_collector.AGU_AdES
             && ~exec_reg2.RI)) begin
             exception1_en = 1;
             EPC = exception_collector.BRU_BadVAddr;
@@ -93,16 +95,16 @@ module commit(
             exception1_en = 1;
             EPC = exec_reg1.PC;
             ExeCode = EX_BP;
-        end else if(exec_reg1.en && exec_reg1.fu == MMU && exception_collector.MMU_AdEL) begin
+        end else if(exec_reg1.en && exec_reg1.fu == AGU && exception_collector.AGU_AdEL) begin
             exception1_en = 1;
             EPC = exec_reg1.PC;
             ExeCode = EX_ADEL;
-            BadVAddr = exception_collector.MMU_BadVAddr;
-        end else if(exec_reg1.en &&  exec_reg1.fu == MMU && exception_collector.MMU_AdES) begin
+            BadVAddr = exception_collector.AGU_BadVAddr;
+        end else if(exec_reg1.en &&  exec_reg1.fu == AGU && exception_collector.AGU_AdES) begin
             exception1_en = 1;
             EPC = exec_reg1.PC;
             ExeCode = EX_ADES;
-            BadVAddr = exception_collector.MMU_BadVAddr;
+            BadVAddr = exception_collector.AGU_BadVAddr;
         end else if(exec_reg2.en && exception_collector.COP0_AdEL && exception_collector.COP0_second) begin
             exception2_en = 1;
             EPC = exception_collector.COP0_BadVAddr;
@@ -140,20 +142,20 @@ module commit(
                 EPC = exec_reg2.PC - 32'd4;
                 BD = 1;
             end
-        end else if(exec_reg2.en && exception_collector.MMU_AdEL) begin
+        end else if(exec_reg2.en && exception_collector.AGU_AdEL) begin
             exception2_en = 1;
             EPC = exec_reg2.PC;
             ExeCode = EX_ADEL;
-            BadVAddr = exception_collector.MMU_BadVAddr;
+            BadVAddr = exception_collector.AGU_BadVAddr;
             if(exec_reg1.fu == BRU)begin
                 EPC = exec_reg2.PC - 32'd4;
                 BD = 1;
             end
-        end else if(exec_reg2.en && exception_collector.MMU_AdES) begin
+        end else if(exec_reg2.en && exception_collector.AGU_AdES) begin
             exception2_en = 1;
             EPC = exec_reg2.PC;
             ExeCode = EX_ADES;
-            BadVAddr = exception_collector.MMU_BadVAddr;
+            BadVAddr = exception_collector.AGU_BadVAddr;
             if(exec_reg1.fu == BRU)begin
                 EPC = exec_reg2.PC - 32'd4;
                 BD = 1;
@@ -190,9 +192,9 @@ module commit(
                     wd5 = BRU_link_PC;
                 end
 
-                MMU:begin
+                AGU:begin
                     wa5 = exec_reg1.target_reg;
-                    wd5 = MMU_out;
+                    wd5 = AGU_result;
                 end
 
                 HILO:begin
@@ -203,6 +205,11 @@ module commit(
                 CP0:begin
                     wa5 = exec_reg1.target_reg;
                     wd5 = COP0_result;
+                end
+                
+                MLT:begin
+                    wa5 = exec_reg1.target_reg;
+                    wd5 = MLT_result[31:0];
                 end
 
                 default: write_en1 = 0;
@@ -218,9 +225,9 @@ module commit(
                     wd6 = ALU2_result;
                 end
 
-                MMU:begin
+                AGU:begin
                     wa6 = exec_reg2.target_reg;
-                    wd6 = MMU_out;
+                    wd6 = AGU_result;
                 end
 
                 HILO:begin
@@ -231,6 +238,11 @@ module commit(
                 CP0:begin
                     wa6 = exec_reg2.target_reg;
                     wd6 = COP0_result;
+                end 
+                
+                MLT:begin
+                    wa6 = exec_reg2.target_reg;
+                    wd6 = MLT_result[31:0];
                 end
 
                 default: write_en2 = 0;

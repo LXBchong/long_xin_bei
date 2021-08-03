@@ -14,6 +14,7 @@ module ALU (
     shamt_t shamt;
     arith_t operator;
 
+    //assign en = in.en && ~in.delay_exec.delay_opA && ~in.delay_exec.delay_opB ;
     assign en = in.en;
     assign opA = in.opA;
     assign opB = in.opB;

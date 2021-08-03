@@ -1,7 +1,7 @@
 `include "common.svh"
 `include "instr.svh"
 
-module MyCore(
+module MyCore_unused(
 
     output ibus_req_t  ireq,
     output dbus_req_t  dreq,
@@ -85,7 +85,7 @@ module MyCore(
     assign exec_p12_nxt.write_hi = write_hi_hl;
     assign exec_p12_nxt.write_lo = write_lo_hl;
     assign exec_p12_nxt.HILO_result = HILO_result;
-    
+    assign exec_p12_nxt.COP0_result = COP0_result;
 
     assign exec_p23_nxt.ALU1_result = exec_p12.ALU1_result;
     assign exec_p23_nxt.ALU2_result = exec_p12.ALU2_result;
@@ -99,6 +99,7 @@ module MyCore(
     assign exec_p23_nxt.write_hi = exec_p12.write_hi;
     assign exec_p23_nxt.write_lo = exec_p12.write_lo;
     assign exec_p23_nxt.HILO_result = exec_p12.HILO_result;
+    assign exec_p23_nxt.COP0_result = exec_p12.COP0_result; 
 
     assign exec_result_nxt.ALU1_result = exec_p23.ALU1_result;
     assign exec_result_nxt.ALU2_result = exec_p23.ALU2_result;
@@ -111,6 +112,8 @@ module MyCore(
     assign exec_result_nxt.HILO_result = exec_p23.HILO_result;
     assign exec_result_nxt.exec_reg1 = exec_p23.exec_reg1;
     assign exec_result_nxt.exec_reg2 = exec_p23.exec_reg2;
+    assign exec_result_nxt.COP0_result = exec_p23.COP0_result; 
+    
     //TODO more result to be done 
     assign ALU1_bypass_p1 = ALU1_result;
     assign ALU2_bypass_p1 = ALU2_result;

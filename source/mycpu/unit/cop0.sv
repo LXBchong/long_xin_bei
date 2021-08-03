@@ -6,7 +6,7 @@ module COP0 (
     output logic COP0_eret,
     output word_t COP0_result,
     output logic[7:0] write_regsel,
-    output word_t write_data,
+    output word_t write_data, write_PC,
     output logic wfirst, wsecond,
     input cp0_regfile_t cp0_reg,
     input logic cp0_flush,
@@ -19,6 +19,7 @@ module COP0 (
     assign COP0_eret = in.eret;
     assign write_regsel = in.mt && ~cp0_flush ? in.regsel : '0;
     assign write_data = in.write_data;
+    assign write_PC = in.PC;
     
     assign wfirst = in.first;
     assign wsecond = in.second;

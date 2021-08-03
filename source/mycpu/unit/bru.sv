@@ -4,13 +4,14 @@
 module BRU (
     input BRU_input_t in,
     output logic branch_predict_fail,
-    output addr_t BRU_link_PC, PC_not_taken,
+    output addr_t BRU_link_PC, recover_PC,
+    output BRU_BP_bypass_t BRU_BP_bypass,
     output logic AdEL,
     output addr_t BadVAddr,
     input logic DS_EXC
 );
 
-    logic         en, branch_taken, result;
+    logic         en, branch_taken, result, wrong_PC;
     word_t        opA, opB;
     compare_t     operator;
 
@@ -19,6 +20,8 @@ module BRU (
     assign opA = in.opA;
     assign opB = in.opB;
     assign operator = in.operator;
+
+    //TODO exclude ret && calc wrong addr and wrong jump
 
     always_comb begin
         result = 0;
@@ -50,19 +53,29 @@ module BRU (
                         result = 0;
                     end
 
-            endcase 
+            endcase
         end
     end
 
-    assign branch_predict_fail = (branch_taken != result && ~DS_EXC && ~in.DS_RI) ? 1 : 0;
+    assign wrong_PC = branch_taken && result && in.predict_PC != in.jump_PC;
+    assign branch_predict_fail = (branch_taken != result && ~DS_EXC && ~in.DS_RI) || wrong_PC ? 1 : 0;
 
     assign BRU_link_PC = in.link_PC;
 
-    assign PC_not_taken = branch_taken ? in.link_PC : in.jump_PC;
+    assign recover_PC = result ? in.jump_PC : in.link_PC;
 
     assign AdEL = (result && in.jump_PC[1:0] != 2'b00)
         || (~result && in.link_PC[1:0] != 2'b00);
-
+    
     assign BadVAddr = result ? in.jump_PC : in.link_PC; 
+
+    always_comb begin
+        BRU_BP_bypass.branch_in_exec = ~AdEL && ~DS_EXC && en;
+        BRU_BP_bypass.branch_result = result;
+        BRU_BP_bypass.branch_ins_PC = in.link_PC - 32'd8;
+        BRU_BP_bypass.jump_PC = in.jump_PC;
+        BRU_BP_bypass.is_ret = in.is_ret;
+        BRU_BP_bypass.is_call = in.is_call;
+    end
 
 endmodule
