@@ -35,8 +35,7 @@ module CP0(
 
     always_ff @(posedge clk) begin
         if(~resetn)begin
-            {BadVAddr, Count, Compare ,EPC} <= '0;
-            Cause <= {1'b0, 8'h11, 5'b00000};
+            {BadVAddr, Count, Cause, Compare ,EPC} <= '0;
             Status <= {8'h00, 1'b0, 1'b1};
             clock_count <= '0;
             timer_interrupt <= '0;
@@ -45,7 +44,7 @@ module CP0(
             Count <= Count_nxt;
             Compare <= Compare_nxt;
             Status <= Status_nxt;
-            Cause <= Cause_nxt;
+            Cause <= {Cause_nxt.BD, interrupt_info, Cause_nxt.ExcCode};
             EPC <= EPC_nxt;
             clock_count <= clock_count + 1;
             timer_interrupt <= timer_interrupt_nxt;
