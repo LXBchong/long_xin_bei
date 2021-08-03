@@ -88,6 +88,7 @@ module Dreg(
     always_comb begin
         unique case (d_icode)
             SPE: invalid_instr = 0;
+            SPE2: invalid_instr = d_acode !== MUL;
             ADDIU: invalid_instr = 0;
             ANDI: invalid_instr = 0;
             BEQ: invalid_instr = 0;
@@ -140,6 +141,7 @@ module Dreg(
                 if(d_acode === JR) d_dst = 0; //the zero reg
                 else d_dst = d_rd;
             end
+            SPE2: d_dst = d_rd;
             ADDIU: d_dst = d_rt; 
             ANDI:  d_dst = d_rt; 
             JAL:   d_dst = 5'd31;  // GPR 31
@@ -247,6 +249,8 @@ module Dreg(
                     default: d_val2 = d_newval2;
                 endcase
             end
+            SPE2: d_val2 = d_newval2;
+
             LB:   d_val2 = immeSE;
             LBU:  d_val2 = immeSE;
             LH:   d_val2 = immeSE;

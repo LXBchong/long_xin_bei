@@ -197,6 +197,7 @@ module Mreg(
                     endcase
                 end
 
+                SPE2: m_write_enable = (m_acode === MUL) ? 4'b1111 : 4'b0000;
                 REGIMM: begin
                     unique case (m_rt)
                         BGEZAL: m_write_enable = 4'b1111;
@@ -254,5 +255,4 @@ module Mreg(
             default: m_data_size = MSIZE4;
         endcase
     end
-
 endmodule

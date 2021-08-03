@@ -123,6 +123,12 @@ module Ereg(
                     default: e_val3 = 0;
                 endcase
             end
+            SPE2: begin
+                unique case (e_acode)
+                    MUL: {tmp0, e_val3} = (e_val1[31] ^ e_val2[31]) ? (~mulres + 1) : mulres;
+                    defalut: e_val3 = 0;
+                endcase
+            end
             REGIMM: begin
                 unique case (e_rt)
                     BGEZAL: e_val3 = e_val2;
@@ -146,7 +152,7 @@ module Ereg(
     
 // mult and div 
     i64 mulres, divres;
-    i32 op1, op2;
+    i32 op1, op2, tmp0;
     multiplier_multicycle_dsp mul(
         .valid(mul_valid), .a(op1), .b(op2),
         .done(mul_done), .c(mulres),
@@ -198,11 +204,18 @@ module Ereg(
                     end
                 endcase 
             end
+            SPE2: begin //mul
+                if(e_acode === MUL)begin
+                    mul_valid = 1;
+                    op1 = e_val1[31] ? (~e_val1 + 1) : e_val1;
+                    op2 = e_val2[31] ? (~e_val2 + 1) : e_val2;
+                end else mul_valid = 0;
+            end
             default: begin
                 {hi_ewrite, lo_ewrite} = '0;
                 {mul_valid, div_valid} = '0;
             end
         endcase
     end
-
+    logic _unused_ok = &{1'b0, tmp0 ,1'b0};
 endmodule
