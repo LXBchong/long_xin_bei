@@ -153,13 +153,13 @@ module Ereg(
 // mult and div 
     i64 mulres, divres;
     i32 op1, op2, tmp0;
-    multiplier_multicycle_dsp mul(
+    Mul mul(
         .valid(mul_valid), .a(op1), .b(op2),
         .done(mul_done), .c(mulres),
         .*
     );
 
-    divider_multicycle_from_single div(
+    Div div(
         .valid(div_valid), .a(op1), .b(op2),
         .done(div_done), .c(divres),
         .*
