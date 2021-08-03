@@ -13,13 +13,13 @@ module D_LUTRAM #(
     localparam int BYTES_PER_DATA = DATA_WIDTH / BYTE_WIDTH ,
     localparam int NUM_BITS   = NUM_DATA * DATA_WIDTH 
 ) (
-    input logic clk,
+    input logic clk,resetn,
 
     input logic[ADDR_WIDTH-1:0] addr,
     input logic[BYTES_PER_DATA-1:0] strobe,
-    input word_t wdata,
+    input logic[DATA_WIDTH-1:0] wdata,
 
-    output word_t rdata
+    output logic[DATA_WIDTH-1:0] rdata
 );
 
 // xpm_memory_spram: Single Port RAM
@@ -46,7 +46,7 @@ xpm_memory_spram #(
     .WRITE_DATA_WIDTH_A(DATA_WIDTH),
     .WRITE_MODE_A("read_first")
 ) xpm_memory_spram_inst (
-    .clka(clk), .ena(1),
+    .clka(clk), .ena(resetn),
     .addra(addr),
     .wea(strobe),
     .dina(wdata),
