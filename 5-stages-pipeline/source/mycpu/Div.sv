@@ -4,9 +4,10 @@ module Div (
     output logic done,
     output i64 c // c = {a % b, a / b}
 );
+    /* verilator lint_off WIDTH */
     enum i1 { INIT, DOING } state, state_nxt;
     i35 count, count_nxt;
-    localparam i35 DIV_DELAY = {'0, 1'b1, 32'b0};
+    localparam i35 DIV_DELAY = {2'b0, 1'b1, 32'b0};
     always_ff @(posedge clk) begin
         if (~resetn) begin
             {state, count} <= '0;
@@ -37,7 +38,7 @@ module Div (
         p_nxt = p;
         unique case(state)
             INIT: begin
-                p_nxt = {'0, a};
+                p_nxt = {4{8'b0}, a};
             end
             DOING: begin
                 p_nxt = {p_nxt[63:0], 1'b0};
@@ -56,4 +57,5 @@ module Div (
         end
     end
     assign c = p;
+    /* verilator lint_on WIDTH */
 endmodule
