@@ -134,7 +134,7 @@ module CP0(
         endcase        
     end
 
-    logic _unused_ok = &{1'b0, m_excCode[5] ,1'b0};
+    logic _unused_ok = &{1'b0, m_excCode[5] ,Cause_nxt ,1'b0};
     // hhhhhhh
     // can you find me?
 endmodule
