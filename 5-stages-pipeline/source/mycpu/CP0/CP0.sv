@@ -39,7 +39,7 @@ module CP0(
             Cause <= {1'b0, 8'h11, 5'b00000};
             Status <= {8'h00, 1'b0, 1'b1};
             clock_count <= '0;
-            timer_interrupt <= '0;
+            timer_interrupt <= '0
         end else begin
             BadVAddr <= BadVAddr_nxt;
             Count <= Count_nxt;
