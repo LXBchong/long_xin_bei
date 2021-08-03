@@ -3,7 +3,7 @@
 
 module DCache #(
     parameter int OFFSET_BITS = 4,
-    parameter int INDEX_BITS = 8,
+    parameter int INDEX_BITS = 7,
     //4路缓存
     localparam int TAG_BITS = 32 - OFFSET_BITS - INDEX_BITS,
     localparam int WORDS_NUM = 1 << (OFFSET_BITS-2),   
