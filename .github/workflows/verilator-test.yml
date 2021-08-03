@@ -47,6 +47,6 @@ jobs:
           cd ICS-2021Spring-FDU
           mv source/include/refcpu ../5-stages-pipeline/source/include
           rm -r source/include source/mycpu
-          # cp -r ../5-stages-pipeline/source/include ./source/include
-          # cp -r ../5-stages-pipeline/source/mycpu ./source/mycpu
+          cp -r ../5-stages-pipeline/source/include ./source/include
+          cp -r ../5-stages-pipeline/source/mycpu ./source/mycpu
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TEST=coremark VSIM_ARGS='--no-status'

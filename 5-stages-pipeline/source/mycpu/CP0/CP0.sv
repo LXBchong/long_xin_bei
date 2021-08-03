@@ -21,7 +21,7 @@ module CP0(
         i1 BD;    //in delay slot ?   
         i8 IP;
         i5 ExcCode;     
-    } //Cause_t;
+    } Cause_t;
 
     i1 clock_count;
     i1 timer_interrupt, timer_interrupt_nxt;
