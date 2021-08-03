@@ -35,7 +35,8 @@ module CP0(
 
     always_ff @(posedge clk) begin
         if(~resetn)begin
-            {BadVAddr, Count, Cause, Compare ,EPC} <= '0;
+            {BadVAddr, Count, Compare ,EPC} <= '0;
+            Cause <= {1'b0, 8'h11, 5'b00000};
             Status <= {8'h00, 1'b0, 1'b1};
             clock_count <= '0;
             timer_interrupt <= '0;
@@ -46,7 +47,7 @@ module CP0(
             Status <= Status_nxt;
             Cause <= Cause_nxt;
             EPC <= EPC_nxt;
-            clock_count <= clock_count+1;
+            clock_count <= clock_count + 1;
             timer_interrupt <= timer_interrupt_nxt;
         end
     end
@@ -89,41 +90,25 @@ module CP0(
             end
         end else if(cp0_write === 1) begin
             BadVAddr_nxt = BadVAddr;
+            Count_nxt = Count + clock_count;
+            Compare_nxt = Compare;
+            Status_nxt = Status;
             Cause_nxt = Cause;
+            EPC_nxt = EPC;
+            timer_interrupt_nxt = timer_interrupt | isEqual;
             if(cp0_idx === 5'd9)begin
                 Count_nxt = cp0_data2w;
-                Compare_nxt = Compare;
-                Status_nxt = Status;
-                EPC_nxt = EPC;
-                timer_interrupt_nxt = timer_interrupt | isEqual;
-
             end else if(cp0_idx === 5'd11)begin
-                Count_nxt = Count + clock_count;
                 Compare_nxt = cp0_data2w;
                 Compare_set = 1;
                 timer_interrupt_nxt = 0 | isEqual;
-
-                Status_nxt = Status;
-                EPC_nxt = EPC;
             end else if(cp0_idx === 5'd12)begin
-                Count_nxt = Count + clock_count;
-                Compare_nxt = Compare;
                 Status_nxt = {cp0_data2w[15:8], cp0_data2w[1], cp0_data2w[0]};
-                EPC_nxt = EPC;
-                timer_interrupt_nxt = timer_interrupt | isEqual;
-
+            end else if(cp0_idx === 5'd13)begin
+                Cause_nxt.IP[1:0] = cp0_data2w[9:8];
             end else if(cp0_idx === 5'd14)begin
-                Count_nxt = Count + clock_count;
-                Compare_nxt = Compare;
-                Status_nxt = Status;
                 EPC_nxt = cp0_data2w;
-                timer_interrupt_nxt =timer_interrupt | isEqual;
             end else begin
-                Count_nxt = Count + clock_count;
-                Compare_nxt = Compare;
-                Status_nxt = Status;
-                EPC_nxt = EPC;
-                timer_interrupt_nxt = timer_interrupt | isEqual;
             end
         end else begin
             BadVAddr_nxt = BadVAddr;
