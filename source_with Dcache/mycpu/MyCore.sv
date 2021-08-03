@@ -1,7 +1,7 @@
 `include "common.svh"
 `include "instr.svh"
 
-module MyCore(
+module MyCore_unused(
 
     output ibus_req_t  ireq,
     output dbus_req_t  dreq,
@@ -38,11 +38,13 @@ module MyCore(
     word_t ALU1_result, ALU2_result, MMU_out, HILO_result, COP0_result;
     logic[63:0] MLT_result, DIV_result;
     logic branch_predict_fail, eret, cp0_flush, wfirst, wsecond, DS_EXC;
-    addr_t BRU_link_PC, PC_not_taken;
+    addr_t BRU_link_PC, PC_not_taken, EPC, cur_PC, cur_PC_nxt;
     word_t p0, p1, p2, p3;
     exec_pipeline_reg_t exec_p12, exec_p23, exec_p12_nxt, exec_p23_nxt;
     exec_input_t exec_input, exec_input_nxt;
     exec_result_t exec_result, exec_result_nxt;
+    
+    word_t ALU1_bypass_p1, ALU2_bypass_p1,ALU1_bypass_p2, ALU2_bypass_p2,ALU1_bypass_p3, ALU2_bypass_p3;
     
     cp0_reg_input_t cp0_reg_input;
     cp0_regfile_t cp0_reg;
@@ -51,9 +53,12 @@ module MyCore(
     exception_collector_t exception_collector,  exception_collector_nxt;
     
     assign DS_EXC = 0;
+    assign EPC = cp0_reg.EPC;
 
     //TODO: doesn't have cache yet
-    fetch fetch_ins(clk, resetn, fetch_PC_nxt, fetch_instr_nxt, fetch_halt, ireq, iresp, PC_not_taken, branch_predict_fail, queue_full, flush, eret, cp0_flush, cp0_reg.EPC);
+    fetch1 fetch1_ins(.*);
+    fetch2 fetch2_ins(clk, resetn, cur_PC, fetch_PC_nxt, fetch_instr_nxt, fetch_halt, iresp, queue_full, flush, eret, cp0_flush);
+    //fetch fetch_ins(clk, resetn, fetch_PC_nxt, fetch_instr_nxt, fetch_halt, ireq, iresp, PC_not_taken, branch_predict_fail, queue_full, flush, eret, cp0_flush, cp0_reg.EPC);
 
     decode decode_ins1(fetch_PC[0], fetch_instr[0], decode_info_nxt[0]);
     decode decode_ins2(fetch_PC[1], fetch_instr[1], decode_info_nxt[1]);
@@ -62,7 +67,7 @@ module MyCore(
     assign decode_en[1] = decode_info[1].PC != '0 ? 1 : 0;
     
     queue issue_queue_ins(clk, resetn, flush, decode_info, decode_en, issue_instr, issue_cnt, queue_full, queue_empty, fetch_halt);
-    issue issue_ins(clk, resetn, issue_instr, exec_input_nxt, issue_cnt, ra1, ra2, ra3, ra4, rd1, rd2, rd3, rd4, queue_empty, fetch_halt, mem_halt, queue_full, div_halt);
+    issue issue_ins(clk, resetn, issue_instr, exec_input_nxt, issue_cnt, ra1, ra2, ra3, ra4, rd1, rd2, rd3, rd4, queue_empty, fetch_halt, mem_halt, queue_full, div_halt, ALU1_bypass_p1, ALU2_bypass_p1, ALU1_bypass_p2, ALU2_bypass_p2, ALU1_bypass_p3, ALU2_bypass_p3);
 
     regfile regfile_ins(.*);
     hilo_reg hilo_reg_ins(.*);
@@ -80,7 +85,7 @@ module MyCore(
     assign exec_p12_nxt.write_hi = write_hi_hl;
     assign exec_p12_nxt.write_lo = write_lo_hl;
     assign exec_p12_nxt.HILO_result = HILO_result;
-    
+    assign exec_p12_nxt.COP0_result = COP0_result;
 
     assign exec_p23_nxt.ALU1_result = exec_p12.ALU1_result;
     assign exec_p23_nxt.ALU2_result = exec_p12.ALU2_result;
@@ -94,6 +99,7 @@ module MyCore(
     assign exec_p23_nxt.write_hi = exec_p12.write_hi;
     assign exec_p23_nxt.write_lo = exec_p12.write_lo;
     assign exec_p23_nxt.HILO_result = exec_p12.HILO_result;
+    assign exec_p23_nxt.COP0_result = exec_p12.COP0_result; 
 
     assign exec_result_nxt.ALU1_result = exec_p23.ALU1_result;
     assign exec_result_nxt.ALU2_result = exec_p23.ALU2_result;
@@ -106,8 +112,15 @@ module MyCore(
     assign exec_result_nxt.HILO_result = exec_p23.HILO_result;
     assign exec_result_nxt.exec_reg1 = exec_p23.exec_reg1;
     assign exec_result_nxt.exec_reg2 = exec_p23.exec_reg2;
+    assign exec_result_nxt.COP0_result = exec_p23.COP0_result; 
+    
     //TODO more result to be done 
-
+    assign ALU1_bypass_p1 = ALU1_result;
+    assign ALU2_bypass_p1 = ALU2_result;
+    assign ALU1_bypass_p2 = exec_p12.ALU1_result;
+    assign ALU2_bypass_p2 = exec_p12.ALU2_result;
+    assign ALU1_bypass_p3 = exec_p23.ALU1_result;
+    assign ALU2_bypass_p3 = exec_p23.ALU2_result;
 
     ALU ALU1_ins(exec_input.ALU1_input, ALU1_result, exception_collector_nxt.ALU1_OV, exception_collector_nxt.ALU1_SYS, exception_collector_nxt.ALU1_BR);
     ALU ALU2_ins(exec_input.ALU2_input, ALU2_result, exception_collector_nxt.ALU2_OV, exception_collector_nxt.ALU2_SYS, exception_collector_nxt.ALU2_BR);
@@ -142,7 +155,7 @@ module MyCore(
             decode_info <= '0;
             exec_result = '0;
             
-            if(mem_halt || div_halt) begin
+            if(mem_halt) begin
             
             end else begin
                 exec_input <= '0;

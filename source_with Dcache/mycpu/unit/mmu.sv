@@ -1,7 +1,7 @@
 `include "common.svh"
 `include "instr.svh"
 
-module MMU(
+module MMUfuck(
     input MMU_input_t in,
     output word_t    out,
 
@@ -28,7 +28,6 @@ module MMU(
         data = '0;
         AdES = 0;
         AdEL = 0;
-        valid = 0;
         if(in.mem_write) begin
             unique case(in.msize)
                 MSIZE4:begin
