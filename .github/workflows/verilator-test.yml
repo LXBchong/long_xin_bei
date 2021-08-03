@@ -26,6 +26,7 @@ jobs:
           rm -r source/include source/mycpu
           cp -r ../5-stages-pipeline/source/include ./source/include
           cp -r ../5-stages-pipeline/source/mycpu ./source/mycpu
+          cat source/mycpu/CP0/CP0.sv | tail -n 5
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop VSIM_ARGS='--no-status'
 
   ubuntu-18-performance-test:
