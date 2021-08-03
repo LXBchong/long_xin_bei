@@ -4,6 +4,7 @@ module Mul (
     output logic done,
     output i64 c // c = a * b
 );
+    /* verilator lint_off WIDTH */
     logic [3:0][31:0]p, p_nxt;
     assign p_nxt[0] = a[15:0] * b[15:0];
     assign p_nxt[1] = a[15:0] * b[31:16];
@@ -42,4 +43,5 @@ module Mul (
         end
     end
     assign done = state_nxt == INIT;
+    /* verilator lint_on WIDTH */
 endmodule
