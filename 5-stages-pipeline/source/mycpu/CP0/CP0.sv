@@ -21,7 +21,7 @@ module CP0(
         i1 BD;    //in delay slot ?   
         i8 IP;
         i5 ExcCode;     
-    } Cause_t;
+    } //Cause_t;
 
     i1 clock_count;
     i1 timer_interrupt, timer_interrupt_nxt;
@@ -39,7 +39,7 @@ module CP0(
             Cause <= {1'b0, 8'h11, 5'b00000};
             Status <= {8'h00, 1'b0, 1'b1};
             clock_count <= '0;
-            timer_interrupt <= '0
+            timer_interrupt <= '0;
         end else begin
             BadVAddr <= BadVAddr_nxt;
             Count <= Count_nxt;
