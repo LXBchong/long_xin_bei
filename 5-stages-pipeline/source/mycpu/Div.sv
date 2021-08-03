@@ -38,7 +38,7 @@ module Div (
         p_nxt = p;
         unique case(state)
             INIT: begin
-                p_nxt = {4{8'b0}, a};
+                p_nxt = {'0, a};
             end
             DOING: begin
                 p_nxt = {p_nxt[63:0], 1'b0};
