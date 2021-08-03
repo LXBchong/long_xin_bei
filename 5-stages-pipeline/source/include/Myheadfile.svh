@@ -78,6 +78,5 @@ parameter MTC0 = 5'b00100;
 //system
 // special2
 parameter SPE2 = 6'b011100;
-
 parameter MUL  = 6'b000010;
 `endif 

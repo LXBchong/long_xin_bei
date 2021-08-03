@@ -165,8 +165,4 @@ module CBusToAXI(
         rid, rresp, bid, bresp
     });
 
-//my own code for debug
-    always_comb begin
-        
-    end
 endmodule

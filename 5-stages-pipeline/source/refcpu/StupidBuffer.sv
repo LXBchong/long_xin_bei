@@ -1,12 +1,5 @@
 `include "common.svh"
 
-typedef enum i2 {
-    IDLE,
-    FETCH,
-    READY,
-    FLUSH
-} state_t /* verilator public */;
-
 module StupidBuffer (
     input logic clk, resetn,
 
@@ -16,6 +9,13 @@ module StupidBuffer (
     input  cbus_resp_t cresp
 );
     // typedefs
+    typedef enum i2 {
+        IDLE,
+        FETCH,
+        READY,
+        FLUSH
+    } state_t;
+
     typedef union packed {
         word_t data;
         i8 [3:0] lanes;
@@ -24,7 +24,7 @@ module StupidBuffer (
     typedef i4 offset_t;
 
     // registers
-    state_t    state /* verilator public_flat_rd */;
+    state_t    state;
     dbus_req_t req;  // dreq is saved once addr_ok is asserted.
     offset_t   offset;
 

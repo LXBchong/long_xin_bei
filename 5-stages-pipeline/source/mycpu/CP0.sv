@@ -70,6 +70,13 @@ module CP0(
 
 /* verilator lint_off WIDTH */
     always_comb begin
+        BadVAddr_nxt = BadVAddr;
+        Count_nxt = Count + clock_count;
+        Compare_nxt = Compare;
+        Status_nxt = Status;
+        Cause_nxt = Cause;
+        EPC_nxt = EPC;
+        timer_interrupt_nxt = timer_interrupt | isEqual;
         if(ERET2pc === 1)begin
             Status_nxt.EXL = 0;
             //Status_nxt.IE = 1;
@@ -88,13 +95,6 @@ module CP0(
                 //Status_nxt.IE = 0;
             end
         end else if(cp0_write === 1) begin
-            BadVAddr_nxt = BadVAddr;
-            Count_nxt = Count + clock_count;
-            Compare_nxt = Compare;
-            Status_nxt = Status;
-            Cause_nxt = Cause;
-            EPC_nxt = EPC;
-            timer_interrupt_nxt = timer_interrupt | isEqual;
             if(cp0_idx === 5'd9)begin
                 Count_nxt = cp0_data2w;
             end else if(cp0_idx === 5'd11)begin
@@ -110,13 +110,6 @@ module CP0(
             end else begin
             end
         end else begin
-            BadVAddr_nxt = BadVAddr;
-            Cause_nxt = Cause;
-            Count_nxt = Count + clock_count;
-            Compare_nxt = Compare;
-            Status_nxt = Status;
-            EPC_nxt = EPC;
-            timer_interrupt_nxt = timer_interrupt | isEqual;
         end
     end
 /* verilator lint_on WIDTH */
