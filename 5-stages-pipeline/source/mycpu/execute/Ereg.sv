@@ -126,7 +126,7 @@ module Ereg(
             SPE2: begin
                 unique case (e_acode)
                     MUL: {tmp0, e_val3} = (e_val1[31] ^ e_val2[31]) ? (~mulres + 1) : mulres;
-                    defalut: e_val3 = 0;
+                    default: e_val3 = 0;
                 endcase
             end
             REGIMM: begin
