@@ -391,5 +391,6 @@ module Dreg(
             default: {hi_dwrite, lo_dwrite} = '0;
         endcase
     end
-
+    
+    logic _unused_ok = &{1'b0, exception, 1'b0};
 endmodule

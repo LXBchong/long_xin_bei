@@ -225,5 +225,5 @@ module Ereg(
             end
         endcase
     end
-    logic _unused_ok = &{1'b0, tmp0 ,1'b0};
+    logic _unused_ok = &{1'b0, tmp0, exception,1'b0};
 endmodule
