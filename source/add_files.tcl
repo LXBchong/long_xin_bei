@@ -5,3 +5,5 @@ add_files $COMMON_ROOT/util/
 add_files $COMMON_ROOT/ram/
 add_files $COMMON_ROOT/unit/
 add_files $COMMON_ROOT/mycpu/
+add_files $COMMON_ROOT/cache/
+add_files $COMMON_ROOT/external/
