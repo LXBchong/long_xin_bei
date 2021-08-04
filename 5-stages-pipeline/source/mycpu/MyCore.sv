@@ -204,7 +204,7 @@ module MyCore (
         F_stall = conflict1 | instr_stall | data_stall | cal_stall;
         D_stall = conflict1 | instr_stall | data_stall | cal_stall;  //beq or bne 
         E_stall = data_stall | cal_stall;
-        M_stall = exception === 1 ? !i_resp : data_stall;
+        M_stall = exception === 1 ? instr_stall : data_stall;
 
         D_bubble = instr_stall | d_isERET | exception;  
         E_bubble = conflict1 | instr_stall | exception;

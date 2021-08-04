@@ -35,7 +35,7 @@ module Dreg(
     i32 d_newval1, d_newval2;
 
     always_ff @(posedge clk) begin
-        if(~resetn | exception)begin
+        if(~resetn)begin
             //d_pc <= '0;
             d_icode <= '0;
             d_acode <= '0;
@@ -57,6 +57,15 @@ module Dreg(
             d_sa <= '0;
             d_tCode <= '0;
             d_inDelaySlot <= '0;
+        end else if(D_excCode[5])begin
+            d_icode <= '0;
+            d_acode <= '0;
+            d_rt <= '0;
+            d_rs <= '0;
+            d_rd <= '0;
+            d_sa <= '0;
+            d_tCode <= D_excCode;
+            d_inDelaySlot <= D_inDelaySlot;
         end else begin
             d_pc <= D_pc;
             d_icode <= D_icode;
