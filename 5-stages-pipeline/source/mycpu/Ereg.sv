@@ -5,7 +5,7 @@ module Ereg(
     input i32 E_pc, E_val1, E_val2, E_valt,
     input i6 E_icode, E_acode, E_excCode,
     input i5 E_dst, E_rt, E_rs, //for icode about REGIMM 
-    input i1 E_bubble, E_stall, clk, resetn, E_inDelaySlot,
+    input i1 E_bubble, E_stall, clk, resetn, E_inDelaySlot, exception,
     input i32 hi_cur, lo_cur,
 
     output i32 e_pc, e_val3,
@@ -22,7 +22,7 @@ module Ereg(
     i1 extend;
 
     always_ff @(posedge clk) begin
-        if(~resetn) begin
+        if(~resetn | exception) begin
             //e_pc <= 0;
             e_acode <= 0;
             e_icode <= 0;

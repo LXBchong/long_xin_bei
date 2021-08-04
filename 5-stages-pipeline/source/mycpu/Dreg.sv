@@ -5,7 +5,7 @@ module Dreg(
     input i32 D_pc, 
     input i6 D_icode, D_acode, D_excCode,
     input i5 D_rt, D_rs, D_rd, D_sa,
-    input i1 D_stall, D_bubble, clk, resetn, D_inDelaySlot,
+    input i1 D_stall, D_bubble, clk, resetn, D_inDelaySlot, exception,
 
     output i32 d_pc, d_val1, d_val2, d_valt, d_jaddr,
     output i6 d_icode, d_acode, d_excCode,
@@ -35,7 +35,7 @@ module Dreg(
     i32 d_newval1, d_newval2;
 
     always_ff @(posedge clk) begin
-        if(~resetn)begin
+        if(~resetn | exception)begin
             //d_pc <= '0;
             d_icode <= '0;
             d_acode <= '0;
