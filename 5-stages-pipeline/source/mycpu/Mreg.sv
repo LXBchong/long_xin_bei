@@ -48,7 +48,7 @@ module Mreg(
             m_tCode <= '0;
             inDelaySlot <= '0;
         end else if(M_excCode[5])begin
-            m_pc <= 0;
+            m_pc <= M_pc;
             m_icode <= 0;
             m_acode <= 0;
             m_dst <= 0;

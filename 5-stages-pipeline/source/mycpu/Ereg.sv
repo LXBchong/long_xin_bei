@@ -46,6 +46,7 @@ module Ereg(
             e_tCode <= '0;
             e_inDelaySlot <= '0;
         end else if(E_excCode[5]) begin 
+            e_pc <= E_pc;
             e_acode <= 0;
             e_icode <= 0;
             e_dst <= 0;
