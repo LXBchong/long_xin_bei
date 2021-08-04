@@ -24,7 +24,7 @@ module Mreg(
     i5 m_rs, m_rt;
 
     always_ff @(posedge clk) begin
-        if(~resetn) begin
+        if(~resetn || M_bubble) begin
             m_pc <= 0;
             m_icode <= 0;
             m_acode <= 0;
@@ -37,17 +37,6 @@ module Mreg(
             inDelaySlot <= '0;
         end else if(M_stall)begin
 
-        end else if(M_bubble)begin
-            m_pc <= 0;
-            m_icode <= 0;
-            m_acode <= 0;
-            m_dst <= 0;
-            m_newval3 <= 0;
-            m_valt <= '0;
-            m_rt <= 0;
-            m_rs <= '0;
-            m_tCode <= '0;
-            inDelaySlot <= '0;
         end else begin
             m_pc <= M_pc;
             m_icode <= M_icode;

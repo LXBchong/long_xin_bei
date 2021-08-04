@@ -86,13 +86,12 @@ module CP0(
             if(Status.EXL === 0)begin
                 if(inDelaySlot === 0)begin
                     EPC_nxt = excPC;
-                    Cause_nxt.BD = '0;
+                    Cause_nxt.BD = 0;
                 end else begin
                     EPC_nxt = excPC - 4;
-                    Cause_nxt.BD = '1;
+                    Cause_nxt.BD = 1;
                 end
                 Status_nxt.EXL = 1;
-                //Status_nxt.IE = 0;
             end
         end else if(cp0_write === 1) begin
             if(cp0_idx === 5'd9)begin
