@@ -35,7 +35,11 @@ module Dreg(
     i32 d_newval1, d_newval2;
 
     always_ff @(posedge clk) begin
+<<<<<<< HEAD
         if(~resetn | exception)begin
+=======
+        if(~resetn | exception)begin
+>>>>>>> 590520910c0565acd307671b70a8bee7ecb5c29e
             //d_pc <= '0;
             d_icode <= '0;
             d_acode <= '0;
@@ -47,16 +51,6 @@ module Dreg(
             d_inDelaySlot <= '0;
         end else if(D_stall)begin
             
-        end else if(D_bubble)begin
-            //d_pc <= '0;
-            d_icode <= '0;
-            d_acode <= '0;
-            d_rt <= '0;
-            d_rs <= '0;
-            d_rd <= '0;
-            d_sa <= '0;
-            d_tCode <= '0;
-            d_inDelaySlot <= '0;
         end else begin
             d_pc <= D_pc;
             d_icode <= D_icode;
@@ -117,8 +111,6 @@ module Dreg(
             default: invalid_instr = 1;
         endcase
     end
-
-    
 
 //COP0
     always_comb begin
