@@ -5,9 +5,9 @@ module CP0(
     input i32 cp0_data2w, invalid_addr, excPC,  
     input i5 cp0_idx,
     input i1 cp0_write, exception, isBadAddr, inDelaySlot, ERET2pc,
-    input i6 ext_int, m_excCode,
+    (*mark_debug = "true"*)input i6 ext_int, m_excCode,
 
-    output i32 cp0_val, cp0_epc, 
+    (*mark_debug = "true"*)output i32 cp0_val, cp0_epc, 
     output i1 interrupt
 );
 //variable defination
@@ -79,7 +79,7 @@ module CP0(
         timer_interrupt_nxt = timer_interrupt | isEqual;
         if(ERET2pc === 1)begin
             Status_nxt.EXL = 0;
-            //Status_nxt.IE = 1;
+           // Status_nxt.IE = 1;
         end else if(exception === 1)begin
             if(isBadAddr)BadVAddr_nxt = invalid_addr;
             Cause_nxt.ExcCode = m_excCode[4:0];

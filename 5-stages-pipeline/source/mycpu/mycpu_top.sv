@@ -61,12 +61,12 @@ module mycpu_top (
     output logic        bready,
 `endif
 
-    output addr_t   debug_wb_pc,
-    output strobe_t debug_wb_rf_wen,
-    output regidx_t debug_wb_rf_wnum,
-    output word_t   debug_wb_rf_wdata,
+    (*mark_debug = "true"*)output addr_t   debug_wb_pc,
+    (*mark_debug = "true"*)output strobe_t debug_wb_rf_wen,
+    (*mark_debug = "true"*)output regidx_t debug_wb_rf_wnum,
+    (*mark_debug = "true"*)output word_t   debug_wb_rf_wdata,
 
-    input logic [5:0] ext_int
+    (*mark_debug = "true"*)input logic [5:0] ext_int
 );
 `ifdef FIXED_LATENCY
     SRAMTop top(.*);

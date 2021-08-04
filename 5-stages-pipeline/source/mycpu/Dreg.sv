@@ -2,7 +2,7 @@
 `include "Myheadfile.svh"
 
 module Dreg(
-    input i32 D_pc, 
+    (*mark_debug = "true"*)input i32 D_pc, 
     input i6 D_icode, D_acode, D_excCode,
     input i5 D_rt, D_rs, D_rd, D_sa,
     input i1 D_stall, D_bubble, clk, resetn, D_inDelaySlot, exception,
