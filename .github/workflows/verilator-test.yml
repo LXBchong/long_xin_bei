@@ -25,10 +25,9 @@ jobs:
           rm -r source/include source/mycpu
           cp -r ../5-stages-pipeline/source/include ./source
           cp -r ../5-stages-pipeline/source/mycpu ./source
-          cat source/mycpu/CP0/CP0.sv | tail -n 5
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop VSIM_ARGS='--no-status'
 
-  ubuntu-18-functional-test1,2,3,4:
+  ubuntu-18-functional-test1-4:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout -dev repository
@@ -48,7 +47,6 @@ jobs:
           rm -r source/include source/mycpu
           cp -r ../5-stages-pipeline/source/include ./source
           cp -r ../5-stages-pipeline/source/mycpu ./source
-          cat source/mycpu/CP0/CP0.sv | tail -n 5
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test1
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test2
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test3
