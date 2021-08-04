@@ -24,11 +24,7 @@ module Mreg(
     i5 m_rs, m_rt;
 
     always_ff @(posedge clk) begin
-<<<<<<< HEAD
         if(~resetn | exception) begin
-=======
-        if(~resetn | exception) begin
->>>>>>> 590520910c0565acd307671b70a8bee7ecb5c29e
             m_pc <= 0;
             m_icode <= 0;
             m_acode <= 0;

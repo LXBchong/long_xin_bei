@@ -35,11 +35,7 @@ module Dreg(
     i32 d_newval1, d_newval2;
 
     always_ff @(posedge clk) begin
-<<<<<<< HEAD
         if(~resetn | exception)begin
-=======
-        if(~resetn | exception)begin
->>>>>>> 590520910c0565acd307671b70a8bee7ecb5c29e
             //d_pc <= '0;
             d_icode <= '0;
             d_acode <= '0;

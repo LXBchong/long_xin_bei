@@ -22,11 +22,7 @@ module Ereg(
     i1 extend;
 
     always_ff @(posedge clk) begin
-<<<<<<< HEAD
         if(~resetn | exception) begin
-=======
-        if(~resetn | exception) begin
->>>>>>> 590520910c0565acd307671b70a8bee7ecb5c29e
             //e_pc <= 0;
             e_acode <= 0;
             e_icode <= 0;
