@@ -1,14 +1,14 @@
 `include "common.svh"
 `include "Myheadfile.svh"
 module MyCore (
-    input logic clk, resetn,
+    (*mark_debug = "true"*)input logic clk, resetn,
 
     output ibus_req_t  ireq,
     input  ibus_resp_t iresp,
     output dbus_req_t  dreq,
     input  dbus_resp_t dresp,
     output i1 uncachedD, uncachedI,
-    input i6 ext_int
+    (*mark_debug = "true"*)input i6 ext_int
 );
     /****
      * TODO (Lab1) your code here :)

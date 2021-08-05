@@ -8,7 +8,7 @@ module CP0(
     (*mark_debug = "true"*)input i6 ext_int, m_excCode,
 
     (*mark_debug = "true"*)output i32 cp0_val, cp0_epc, 
-    output i1 interrupt
+    (*mark_debug = "true"*)output i1 interrupt
 );
 //variable defination
     typedef struct packed {
