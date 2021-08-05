@@ -7,6 +7,8 @@ module Ereg(
     input i5 E_dst, E_rt, E_rs, //for icode about REGIMM 
     input i1 E_bubble, E_stall, clk, resetn, E_inDelaySlot, exception,
     input i32 hi_cur, lo_cur,
+    input i32 E_cp0_data2w,
+    input i5 E_cp0_idx,
 
     output i32 e_pc, e_val3,
     output i6 e_icode, e_acode, e_excCode,
@@ -14,7 +16,9 @@ module Ereg(
 
     output i32 e_valt, hi_edata, lo_edata,
     output i1 hi_ewrite, lo_ewrite, e_inDelaySlot,
-    output i1 mul_done, mul_valid, div_done, div_valid
+    output i1 mul_done, mul_valid, div_done, div_valid,
+    output i32 e_cp0_data2w,
+    output i5 e_cp0_idx
 );
 
     i32 e_val1, e_val2;
@@ -69,6 +73,8 @@ module Ereg(
             e_rs <= E_rs;
             e_tCode <= E_excCode;
             e_inDelaySlot <= E_inDelaySlot;
+            e_cp0_data2w <= E_cp0_data2w;
+            e_cp0_idx <= E_cp0_idx;
         end
     end
     

@@ -24,10 +24,9 @@ module Dreg(
 
     output i1 d_isERET,
 
-    input i32 d_epc, cp0_val, 
-    output i1 cp0_write,
-    output i5 cp0_idx, 
-    output i32 cp0_data2w
+    input i32 d_epc,
+    output i5 d_cp0_idx, 
+    output i32 d_cp0_data2w
 );
     //consider the D_stall
     i5 d_rd, d_sa;
@@ -77,9 +76,9 @@ module Dreg(
             d_inDelaySlot <= D_inDelaySlot;
         end
     end
-
 //d_isERET
     assign d_isERET = d_icode === COP0 && d_acode === ERET;
+
 //exception
     i1 invalid_instr, self_jump;
     always_comb begin
@@ -127,12 +126,8 @@ module Dreg(
     end
 
 //COP0
-    always_comb begin
-        cp0_write = d_icode === COP0 && d_rs === MTC0;
-        cp0_data2w = d_newval2;   //already forwarding
-        cp0_idx = d_rd;
-    end
-
+    assign d_cp0_data2w = d_newval2;
+    assign d_cp0_idx = d_rd;
 //stall and bubble are not proper in combinatorial logic
 
 //link to regfile
@@ -217,7 +212,6 @@ module Dreg(
                     default: d_val1 = d_newval1;
                 endcase
             end
-            COP0: d_val1 = cp0_val;
             default: d_val1 = d_newval1;
         endcase
     end

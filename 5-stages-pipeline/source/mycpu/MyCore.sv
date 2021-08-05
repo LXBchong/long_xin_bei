@@ -37,6 +37,8 @@ module MyCore (
     i32 d_pc, d_val1, d_val2, d_valt, cp0_epc;   
     i6 d_icode, d_acode, d_excCode;
     i5 d_dst, d_src1, d_src2, d_rt, d_rs;
+    i32 d_cp0_data2w;
+    i5 d_cp0_idx;
     
     Dreg dreg(
         .d_jump, .D_excCode(f_excCode), .d_epc(cp0_epc),
@@ -55,6 +57,8 @@ module MyCore (
     i5 e_dst, e_rt, e_rs;
     i1 e_inDelaySlot;
     i32 e_valt;
+    i32 e_cp0_data2w;
+    i5 e_cp0_idx;
 
     Ereg ereg(
         .E_excCode(d_excCode), .E_inDelaySlot(d_inDelaySlot),
@@ -62,7 +66,7 @@ module MyCore (
         .E_val2(d_val2), .E_valt(d_valt),
         .E_icode(d_icode), .E_acode(d_acode),
         .E_dst(d_dst), .E_rt(d_rt), .E_rs(d_rs),
-        .E_bubble, .clk,
+        .E_bubble, .clk, .E_cp0_data2w(d_cp0_data2w), .E_cp0_idx(d_cp0_idx),
         .*
     );
 
@@ -80,7 +84,7 @@ module MyCore (
         .M_pc(e_pc), .M_val3(e_val3), .M_icode(e_icode),
         .M_acode(e_acode), .M_dst(e_dst), .clk,
         .M_rt(e_rt), .M_valt(e_valt), 
-        .M_rs(e_rs),
+        .M_rs(e_rs), .M_cp0_data2w(e_cp0_data2w), .M_cp0_idx(e_cp0_idx),
         .*
     );
   

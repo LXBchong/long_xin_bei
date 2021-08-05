@@ -5,6 +5,8 @@ module Mreg(
     input i6 M_icode, M_acode, M_excCode,
     input i5 M_dst, M_rt, M_rs,
     input i1 M_stall, M_bubble, clk, resetn, M_inDelaySlot,
+    input i32 M_cp0_data2w,
+    input i5 M_cp0_idx,
 
     output i32 m_pc, m_val3, m_valo, m_newval3,
     output i6 m_icode, m_acode, m_excCode,
@@ -17,7 +19,11 @@ module Mreg(
     input i1 interrupt,
     output i1 exception, isBadAddr, inDelaySlot,
 
-    output i32 invalid_addr, excPC
+    input i32 cp0_val,
+    output i32 invalid_addr, excPC,
+    output i32 cp0_data2w,
+    output i5 cp0_idx,
+    output i1 cp0_write
 );
     i32 m_valt;
     i6 m_tCode;
@@ -69,12 +75,17 @@ module Mreg(
             m_rs <= M_rs;
             m_tCode <= M_excCode;
             inDelaySlot <= M_inDelaySlot;
+            cp0_idx <= M_cp0_idx;
+            cp0_data2w <= M_cp0_data2w;
         end
     end
 
     assign isBadAddr = (m_excCode[4:0] === 5'h04) | (m_excCode[4:0] === 5'h05);
     assign excPC = m_pc;
 
+//COP0
+    assign cp0_write = m_icode === COP0 && m_rs === MTC0;
+    
 //alignment
     i1 isAddrD_align;
     always_comb begin
@@ -173,6 +184,7 @@ module Mreg(
                 if(m_newval3[1])m_val3 = {{16{1'b0}}, m_data[31:16]};
                 else m_val3 = {{16{1'b0}}, m_data[15:0]};
             end 
+            COP0: m_val3 = cp0_val;
             default: m_val3 = m_newval3;
         endcase
     end
