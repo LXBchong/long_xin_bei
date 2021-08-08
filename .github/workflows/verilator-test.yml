@@ -47,9 +47,9 @@ jobs:
           rm -r source/include source/mycpu
           cp -r ../5-stages-pipeline/source/include ./source
           cp -r ../5-stages-pipeline/source/mycpu ./source
-          make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test1
-          make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test2
-          make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test3
+          #make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test1
+          #make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test2
+          #make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test3
           make vsim -j USE_CLANG=1 VSIM_OPT=1 TARGET=mycpu/VTop TEST=test4
 
   ubuntu-18-performance-test:
