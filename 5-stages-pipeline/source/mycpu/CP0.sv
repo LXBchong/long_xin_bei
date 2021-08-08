@@ -45,7 +45,7 @@ module CP0(
             Count <= Count_nxt;
             Compare <= Compare_nxt;
             Status <= Status_nxt;
-            Cause <= {Cause_nxt.BD, interrupt_info, Cause_nxt.ExcCode};
+            Cause <= Cause_nxt;
             EPC <= EPC_nxt;
             clock_count <= clock_count + 1;
             timer_interrupt <= timer_interrupt_nxt;
@@ -75,12 +75,11 @@ module CP0(
         Count_nxt = Count + clock_count;
         Compare_nxt = Compare;
         Status_nxt = Status;
-        Cause_nxt = Cause;
+        Cause_nxt = {Cause.BD, interrupt_info, Cause.ExcCode};
         EPC_nxt = EPC;
         timer_interrupt_nxt = timer_interrupt | isEqual;
         if(ERET2pc === 1)begin
             Status_nxt.EXL = 0;
-           // Status_nxt.IE = 1;
         end else if(exception === 1)begin
             if(isBadAddr)BadVAddr_nxt = invalid_addr;
             Cause_nxt.ExcCode = m_excCode[4:0];
