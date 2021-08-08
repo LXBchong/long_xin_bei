@@ -5,9 +5,10 @@ module CP0(
     input i32 cp0_data2w, invalid_addr, excPC,  
     input i5 cp0_idx,
     input i1 cp0_write, exception, isBadAddr, inDelaySlot, ERET2pc,
-    (*mark_debug = "true"*)input i6 ext_int, m_excCode,
+    input i6 ext_int,
+    (*mark_debug = "true"*)input i6 m_excCode,
 
-    (*mark_debug = "true"*)output i32 cp0_val, cp0_epc, 
+    output i32 cp0_val, cp0_epc, 
     (*mark_debug = "true"*)output i1 interrupt
 );
 //variable defination
