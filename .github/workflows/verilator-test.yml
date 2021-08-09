@@ -72,4 +72,4 @@ jobs:
           rm -r source/include source/mycpu
           cp -r ../5-stages-pipeline/source/include ./source
           cp -r ../5-stages-pipeline/source/mycpu ./source
-          make vsim -j USE_CLANG=1 VSIM_OPT=1 TEST=coremark TARGET=mycpu/VTop VSIM_ARGS='--no-status'
+          make vsim -j USE_CLANG=1 VSIM_OPT=1 TEST=sha TARGET=mycpu/VTop VSIM_ARGS='--no-status'
