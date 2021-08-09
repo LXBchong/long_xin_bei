@@ -2,8 +2,7 @@ MESSAGE := $(m)
 BRANCH  := $(b)
 
 test:
-	echo "$(MESSAGE):$(m)"
-	echo "$(BRANCH):$(b)"
+	echo "hello world"
 
 website:
 	@make push m="$(MESSAGE)" b="main"
