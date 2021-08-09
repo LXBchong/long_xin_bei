@@ -1,7 +1,7 @@
 `include "common.svh"
 `include "Myheadfile.svh"
 module MyCore (
-    (*mark_debug = "true"*)input logic clk, resetn,
+    input logic clk, resetn,
 
     output ibus_req_t  ireq,
     input  ibus_resp_t iresp,

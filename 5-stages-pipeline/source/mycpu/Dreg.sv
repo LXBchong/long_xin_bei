@@ -44,8 +44,8 @@ module Dreg(
             d_tCode <= '0;
             d_inDelaySlot <= '0;
         end else if(D_stall)begin
-            
         end else if(D_bubble)begin
+            d_pc <= D_pc;
             d_icode <= '0;
             d_acode <= '0;
             d_rt <= '0;

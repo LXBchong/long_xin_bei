@@ -43,7 +43,7 @@ module Mreg(
             inDelaySlot <= '0;
         end else if(M_stall)begin
         end else if(M_bubble)begin
-            m_pc <= 0;
+            m_pc <= M_pc;
             m_icode <= 0;
             m_acode <= 0;
             m_dst <= 0;

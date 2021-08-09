@@ -39,6 +39,7 @@ module Ereg(
             e_inDelaySlot <= '0;
         end else if(E_stall) begin
         end else if(E_bubble)begin           
+            e_pc <= E_pc;
             e_acode <= 0;
             e_icode <= 0;
             e_dst <= 0;
