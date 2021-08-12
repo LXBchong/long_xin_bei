@@ -1,0 +1,1943 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.3">
+    
+    
+      
+        <title>《超标量处理器》笔记 - 2021龙芯杯</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="2021龙芯杯" class="md-header__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            2021龙芯杯
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              《超标量处理器》笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="2021龙芯杯" class="md-nav__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    2021龙芯杯
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%BE%99%E8%8A%AF%E6%9D%AF%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        资料汇总
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CPU%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        CPU设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cache%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Cache设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Soc%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Soc框架设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A4%96%E8%AE%BE%E9%83%A8%E5%88%86%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        外设设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        其它资料
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="其它资料" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          其它资料
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          《超标量处理器》笔记
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        《超标量处理器》笔记
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    第一章
+  </a>
+  
+    <nav class="md-nav" aria-label="第一章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    1.3.1顺序执行
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第二章
+  </a>
+  
+    <nav class="md-nav" aria-label="第二章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-cache" class="md-nav__link">
+    2.1 Cache的一般设计
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Cache的一般设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-cache" class="md-nav__link">
+    2.1.1 Cache的组成方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213-cache" class="md-nav__link">
+    2.1.3 Cache的替换策略
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cache" class="md-nav__link">
+    2.2 提高Cache的性能
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 提高Cache的性能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    2.2.1 写缓存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    2.2.2 流水线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    2.2.3 多级结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-victim-cache" class="md-nav__link">
+    2.2.4 Victim Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    2.2.5 预取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-cache" class="md-nav__link">
+    2.3 多端口Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 超标量处理器的取指令
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第三章
+  </a>
+  
+    <nav class="md-nav" aria-label="第三章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34-tlb" class="md-nav__link">
+    3.4 TLB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第四章
+  </a>
+  
+    <nav class="md-nav" aria-label="第四章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    4.2.1两位饱和计数器的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    4.2.2局部历史的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    4.2.3全局历史的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    4.2.4竞争的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#425" class="md-nav__link">
+    4.2.5分支预测的更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    4.3分支指令的目标地址预测
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3分支指令的目标地址预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431pc-relative" class="md-nav__link">
+    4.3.1直接跳转（PC-relative）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-absolute" class="md-nav__link">
+    4.3.2 间接跳转（absolute）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433" class="md-nav__link">
+    4.3.3小结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    4.4分支预测失败的恢复
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    4.5超标量处理器的分支预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第五章
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第六章
+  </a>
+  
+    <nav class="md-nav" aria-label="第六章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    6.1 指令缓存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6.2一般情况
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    6.3特殊情况
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3特殊情况">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631" class="md-nav__link">
+    6.3.1 分支指令的处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632" class="md-nav__link">
+    6.3.2乘累加/乘法指令的处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    第七章
+  </a>
+  
+    <nav class="md-nav" aria-label="第七章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    7.1概述
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    第八章
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    第九章
+  </a>
+  
+    <nav class="md-nav" aria-label="第九章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    9.3旁路网络
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    9.4 操作数的选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-cluster" class="md-nav__link">
+    9.5 Cluster
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5 Cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951-cluster-iq" class="md-nav__link">
+    9.5.1 Cluster IQ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952-cluster-bypass" class="md-nav__link">
+    9.5.2 Cluster Bypass
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    9.6 存储器指令的加速
+  </a>
+  
+    <nav class="md-nav" aria-label="9.6 存储器指令的加速">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#961-memory-disambiguation" class="md-nav__link">
+    9.6.1 Memory Disambiguation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#962-cache" class="md-nav__link">
+    9.6.2 非阻塞Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#963" class="md-nav__link">
+    9.6.3 关键字优先
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    第十章
+  </a>
+  
+    <nav class="md-nav" aria-label="第十章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    10.1 概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    10.4 特殊情况的处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    第十一章
+  </a>
+  
+    <nav class="md-nav" aria-label="第十一章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    11.2 取指令和分支预测
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 取指令和分支预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1121-lineway" class="md-nav__link">
+    11.2.1 line/way的预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1122" class="md-nav__link">
+    11.2.2 分支预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114" class="md-nav__link">
+    11.4 发射
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115" class="md-nav__link">
+    11.5 执行单元
+  </a>
+  
+    <nav class="md-nav" aria-label="11.5 执行单元">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1151" class="md-nav__link">
+    11.5.1 整数的执行单元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1152" class="md-nav__link">
+    11.5.2 浮点数的执行单元
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#118" class="md-nav__link">
+    11.8 结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materials/%E6%8C%87%E4%BB%A4%E9%9B%86/" class="md-nav__link">
+        指令集
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materials/%E6%94%AF%E6%8C%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%A2%9D%E5%A4%96%E6%8C%87%E4%BB%A4/" class="md-nav__link">
+        支持操作系统的额外指令
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    第一章
+  </a>
+  
+    <nav class="md-nav" aria-label="第一章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    1.3.1顺序执行
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第二章
+  </a>
+  
+    <nav class="md-nav" aria-label="第二章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-cache" class="md-nav__link">
+    2.1 Cache的一般设计
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Cache的一般设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-cache" class="md-nav__link">
+    2.1.1 Cache的组成方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213-cache" class="md-nav__link">
+    2.1.3 Cache的替换策略
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cache" class="md-nav__link">
+    2.2 提高Cache的性能
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 提高Cache的性能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    2.2.1 写缓存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    2.2.2 流水线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    2.2.3 多级结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-victim-cache" class="md-nav__link">
+    2.2.4 Victim Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    2.2.5 预取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-cache" class="md-nav__link">
+    2.3 多端口Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 超标量处理器的取指令
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第三章
+  </a>
+  
+    <nav class="md-nav" aria-label="第三章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#34-tlb" class="md-nav__link">
+    3.4 TLB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第四章
+  </a>
+  
+    <nav class="md-nav" aria-label="第四章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    4.2.1两位饱和计数器的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    4.2.2局部历史的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    4.2.3全局历史的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    4.2.4竞争的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#425" class="md-nav__link">
+    4.2.5分支预测的更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    4.3分支指令的目标地址预测
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3分支指令的目标地址预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431pc-relative" class="md-nav__link">
+    4.3.1直接跳转（PC-relative）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-absolute" class="md-nav__link">
+    4.3.2 间接跳转（absolute）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433" class="md-nav__link">
+    4.3.3小结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    4.4分支预测失败的恢复
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    4.5超标量处理器的分支预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第五章
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第六章
+  </a>
+  
+    <nav class="md-nav" aria-label="第六章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    6.1 指令缓存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6.2一般情况
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    6.3特殊情况
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3特殊情况">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631" class="md-nav__link">
+    6.3.1 分支指令的处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632" class="md-nav__link">
+    6.3.2乘累加/乘法指令的处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    第七章
+  </a>
+  
+    <nav class="md-nav" aria-label="第七章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    7.1概述
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    第八章
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    第九章
+  </a>
+  
+    <nav class="md-nav" aria-label="第九章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    9.3旁路网络
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    9.4 操作数的选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-cluster" class="md-nav__link">
+    9.5 Cluster
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5 Cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951-cluster-iq" class="md-nav__link">
+    9.5.1 Cluster IQ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952-cluster-bypass" class="md-nav__link">
+    9.5.2 Cluster Bypass
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    9.6 存储器指令的加速
+  </a>
+  
+    <nav class="md-nav" aria-label="9.6 存储器指令的加速">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#961-memory-disambiguation" class="md-nav__link">
+    9.6.1 Memory Disambiguation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#962-cache" class="md-nav__link">
+    9.6.2 非阻塞Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#963" class="md-nav__link">
+    9.6.3 关键字优先
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    第十章
+  </a>
+  
+    <nav class="md-nav" aria-label="第十章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    10.1 概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    10.4 特殊情况的处理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    第十一章
+  </a>
+  
+    <nav class="md-nav" aria-label="第十一章">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    11.2 取指令和分支预测
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 取指令和分支预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1121-lineway" class="md-nav__link">
+    11.2.1 line/way的预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1122" class="md-nav__link">
+    11.2.2 分支预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114" class="md-nav__link">
+    11.4 发射
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115" class="md-nav__link">
+    11.5 执行单元
+  </a>
+  
+    <nav class="md-nav" aria-label="11.5 执行单元">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1151" class="md-nav__link">
+    11.5.1 整数的执行单元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1152" class="md-nav__link">
+    11.5.2 浮点数的执行单元
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#118" class="md-nav__link">
+    11.8 结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>《超标量处理器》笔记</h1>
+                
+                <blockquote>
+<p>参考书籍：<a href="materials\超标量处理器.pdf">超标量处理器</a></p>
+</blockquote>
+<h2 id="_1">第一章<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h4 id="131">1.3.1顺序执行<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
+<ul>
+<li>如果将发射的过程放到指令的解码阶段，会严重影响处理器的周期时间，因此将发射的过程单独作为一个流水段</li>
+<li>因为要保证流水线的写回阶段是顺序执行的，因此所有的<code>FU</code>都需要经历同样周期数的流水线</li>
+<li><code>ScoreBoard</code>：记录每条指令的执行情况（详见P23）</li>
+<li>每条指令都可以从旁路网络（bypassing network）获得操作数，不需要等待源寄存器写回</li>
+</ul>
+<h2 id="_2">第二章<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21-cache">2.1 Cache的一般设计<a class="headerlink" href="#21-cache" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>例如TLB和Victim Cache多采用全相联结构，而普通的I-cache和D-cache则采用组相联结构</p>
+</blockquote>
+<ul>
+<li>强制缺失：预取（prefetching）</li>
+<li>冲突缺失：可以用Victim Cache来缓解</li>
+</ul>
+<h4 id="211-cache">2.1.1 Cache的组成方式<a class="headerlink" href="#211-cache" title="Permanent link">&para;</a></h4>
+<ul>
+<li>组相连：因为需要从多个Cache line中选择一个匹配的结果，延迟会增大，甚至可能需要流水线，但是其显著地增加了Cache命中，所以得到了广泛的应用</li>
+<li>Cache的访问一般会比较慢，想提高频率，Cache的访问就需要使用流水线，对于指令cache影响不大，但是对于数据cache会增大load指令的延迟。</li>
+<li>访问方式：</li>
+<li>串行：对于超标量处理器来说，由于可以调度其他指令，所以就算串行方式增加一个cache阶段的时钟周期，但是也不会引起性能的明显降低</li>
+<li>全相连：TLB的实现方法</li>
+</ul>
+<h4 id="213-cache">2.1.3 Cache的替换策略<a class="headerlink" href="#213-cache" title="Permanent link">&para;</a></h4>
+<ul>
+<li>伪LRU的一种实现方法：P41</li>
+<li>需要比较**随机**替换和**伪LRU**所花的时间</li>
+</ul>
+<h3 id="22-cache">2.2 提高Cache的性能<a class="headerlink" href="#22-cache" title="Permanent link">&para;</a></h3>
+<h4 id="221">2.2.1 写缓存<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
+<ul>
+<li>因为内存一般只有一个读写端口，所以写回脏数据就会需要两次串行的访存，效率低，可以先写道写缓存（write buffer）中，对于写通（write through）的Dcache来说，写缓存尤为必要</li>
+</ul>
+<h4 id="222">2.2.2 流水线<a class="headerlink" href="#222" title="Permanent link">&para;</a></h4>
+<ul>
+<li>读Dcache可以并行读取Tag SRAM和Data SRAM的数据，但是写Dcache只能串行，所以写的时候需要用流水线</li>
+<li>注意额外的转发</li>
+</ul>
+<h4 id="223">2.2.3 多级结构<a class="headerlink" href="#223" title="Permanent link">&para;</a></h4>
+<ul>
+<li>现代处理器多采用inclusive类型的Cache</li>
+</ul>
+<h4 id="224-victim-cache">2.2.4 Victim Cache<a class="headerlink" href="#224-victim-cache" title="Permanent link">&para;</a></h4>
+<ul>
+<li>防止被踢出的数据马上被利用，而Filter Cache则是防止不会再用的数据一直不被踢出</li>
+</ul>
+<h4 id="225">2.2.5 预取<a class="headerlink" href="#225" title="Permanent link">&para;</a></h4>
+<ul>
+<li>硬件预取：ICache预取的效果要比Dcache要好，可以将预取的指令放到一个单独的缓存中</li>
+</ul>
+<h4 id="23-cache">2.3 多端口Cache<a class="headerlink" href="#23-cache" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Multi-banking：需要尽量减少bank的冲突（空间局部性），以及遇到冲突的处理，其它部件也要实现多端口（Tag SRAM和TLB的复制，可以参考Opteron处理器）</li>
+</ul>
+<h4 id="24">2.4 超标量处理器的取指令<a class="headerlink" href="#24" title="Permanent link">&para;</a></h4>
+<ul>
+<li>每周期取更多的指令，多余的放在**指令缓存**中（2路处理器最多可以取4条指令）</li>
+</ul>
+<h2 id="_3">第三章<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="34-tlb">3.4 TLB<a class="headerlink" href="#34-tlb" title="Permanent link">&para;</a></h3>
+<ul>
+<li>TLB就是页表的Cache</li>
+</ul>
+<h2 id="_4">第四章<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>对**方向**和**目标地址**都需要预测</p>
+</blockquote>
+<ul>
+<li>可以将是否是分支指令的信息在指令从L2 cache写入到Icache之前进行**预解码**（pre-decode），然后把这个信息一起写到Icache中</li>
+<li>分支预测最好时机就是在当前周期得到取指令地址的时候</li>
+<li>需要根据PC值判断本周期的**指令组**（fetch group）中是否存在跳转指令</li>
+<li>因为我们是顺序双发，所以本周期的指令组只有两个指令</li>
+</ul>
+<h4 id="421">4.2.1两位饱和计数器的分支预测<a class="headerlink" href="#421" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>初始状态一般为 weakly not taken 或 strongly not taken</p>
+</li>
+<li>
+<p>使用格雷码对状态机进行编码，减少出错、降低功耗</p>
+</li>
+<li>
+<p>PHT(Pattern History Table) 大小为2KB就有很高的准确率（93%）</p>
+</li>
+</ul>
+<p><img alt="PHT的大小对分支预测准确度的影响曲线" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/PHT%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%AF%B9%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B%E5%87%86%E7%A1%AE%E5%BA%A6%E7%9A%84%E5%BD%B1%E5%93%8D%E6%9B%B2%E7%BA%BF.PNG" /></p>
+<ul>
+<li>由于这种方法的正确率有一个极限值，很难达到98%以上的正确率，现代处理器不会直接使用这种方法。</li>
+</ul>
+<h4 id="422">4.2.2局部历史的分支预测<a class="headerlink" href="#422" title="Permanent link">&para;</a></h4>
+<ul>
+<li>当一条分支指令得到结果时，将PHT中对应的计数器读出来，更新好后再写回即可。</li>
+<li>利用BHT(branch history table)和PHT：将分支此前的跳转情况记录下来，然后索引对应情况的PHT</li>
+<li>由于容量的限制，PC需要进行hash，然后不可避免的会有两种冲突，如下。解决方法有位拼接或**异或法**</li>
+<li>两条分支指令对应一个BHR(branch history register)</li>
+<li>两条分支指令对应两个BHR，但是它们BHR的内容一样，对应PHT中的同一个饱和计数器</li>
+</ul>
+<h4 id="423">4.2.3全局历史的分支预测<a class="headerlink" href="#423" title="Permanent link">&para;</a></h4>
+<ul>
+<li>用GHR(global history register)记录所有的分支跳转情况</li>
+<li>两条PC的GHR相同，因为它们的PC值不同，同样应对冲突可以用：位拼接或**异或法**</li>
+</ul>
+<h4 id="424">4.2.4竞争的分支预测<a class="headerlink" href="#424" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>参考图4.25</p>
+</blockquote>
+<ul>
+<li>利用CPHT(Choice PHT)来判断选择GHR还是BHR</li>
+<li>同样的，为了减少冲突，可以把GHR的值和PC的值异或后对CPHT进行索引</li>
+</ul>
+<h4 id="425">4.2.5分支预测的更新<a class="headerlink" href="#425" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>commit阶段再更新会导致后续跟的比较紧的其他跳转指令获取不了最新的GHR，不至于形同虚设（书上的说会“形同虚设”，但是我觉得不至于），但是会有一定影响</p>
+</li>
+<li>
+<p>综合来看，在**取指令阶段用分支预测的结果对GHR进行更新**是不错的做法，就算当前预测错了，那么之后的分支指令也会因为当前分支预测失败而被冲刷掉，不会有负面影响。不过由于GHR写入了一个错误值，需要进行修复</p>
+</li>
+<li>
+<p>用FIFO的Checkpoint GHR来依次保存GHR的值</p>
+</li>
+</ul>
+<blockquote>
+<p>当预测错误时用</p>
+</blockquote>
+<ul>
+<li>更新BHR的时候可以在退休的再更新，这样可以简化设置，也不会有太大的负面影响；而饱和计数器由于一般会处于饱和状态，也可以指令在退休的时候再更新</li>
+</ul>
+<h3 id="43">4.3分支指令的目标地址预测<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<h4 id="431pc-relative">4.3.1直接跳转（PC-relative）<a class="headerlink" href="#431pc-relative" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>取值阶段需要n+1级流水线（若ICache 需要n个周期返回指令）</p>
+</blockquote>
+<ul>
+<li>BTB(branch target buffer)：存储跳转指令对应的PC值，与cache类似。</li>
+<li>减少tag位数（可以位截取，或者**异或运算**，yyds）不仅节省BTB的存储空间，也不会引起分支预测争取率的降低。</li>
+<li>一般只将**预测发生跳转**的分支指令对应的地址放到BTB中</li>
+<li>BTB缺失的处理</li>
+<li>停止执行：需要加入气泡，尤其是间接跳转指令</li>
+<li>继续执行：预测跳转的地址可能不跳转，继续执行可能会是对的，但是功耗大</li>
+</ul>
+<h4 id="432-absolute">4.3.2 间接跳转（absolute）<a class="headerlink" href="#432-absolute" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>大部分间接跳转都是CALL/Return指令，它们是有迹可循的</p>
+</blockquote>
+<ul>
+<li>RAS(Return Address Stack)：保存每次CALL指令的下一条指令</li>
+<li>在BTB中保存指令的类型（CALL、Return或其它），因此在分支预测阶段（第一个取值阶段）就可以知道当前指令是哪一个指令，进而得到下一个指令的地址</li>
+<li>用带**计数器**的RAS来解决重复的递归函数</li>
+<li>使用Target Cache预测其它类型的分支指令的跳转地址（与预测是否跳转类似）</li>
+</ul>
+<h4 id="433">4.3.3小结<a class="headerlink" href="#433" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>参考图4.49</p>
+</blockquote>
+<ul>
+<li>使用BHR、GHR和饱和计数器来预测分支指令的方向；使用BTB、RAS和Target Cache预测分支指令的目标地址；它们都是基于取值阶段的PC值来预测的</li>
+</ul>
+<h3 id="44">4.4分支预测失败的恢复<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>详见书：非乱序流水线应该不用这么麻烦</p>
+</blockquote>
+<h3 id="45">4.5超标量处理器的分支预测<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
+<ul>
+<li>对于目标地址的预测可能并不需要这么复杂</li>
+</ul>
+<blockquote>
+<p>**MIPS**中，程序绝大部分出现的分支指令都是直接跳转（PC-relative），它们的目标地址可以很快算出来，不必进行目标地址的预测，而是在取值阶段算出目标地址；当然对于非Return的间接跳转就不行了。</p>
+</blockquote>
+<ul>
+<li>使用**交叠方式**（interleaving）实现多端口设计，在超标量处理器中很常用，如重排序缓存（ROB）、发射队列（Issue Queue）和指令缓存（Instruction Buffer）等</li>
+</ul>
+<h2 id="_5">第五章<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>乘法/乘累加指令在MIPS指令集中保存在特殊寄存器Hi和Lo中，但是在超标量寄存器里被认为是33和34个通用寄存器，对它们可以进行正常的寄存器重命名</p>
+</li>
+<li>
+<p>类似的指令可以进行指令更改，比如MULT：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 0000000000</td>
+<td>MULT 011000</td>
+</tr>
+</tbody>
+</table>
+<p>我们发现其中[15:6]位是没有意义的, 正好可以编码两个寄存器, 所以将指令改成如下</p>
+<table>
+<thead>
+<tr>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>RdHi</td>
+<td>RdLo</td>
+<td>MULT 011000</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">第六章<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 指令缓存<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>每周期的取指数和解码数不匹配</p>
+</blockquote>
+<ul>
+<li>在取指阶段和解码阶段之间的缓存</li>
+<li>有效指令的个数，告诉缓存哪些指令是有效的</li>
+<li>为了减少对寄存器重命名阶段的影响，一般会将特殊指令（累乘加：<code>madd</code>）拆分成两条普通的指令，每条指令只有**一个**目的寄存器</li>
+<li>用**交叠**的方式，使用多个单端口的SRAM来实现指令内存这个多端口FIFO</li>
+</ul>
+<h3 id="62">6.2一般情况<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从指令缓存中读取的四条指令未必是四字对齐的，需要按顺序排列好</li>
+</ul>
+<h3 id="63">6.3特殊情况<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<h4 id="631">6.3.1 分支指令的处理<a class="headerlink" href="#631" title="Permanent link">&para;</a></h4>
+<ul>
+<li>每周期最多只有一条分支指令（MIPS指令集有延迟槽，所以顺序双发不可能需要处理两条）</li>
+<li>解码阶段对分支指令的预测的检查</li>
+</ul>
+<h4 id="632">6.3.2乘累加/乘法指令的处理<a class="headerlink" href="#632" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在处理器内部，被拆分的乘累加在流水线的执行阶段，仍然以一个完整的乘累加指令完成；拆分只是更有利于进行寄存器重命名和便于在ROB中的存放；在写发射队列的时候，将两条指令进行了融合，最终变成一条完整的乘累加或乘法指令</li>
+<li>一个周期多个复杂指令：拆分完后只进行部分解码</li>
+</ul>
+<h2 id="_7">第七章<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1概述<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<ul>
+<li>有限个数的寄存器导致了上述的假相关性</li>
+</ul>
+<blockquote>
+<p>假的相关性制约了原始程序获得的并行性</p>
+</blockquote>
+<h2 id="_8">第八章<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>采用集中式发射队列（Centralized Issue Queue，CIQ）</li>
+<li>采用非数据捕捉（MIPS R10000和Alpha 21264）</li>
+<li>旁路网络</li>
+</ul>
+<h2 id="_9">第九章<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>退休的时候才真正更新寄存器状态</p>
+</li>
+<li>
+<p>用cluster实现多端口</p>
+</li>
+<li>
+<p>CLZ指令的一种实现方式（在MIPS中允许所有的位为0）</p>
+</li>
+</ul>
+<p><img alt="CLZ指令的一种实现方式" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/CLZ%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.PNG" /></p>
+<ul>
+<li>
+<p>AGU（Address Generate Unit）用来计算地址，在超标量处理器中由于并行处理的需要以及访存对处理器的性能的影响，单独用了一个FU来计算地址，同时进行分支检查</p>
+</li>
+<li>
+<p>BRU（Branch Unit）负责计算分支指令的目的地址，并根据这些条件来决定是否</p>
+</li>
+</ul>
+<h3 id="93">9.3旁路网络<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从寄存器中读出的数据需要一周期的时间（<strong>Source Drive</strong>）才能进入FU的输入端；同理FU计算出结果也需要一个阶段（<strong>Result Drive</strong>）才能到达所有的FU的输入端</li>
+<li>
+<p>从一个输出到另一个输入如果时间很长会让execute的时间变少，可以用（Cluster）来解决这个问题</p>
+</li>
+<li>
+<p>两条指令同时想要占有旁路网络去转发数据，会产生冲突</p>
+</li>
+<li>不需要在所有的FU之间都设置旁路网络</li>
+<li>AGU进行地址计算时，一般都会用到ALU的结果，尤其是间接跳转（寄存器跳转）</li>
+<li>load/store单元中store单元也不需要旁路</li>
+</ul>
+<h3 id="94">9.4 操作数的选择<a class="headerlink" href="#94" title="Permanent link">&para;</a></h3>
+<ul>
+<li>寄存器的信息需要保存在一个表格中（ScoreBoard）</li>
+<li>将ScoreBoard的读取放到流水线的RF Read阶段可以减少对周期时间的影响，但是需要额外的比较电路，此外，ScoreBoard的电路本身就比较复杂</li>
+<li>有些时候**简单的就是好的**，每条FU计算出结果的时候都进行广播（类似单指令流水线的转发）</li>
+</ul>
+<h3 id="95-cluster">9.5 Cluster<a class="headerlink" href="#95-cluster" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>和交叠（interleaving）类似</p>
+</blockquote>
+<ul>
+<li>发射队列的Cluster结构：分布式发射队列（多端口会耗费大量资源，同时会降低速度）</li>
+</ul>
+<h4 id="951-cluster-iq">9.5.1 Cluster IQ<a class="headerlink" href="#951-cluster-iq" title="Permanent link">&para;</a></h4>
+<ul>
+<li>不同的分布式发射队列处理不同的指令，对应少数的仲裁电路和FU</li>
+</ul>
+<h4 id="952-cluster-bypass">9.5.2 Cluster Bypass<a class="headerlink" href="#952-cluster-bypass" title="Permanent link">&para;</a></h4>
+<ul>
+<li>旁路网络只分布在每个Cluster内部，进而减少大量的旁路电路</li>
+<li>对于乱序处理器来说，不同Cluster中的相邻指令之间可以调度其它指令填补空白；但是对于顺序处理器，无法调度只能bubble的情况难以接受，一般会尽量采用完全的旁路网络（Intel的Atom处理器），</li>
+</ul>
+<h3 id="96">9.6 存储器指令的加速<a class="headerlink" href="#96" title="Permanent link">&para;</a></h3>
+<h4 id="961-memory-disambiguation">9.6.1 Memory Disambiguation<a class="headerlink" href="#961-memory-disambiguation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>为了降低设计难度和处理器中存储器的正确性，大部分处理器的store指令是顺序执行（in-order），而load指令主要有三种实现方法，这里只介绍完全的顺序执行</li>
+<li>完全的顺序执行：最保守，性能低，超标量处理器中基本不会采用这个方法（。。。我们应该是采用这个方法）</li>
+</ul>
+<h4 id="962-cache">9.6.2 非阻塞Cache<a class="headerlink" href="#962-cache" title="Permanent link">&para;</a></h4>
+<ul>
+<li>非阻塞（Non-blocking）Cache：在发生D-Cache缺失的时候，处理器可以继续执行后面的load/store指令</li>
+</ul>
+<h4 id="963">9.6.3 关键字优先<a class="headerlink" href="#963" title="Permanent link">&para;</a></h4>
+<ul>
+<li>从下级流水线读取数据的时候，可以先读指令所需要的数据到cache line中，这样CPU就得到了想要的数据，而D-cache会继续完成其它数据的填充。但需要在存储器系统中添加额外的硬件才能实现</li>
+<li>关键词优先和提前开始都可以应用于I-Cache，但是要保证原始顺序</li>
+</ul>
+<h2 id="_10">第十章<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="101">10.1 概述<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从外部来看，处理器总时按照程序指定的顺序执行；从内部来看，超标量处理器，尤其是乱序的，在分发阶段（Dispatch）打乱指令，然后在提交阶段（Commit）拉回到顺序执行，从这个角度来说，超标量处理器堪称一个伪装高手。</li>
+</ul>
+<h3 id="104">10.4 特殊情况的处理<a class="headerlink" href="#104" title="Permanent link">&para;</a></h3>
+<ul>
+<li>由于store指令改变程序员可见状态（architecture state），必须保证其在执行阶段（尤其是写DCache的时候的）的正确性，因为有可能架构在设计的时候存在在提交阶段才检测到分支预测错误的可能性，那么此前的所有指令都不该被执行，这点需要注意。</li>
+<li>分支预测使得原本流水线中指令的状态变为三种（正常、异常、不执行），增加了异常处理的复杂。</li>
+<li>store指令的处理：因为store指令退休的时候才能写回，此时或出现缓存缺失，堵塞了之后的指令会导致处理器性能的降低。解决方法为在Store Buffer中增加一个状态位。</li>
+<li>RISC处理器的一个设计思想：不为不经常出现的情况浪费硬件资源</li>
+</ul>
+<h2 id="_11">第十一章<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="112">11.2 取指令和分支预测<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Alpha 21264采用两级流水线来访问ICache，第一级得到ICache中的指令和Tag，第二级进行Tag比较，同时把指令送到解码器等相关部件中</li>
+<li>两种分支预测方法：第一种简单，第二种复杂需两个周期，如果两种方法复测结果不一样，则bubble掉简单预测的指令，采用复杂方式预测的指令。</li>
+</ul>
+<h4 id="1121-lineway">11.2.1 line/way的预测<a class="headerlink" href="#1121-lineway" title="Permanent link">&para;</a></h4>
+<ul>
+<li>本质上就是把BTB放到了ICache中，因为21264处理器每周期取出的四条指令在四字对齐的边界之内，所以每四条指令用一个line/way预测</li>
+<li>预测信息包含三个内容：（1）successor way：下个周期取出的fetch group在ICache中的way，（2）successor index：下个周期要取出的一组指令中在Cache line中的位置，需要先找到Cache line，然后再找其在Cache line中的位置。（3）branch position：本周期取出的指令组中，若存在预测跳转的分支指令，存储该指令下一条指令的位置，不存储分支指令的位置是因为：一、更容易找到本周期中哪些指令不该进入流水线；二、用00就可以表示出“本周期取出的指令都需要进入流水线”这个信息。</li>
+</ul>
+<p><img alt="line,way-predicion的一个例子" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/line%2Cway-predicion%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90.PNG" /></p>
+<ul>
+<li>可以用两位饱和计数器的方式来管理line/way的预测值</li>
+<li>同时也有三个问题：（1）很多Cache line没有分支指令，浪费分支指令的信息，而独立的BTB只会把预测结果是跳转的指令放在BTB中（2）Cache占用更多的资源（3）每当Cache line被替换，它包含的预测信息就消失了，而独立的BTB不会有这样的问题。</li>
+<li>配合使用virtually-indexed，virtually-tagged结构的Cache更合理</li>
+</ul>
+<h4 id="1122">11.2.2 分支预测<a class="headerlink" href="#1122" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>21264处理器的复杂分支预测与简单分支预测的冲突</p>
+</li>
+<li>
+<p>基于全局历史的预测和局部历史的预测的冲突</p>
+</li>
+</ul>
+<p><img alt="Alpha处理器使用的分支预测" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/Alpha%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%BF%E7%94%A8%E7%9A%84%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B.PNG" /></p>
+<ul>
+<li>对于基于局部历史的分支预测方法，使用非推测（non-speculative）的方式更新；对于基于全局历史的分支预测方法，使用了推测的分式更新，所以GHR的状态可能不正确，所以需要用类似于Checkpoint的方法进行更新。</li>
+</ul>
+<p><img alt="Alpha21264的GHR的状态恢复" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/Alpha21264%E7%9A%84GHR%E7%9A%84%E7%8A%B6%E6%80%81%E6%81%A2%E5%A4%8D.PNG" /></p>
+<h3 id="114">11.4 发射<a class="headerlink" href="#114" title="Permanent link">&para;</a></h3>
+<ul>
+<li>将寄存器堆复制的方法是Cluster结构中常用的方法之一，减少了寄存器对的读端口，访问寄存器退的速度会提高，总的面积也不会显著增多。</li>
+</ul>
+<h3 id="115">11.5 执行单元<a class="headerlink" href="#115" title="Permanent link">&para;</a></h3>
+<h4 id="1151">11.5.1 整数的执行单元<a class="headerlink" href="#1151" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Cluster结构中，若两条相邻的相关指令是在同一Cluster内执行的，就可以背靠背执行；若在不同的Cluster，则需要跨越Cluster，需要单独的一个周期来传递</li>
+<li>寄存器堆有专门供load指令使用的写端口，以此来提高load指令的执行效率</li>
+</ul>
+<h4 id="1152">11.5.2 浮点数的执行单元<a class="headerlink" href="#1152" title="Permanent link">&para;</a></h4>
+<ul>
+<li>浮点数有专门的处理单元，包括加法、乘法、除法等</li>
+</ul>
+<h3 id="118">11.8 结论<a class="headerlink" href="#118" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Alpha 21264 处理器在很多方面做出了有益的尝试</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../%E5%A4%96%E8%AE%BE%E9%83%A8%E5%88%86%E8%AE%BE%E8%AE%A1/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 外设设计" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              外设设计
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../materials/%E6%8C%87%E4%BB%A4%E9%9B%86/" class="md-footer__link md-footer__link--next" aria-label="Next: 指令集" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              指令集
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.29db7785.min.js"></script>
+      
+    
+  </body>
+</html>

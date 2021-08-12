@@ -1,0 +1,2832 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.3">
+    
+    
+      
+        <title>指令集 - 2021龙芯杯</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#labs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="2021龙芯杯" class="md-header__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            2021龙芯杯
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              指令集
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="2021龙芯杯" class="md-nav__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    2021龙芯杯
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%BE%99%E8%8A%AF%E6%9D%AF%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        资料汇总
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        CPU设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cache%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Cache设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Soc%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Soc框架设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A4%96%E8%AE%BE%E9%83%A8%E5%88%86%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        外设设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        其它资料
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="其它资料" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          其它资料
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%B6%85%E6%A0%87%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        《超标量处理器》笔记
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          指令集
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        指令集
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    labs指令集
+  </a>
+  
+    <nav class="md-nav" aria-label="labs指令集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab1" class="md-nav__link">
+    lab1 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab1 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addiu" class="md-nav__link">
+    addiu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addu" class="md-nav__link">
+    addu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#and" class="md-nav__link">
+    and
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#andi" class="md-nav__link">
+    andi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beq-branch-on-equal" class="md-nav__link">
+    beq: Branch on Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bne-branch-on-not-equal" class="md-nav__link">
+    bne: Branch on Not Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#j-jump" class="md-nav__link">
+    j: Jump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jal-jump-and-link" class="md-nav__link">
+    jal: Jump and Link
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jr-jump-register" class="md-nav__link">
+    jr: Jump Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lui-load-upper-immediate" class="md-nav__link">
+    lui: Load Upper Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lw-load-word" class="md-nav__link">
+    lw: Load Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nor" class="md-nav__link">
+    nor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    or
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ori-or-immediate" class="md-nav__link">
+    ori: Or Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sll-shift-word-left-logical" class="md-nav__link">
+    sll: Shift Word Left Logical
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slt-set-on-less-than" class="md-nav__link">
+    slt: Set on Less Than
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slti-set-on-less-than-immediate" class="md-nav__link">
+    slti: Set on Less Than Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sltiu-set-on-less-than-immediate-unsigned" class="md-nav__link">
+    sltiu: Set on Less Than Immediate Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sltu-set-on-less-than-unsigned" class="md-nav__link">
+    sltu: Set on Less Than Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sra-shift-word-right-arithmetic" class="md-nav__link">
+    sra: Shift Word Right Arithmetic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subu" class="md-nav__link">
+    subu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sw" class="md-nav__link">
+    sw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xor" class="md-nav__link">
+    xor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xori" class="md-nav__link">
+    xori
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab2" class="md-nav__link">
+    lab2 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab2 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bgez-branch-on-greater-than-or-equal-to-zero" class="md-nav__link">
+    bgez: Branch on Greater Than or Equal to Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgezal-branch-on-greater-than-or-equal-to-zero-and-link" class="md-nav__link">
+    bgezal: Branch on Greater Than or Equal to Zero and Link
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgtz-branch-on-greater-than-zero" class="md-nav__link">
+    bgtz: Branch on Greater Than Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blez-branch-on-less-than-or-equal-to-zero" class="md-nav__link">
+    blez: Branch on Less Than or Equal to Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bltz-branch-on-less-than-zero" class="md-nav__link">
+    bltz: Branch on Less Than Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bltzal-branch-on-less-than-zero-and-link" class="md-nav__link">
+    bltzal: Branch on Less Than Zero and Link
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jalr-jump-and-link-register" class="md-nav__link">
+    jalr: Jump and Link Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lb" class="md-nav__link">
+    lb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lbu" class="md-nav__link">
+    lbu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lh" class="md-nav__link">
+    lh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lhu" class="md-nav__link">
+    lhu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sb" class="md-nav__link">
+    sb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sh" class="md-nav__link">
+    sh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sllv-shift-word-left-logical-variable" class="md-nav__link">
+    sllv: Shift Word Left Logical Variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srav-shift-word-right-arithmetic-variable" class="md-nav__link">
+    srav: Shift Word Right Arithmetic Variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srlv-shift-word-right-logical-variable" class="md-nav__link">
+    srlv: Shift Word Right Logical Variable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab3" class="md-nav__link">
+    lab3 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab3 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#div" class="md-nav__link">
+    div
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divu" class="md-nav__link">
+    divu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mfhi-move-from-hi-register" class="md-nav__link">
+    mfhi: Move From HI Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mflo-move-from-lo-register" class="md-nav__link">
+    mflo: Move From LO Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mthi-move-to-hi-register" class="md-nav__link">
+    mthi: Move to HI Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtlo-move-to-lo-register" class="md-nav__link">
+    mtlo: Move to LO Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mult" class="md-nav__link">
+    mult
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multu" class="md-nav__link">
+    multu
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab4" class="md-nav__link">
+    lab4 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab4 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addi" class="md-nav__link">
+    addi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sub" class="md-nav__link">
+    sub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eret-exception-return" class="md-nav__link">
+    eret: Exception Return
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mfc0-move-from-coprocessor-0" class="md-nav__link">
+    mfc0: Move from Coprocessor 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtc0-move-to-coprocessor-0" class="md-nav__link">
+    mtc0: Move to Coprocessor 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break" class="md-nav__link">
+    break
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syscall" class="md-nav__link">
+    syscall
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%94%AF%E6%8C%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%A2%9D%E5%A4%96%E6%8C%87%E4%BB%A4/" class="md-nav__link">
+        支持操作系统的额外指令
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    labs指令集
+  </a>
+  
+    <nav class="md-nav" aria-label="labs指令集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab1" class="md-nav__link">
+    lab1 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab1 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addiu" class="md-nav__link">
+    addiu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addu" class="md-nav__link">
+    addu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#and" class="md-nav__link">
+    and
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#andi" class="md-nav__link">
+    andi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beq-branch-on-equal" class="md-nav__link">
+    beq: Branch on Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bne-branch-on-not-equal" class="md-nav__link">
+    bne: Branch on Not Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#j-jump" class="md-nav__link">
+    j: Jump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jal-jump-and-link" class="md-nav__link">
+    jal: Jump and Link
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jr-jump-register" class="md-nav__link">
+    jr: Jump Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lui-load-upper-immediate" class="md-nav__link">
+    lui: Load Upper Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lw-load-word" class="md-nav__link">
+    lw: Load Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nor" class="md-nav__link">
+    nor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#or" class="md-nav__link">
+    or
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ori-or-immediate" class="md-nav__link">
+    ori: Or Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sll-shift-word-left-logical" class="md-nav__link">
+    sll: Shift Word Left Logical
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slt-set-on-less-than" class="md-nav__link">
+    slt: Set on Less Than
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slti-set-on-less-than-immediate" class="md-nav__link">
+    slti: Set on Less Than Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sltiu-set-on-less-than-immediate-unsigned" class="md-nav__link">
+    sltiu: Set on Less Than Immediate Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sltu-set-on-less-than-unsigned" class="md-nav__link">
+    sltu: Set on Less Than Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sra-shift-word-right-arithmetic" class="md-nav__link">
+    sra: Shift Word Right Arithmetic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subu" class="md-nav__link">
+    subu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sw" class="md-nav__link">
+    sw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xor" class="md-nav__link">
+    xor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xori" class="md-nav__link">
+    xori
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab2" class="md-nav__link">
+    lab2 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab2 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bgez-branch-on-greater-than-or-equal-to-zero" class="md-nav__link">
+    bgez: Branch on Greater Than or Equal to Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgezal-branch-on-greater-than-or-equal-to-zero-and-link" class="md-nav__link">
+    bgezal: Branch on Greater Than or Equal to Zero and Link
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgtz-branch-on-greater-than-zero" class="md-nav__link">
+    bgtz: Branch on Greater Than Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blez-branch-on-less-than-or-equal-to-zero" class="md-nav__link">
+    blez: Branch on Less Than or Equal to Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bltz-branch-on-less-than-zero" class="md-nav__link">
+    bltz: Branch on Less Than Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bltzal-branch-on-less-than-zero-and-link" class="md-nav__link">
+    bltzal: Branch on Less Than Zero and Link
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jalr-jump-and-link-register" class="md-nav__link">
+    jalr: Jump and Link Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lb" class="md-nav__link">
+    lb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lbu" class="md-nav__link">
+    lbu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lh" class="md-nav__link">
+    lh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lhu" class="md-nav__link">
+    lhu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sb" class="md-nav__link">
+    sb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sh" class="md-nav__link">
+    sh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sllv-shift-word-left-logical-variable" class="md-nav__link">
+    sllv: Shift Word Left Logical Variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srav-shift-word-right-arithmetic-variable" class="md-nav__link">
+    srav: Shift Word Right Arithmetic Variable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srlv-shift-word-right-logical-variable" class="md-nav__link">
+    srlv: Shift Word Right Logical Variable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab3" class="md-nav__link">
+    lab3 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab3 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#div" class="md-nav__link">
+    div
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#divu" class="md-nav__link">
+    divu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mfhi-move-from-hi-register" class="md-nav__link">
+    mfhi: Move From HI Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mflo-move-from-lo-register" class="md-nav__link">
+    mflo: Move From LO Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mthi-move-to-hi-register" class="md-nav__link">
+    mthi: Move to HI Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtlo-move-to-lo-register" class="md-nav__link">
+    mtlo: Move to LO Register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mult" class="md-nav__link">
+    mult
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multu" class="md-nav__link">
+    multu
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab4" class="md-nav__link">
+    lab4 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="lab4 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addi" class="md-nav__link">
+    addi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sub" class="md-nav__link">
+    sub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eret-exception-return" class="md-nav__link">
+    eret: Exception Return
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mfc0-move-from-coprocessor-0" class="md-nav__link">
+    mfc0: Move from Coprocessor 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mtc0-move-to-coprocessor-0" class="md-nav__link">
+    mtc0: Move to Coprocessor 0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break" class="md-nav__link">
+    break
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syscall" class="md-nav__link">
+    syscall
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>指令集</h1>
+                
+                <h2 id="labs">labs指令集<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>参考资料：<a href="../Volume%20II_%20MIPS32%20Instruction%20Set.pdf">Volume II_ MIPS32 Instruction Set</a></p>
+<p>关于指令的详细内容请查阅上述资料</p>
+</blockquote>
+<p>指令格式：</p>
+<table>
+<thead>
+<tr>
+<th>对应的页数</th>
+<th>数据范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令名称</td>
+<td>对应的寄存器或立即数等等信息</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lab1">lab1 指令<a class="headerlink" href="#lab1" title="Permanent link">&para;</a></h3>
+<h5 id="addiu">addiu<a class="headerlink" href="#addiu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P48</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADDIU</td>
+<td>001001</td>
+<td>rs</td>
+<td>rt</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← GPR[rs] + immediate(signed)  (No exception)</p>
+<h5 id="addu">addu<a class="headerlink" href="#addu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P49</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADDU</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>ADDU  100001</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] + GPR[rt] (No exception)</p>
+<h5 id="and">and<a class="headerlink" href="#and" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P52</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AND</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>AND 100100</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] AND GPR[rt]</p>
+<h5 id="andi">andi<a class="headerlink" href="#andi" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P53</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ANDI</td>
+<td>001100</td>
+<td>rs</td>
+<td>rt</td>
+<td>imme</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← GPR[rs] AND immediate(zero-extended)</p>
+<h5 id="beq-branch-on-equal">beq: Branch on Equal<a class="headerlink" href="#beq-branch-on-equal" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P68</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BEQ</td>
+<td>000100</td>
+<td>rs</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] = GPR[rt] then branch</p>
+<p>An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself)</p>
+<h5 id="bne-branch-on-not-equal">bne: Branch on Not Equal<a class="headerlink" href="#bne-branch-on-not-equal" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P84</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BNE</td>
+<td>000101</td>
+<td>rs</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≠ GPR[rt] then branch</p>
+<h5 id="j-jump">j: Jump<a class="headerlink" href="#j-jump" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P129</th>
+<th>31:26</th>
+<th>25:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J</td>
+<td>000010</td>
+<td>instr_index</td>
+</tr>
+</tbody>
+</table>
+<p>Description: This is a PC-region branch (not PC-relative); the effective target address is in the “current” 256 MB-aligned region. The low 28 bits of the target address is the instr_index field shifted left 2 bits. The remaining upper bits are the corresponding bits of the address of the instruction in the delay slot (not the branch itself, but they are same in most cases).</p>
+<h5 id="jal-jump-and-link">jal: Jump and Link<a class="headerlink" href="#jal-jump-and-link" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P130</th>
+<th>31:26</th>
+<th>25:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JAL</td>
+<td>000011</td>
+<td>instr_index</td>
+</tr>
+</tbody>
+</table>
+<p>Description: Place the return address link in GPR 31(register). The return link is the address of the second instruction following the branch, at which location execution continues after a procedure call.</p>
+<p>This is a PC-region branch (not PC-relative); the effective target address is in the “current” 256 MB-aligned region. The low 28 bits of the target address is the instr_index field shifted left 2bits. The remaining upper bits are the corresponding bits of the address of the instruction in the delay slot (not the branch itself).</p>
+<h5 id="jr-jump-register">jr: Jump Register<a class="headerlink" href="#jr-jump-register" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P138</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JR</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>0 0000000000</td>
+<td>hint</td>
+<td>JR 001000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: PC ← GPR[rs]</p>
+<h5 id="lui-load-upper-immediate">lui: Load Upper Immediate<a class="headerlink" href="#lui-load-upper-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P150</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LUI</td>
+<td>001111</td>
+<td>0 00000</td>
+<td>rt</td>
+<td>imme</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← immediate || 016 </p>
+<p>The 16-bit immediate is shifted left 16 bits and concatenated with 16 bits of low-order zeros. </p>
+<h5 id="lw-load-word">lw: Load Word<a class="headerlink" href="#lw-load-word" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P152</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LW</td>
+<td>100011</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← memory[GPR[base] + offset(signed_extended)]</p>
+<p>The 16-bit signed offset is added to the contents of GPR base to form the effective address.</p>
+<h5 id="nor">nor<a class="headerlink" href="#nor" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P197</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NOR</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>NOR 100111</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] NOR GPR[rt]</p>
+<h5 id="or">or<a class="headerlink" href="#or" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P197</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OR</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>OR 100101</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] or GPR[rt]</p>
+<h5 id="ori-or-immediate">ori: Or Immediate<a class="headerlink" href="#ori-or-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P199</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ORI</td>
+<td>001101</td>
+<td>rs</td>
+<td>rt</td>
+<td>imme</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← GPR[rs] or immediate(zero_extended)</p>
+<h5 id="sll-shift-word-left-logical">sll: Shift Word Left Logical<a class="headerlink" href="#sll-shift-word-left-logical" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P230</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLL</td>
+<td>special 000000</td>
+<td>0 00000</td>
+<td>rt</td>
+<td>rd</td>
+<td>sa</td>
+<td>SLL 000000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rt] &lt;&lt; sa</p>
+<h5 id="slt-set-on-less-than">slt: Set on Less Than<a class="headerlink" href="#slt-set-on-less-than" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P232</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLT</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>SLT 101010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← (GPR[rs] &lt; GPR[rt])</p>
+<p>Compare the contents of GPR rs and GPR rt as signed integers.</p>
+<h5 id="slti-set-on-less-than-immediate">slti: Set on Less Than Immediate<a class="headerlink" href="#slti-set-on-less-than-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P233</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLTI</td>
+<td>001010</td>
+<td>rs</td>
+<td>rt</td>
+<td>imme</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← (GPR[rs] &lt; immediate)</p>
+<p>Compare the contents of GPR rs and the 16-bit signed immediate.</p>
+<h5 id="sltiu-set-on-less-than-immediate-unsigned">sltiu: Set on Less Than Immediate Unsigned<a class="headerlink" href="#sltiu-set-on-less-than-immediate-unsigned" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P234</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLTIU</td>
+<td>001011</td>
+<td>rs</td>
+<td>rt</td>
+<td>imme</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← (GPR[rs] &lt; immediate)</p>
+<p>Compare the contents of GPR rs and the sign-extended 16-bit immediate as unsigned integers.</p>
+<h5 id="sltu-set-on-less-than-unsigned">sltu: Set on Less Than Unsigned<a class="headerlink" href="#sltu-set-on-less-than-unsigned" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P235</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLTU</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>SLTU 101011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← (GPR[rs] &lt; GPR[rt])</p>
+<p>Compare the contents of GPR rs and GPR rt as unsigned integers.</p>
+<h5 id="sra-shift-word-right-arithmetic">sra: Shift Word Right Arithmetic<a class="headerlink" href="#sra-shift-word-right-arithmetic" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P237</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRA</td>
+<td>special 000000</td>
+<td>0 00000</td>
+<td>rt</td>
+<td>rd</td>
+<td>sa</td>
+<td>SRA 000011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rt] &gt;&gt; sa (arithmetic) </p>
+<p>The contents of the low-order 32-bit word of GPR rt are shifted right, duplicating the sign-bit (bit 31) in the emptied bits.</p>
+<p>srl: Shift Word Right Logical</p>
+<table>
+<thead>
+<tr>
+<th>P239</th>
+<th>31:26</th>
+<th>25:22</th>
+<th>21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRL</td>
+<td>special 000000</td>
+<td>0 0000</td>
+<td>R 0</td>
+<td>rt</td>
+<td>rd</td>
+<td>sa</td>
+<td>SRL 000010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rt] &gt;&gt; sa (logical)</p>
+<p>The contents of the low-order 32-bit word of GPR rt are shifted right, inserting zeros into the emptied bits.</p>
+<h5 id="subu">subu<a class="headerlink" href="#subu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P244</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUBU</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>SUBU 100011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] − GPR[rt] (Unsigened, No exceptions)</p>
+<h5 id="sw">sw<a class="headerlink" href="#sw" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P246</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SW</td>
+<td>101011</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: memory[GPR[base] + offset(sign_extended)] ← GPR[rt]</p>
+<p>The least-significant 32-bit word of GPR rt is stored in memory</p>
+<h5 id="xor">xor<a class="headerlink" href="#xor" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P285</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XOR</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>XOR 100110</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] XOR GPR[rt]</p>
+<h5 id="xori">xori<a class="headerlink" href="#xori" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P286</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XORI</td>
+<td>001110</td>
+<td>rs</td>
+<td>rt</td>
+<td>imme</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← GPR[rs] XOR immediate</p>
+<p>Combine the contents of GPR rs and the 16-bit zero-extended immediate.</p>
+<h3 id="lab2">lab2 指令<a class="headerlink" href="#lab2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>bgez, bgezal, blez, bgtz, bltz, bltzal, jalr, lb, lbu, lh, lhu, sb, sh, sllv, srav, srlv,</p>
+</blockquote>
+<h5 id="bgez-branch-on-greater-than-or-equal-to-zero">bgez: Branch on Greater Than or Equal to Zero<a class="headerlink" href="#bgez-branch-on-greater-than-or-equal-to-zero" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P70</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BGEZ</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BGEZ 00001</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≥ 0 then branch </p>
+<p>An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself),</p>
+<h5 id="bgezal-branch-on-greater-than-or-equal-to-zero-and-link">bgezal: Branch on Greater Than or Equal to Zero and Link<a class="headerlink" href="#bgezal-branch-on-greater-than-or-equal-to-zero-and-link" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P71</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BGEZAL</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BGEZAL 10001</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≥ 0 then procedure_call</p>
+<p>Place the return address link in GPR 31. The return link is the address of the second instruction following the branch,</p>
+<p>An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself)</p>
+<h5 id="bgtz-branch-on-greater-than-zero">bgtz: Branch on Greater Than Zero<a class="headerlink" href="#bgtz-branch-on-greater-than-zero" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P75</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BGTZ</td>
+<td>000111</td>
+<td>rs</td>
+<td>0 00000</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &gt; 0 then branch</p>
+<p>An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself)</p>
+<h5 id="blez-branch-on-less-than-or-equal-to-zero">blez: Branch on Less Than or Equal to Zero<a class="headerlink" href="#blez-branch-on-less-than-or-equal-to-zero" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P77</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLEZ</td>
+<td>000110</td>
+<td>rs</td>
+<td>0 00000</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≤ 0 then branch</p>
+<p>An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself),</p>
+<h5 id="bltz-branch-on-less-than-zero">bltz: Branch on Less Than Zero<a class="headerlink" href="#bltz-branch-on-less-than-zero" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P79</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLTZ</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BLTZ 00000</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &lt; 0 then branch</p>
+<p>An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself),</p>
+<h5 id="bltzal-branch-on-less-than-zero-and-link">bltzal: Branch on Less Than Zero and Link<a class="headerlink" href="#bltzal-branch-on-less-than-zero-and-link" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P80</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLTZAL</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BLTZAL 10010</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &lt; 0 then procedure_call</p>
+<p>Place the return address link in GPR 31. The return link is the address of the second instruction following the branch
+An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself)</p>
+<h5 id="jalr-jump-and-link-register">jalr: Jump and Link Register<a class="headerlink" href="#jalr-jump-and-link-register" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P131</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JALR</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>0 00000</td>
+<td>rd</td>
+<td>hint</td>
+<td>JALR 001001</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← return_addr, PC ← GPR[rs]
+Place the return address link in GPR rd. The return link is the address of the second instruction following the branch, where execution continues after a procedure call.</p>
+<h5 id="lb">lb<a class="headerlink" href="#lb" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P142</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LB(load byte)</td>
+<td>100000</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← memory[GPR[base] + offset]
+The contents of the 8-bit byte at the memory location specified by the effective address are fetched, sign-extended, and placed in GPR rt. The 16-bit signed offset is added to the contents of GPR base to form the effective address.</p>
+<h5 id="lbu">lbu<a class="headerlink" href="#lbu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P143</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LBU(load byte unsigned)</td>
+<td>100100</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← memory[GPR[base] + offset]
+The contents of the 8-bit byte at the memory location specified by the effective address are fetched, zero-extended, and placed in GPR rt. The 16-bit signed offset is added to the contents of GPR base to form the effective address.</p>
+<h5 id="lh">lh<a class="headerlink" href="#lh" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P147</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LH(load halfword)</td>
+<td>100001</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← memory[GPR[base] + offset]
+The contents of the 16-bit halfword at the memory location specified by the aligned effective address are fetched, sign-extended, and placed in GPR rt. The 16-bit signed offset is added to the contents of GPR base to form the effective address.</p>
+<h5 id="lhu">lhu<a class="headerlink" href="#lhu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P148</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LHU(load halfword unsigned)</td>
+<td>100101</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← memory[GPR[base] + offset]
+The contents of the 16-bit halfword at the memory location specified by the aligned effective address are fetched, zero-extended, and placed in GPR rt. The 16-bit signed offset is added to the contents of GPR base to form the effective
+address.</p>
+<h5 id="sb">sb<a class="headerlink" href="#sb" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P220</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SB(Store Byte)</td>
+<td>101000</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: memory[GPR[base] + offset] ← GPR[rt]
+The least-significant 8-bit byte of GPR rt is stored in memory at the location specified by the effective address. The 16-bit signed offset is added to the contents of GPR base to form the effective address.</p>
+<h5 id="sh">sh<a class="headerlink" href="#sh" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P229</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SH(Store Halfword)</td>
+<td>101001</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: memory[GPR[base] + offset] ← GPR[rt]
+The least-significant 16-bit halfword of register rt is stored in memory at the location specified by the aligned effective address. The 16-bit signed offset is added to the contents of GPR base to form the effective address.</p>
+<h5 id="sllv-shift-word-left-logical-variable">sllv: Shift Word Left Logical Variable<a class="headerlink" href="#sllv-shift-word-left-logical-variable" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P231</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLLV</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>SLLV 000100</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rt] &lt;&lt; rs
+The contents of the low-order 32-bit word of GPR rt are shifted left, inserting zeros into the emptied bits; the result word is placed in GPR rd. The bit-shift amount is specified by the low-order 5 bits of GPR rs.</p>
+<h5 id="srav-shift-word-right-arithmetic-variable">srav: Shift Word Right Arithmetic Variable<a class="headerlink" href="#srav-shift-word-right-arithmetic-variable" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P238</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRAV</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>SRAV 000111</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rt] &gt;&gt; <strong>GPR[rs]</strong> (the description in document is wrong, you can refer to the following "Operation")
+The contents of the low-order 32-bit word of GPR rt are shifted right, duplicating the sign-bit (bit 31) in the emptied bits; the word result is placed in GPR rd. The bit-shift amount is specified by the low-order 5 bits of GPR rs.</p>
+<h5 id="srlv-shift-word-right-logical-variable">srlv: Shift Word Right Logical Variable<a class="headerlink" href="#srlv-shift-word-right-logical-variable" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P240</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:7</th>
+<th>6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRLV</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0000</td>
+<td>R 0</td>
+<td>SRLV 000110</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rt] &gt;&gt; GPR[rs] (logical)
+The contents of the low-order 32-bit word of GPR rt are shifted right, inserting zeros into the emptied bits; the word result is placed in GPR rd. The bit-shift amount is specified by the low-order 5 bits of GPR rs.</p>
+<h3 id="lab3">lab3 指令<a class="headerlink" href="#lab3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>test3: div, divu, mfhi, mflo, mthi, mtlo, mult, multu</p>
+</blockquote>
+<h5 id="div">div<a class="headerlink" href="#div" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P116</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIV</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00 0000 0000</td>
+<td>DIV  011010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI, LO) ← GPR[rs] / GPR[rt]
+The 32-bit word value in GPR rs is divided by the 32-bit value in GPR rt, treating both operands as signed values. The 32-bit quotient is placed into special register LO and the 32-bit remainder isplaced into special register HI. No arithmetic exception occurs under any circumstances.</p>
+<h5 id="divu">divu<a class="headerlink" href="#divu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P119</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIVU</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00 0000 0000</td>
+<td>DIVU 011011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI, LO) ← GPR[rs] / GPR[rt]
+The 32-bit word value in GPR rs is divided by the 32-bit value in GPR rt, treating both operands as unsigned values. The 32-bit quotient is placed into special register LO and the 32-bit remainder is placed into special register HI. </p>
+<p>No arithmetic exception occurs under any circumstances.</p>
+<h5 id="mfhi-move-from-hi-register">mfhi: Move From HI Register<a class="headerlink" href="#mfhi-move-from-hi-register" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P168</th>
+<th>31:26</th>
+<th>25:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MFHI</td>
+<td>special 000000</td>
+<td>0 00 0000 0000</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>MFHI 010000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← HI
+The contents of special register HI are loaded into GPR rd.</p>
+<h5 id="mflo-move-from-lo-register">mflo: Move From LO Register<a class="headerlink" href="#mflo-move-from-lo-register" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P169</th>
+<th>31:26</th>
+<th>25:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MFLO</td>
+<td>special 000000</td>
+<td>0 00 0000 0000</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>MFLO 010010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← LO
+The contents of special register LO are loaded into GPR rd.</p>
+<h5 id="mthi-move-to-hi-register">mthi: Move to HI Register<a class="headerlink" href="#mthi-move-to-hi-register" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P187</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTHI</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>0 000 0000 0000 0000</td>
+<td>MTHI 010001</td>
+</tr>
+</tbody>
+</table>
+<p>Description: HI ← GPR[rs]
+The contents of GPR rs are loaded into special register HI.</p>
+<h5 id="mtlo-move-to-lo-register">mtlo: Move to LO Register<a class="headerlink" href="#mtlo-move-to-lo-register" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P188</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTLO</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>0 000 0000 0000 0000</td>
+<td>MTLO 010011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: LO ← GPR[rs]
+The contents of GPR rs are loaded into special register LO.</p>
+<h5 id="mult">mult<a class="headerlink" href="#mult" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P191</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MULT</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00 0000 0000</td>
+<td>MULT 011000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI, LO) ← GPR[rs] × GPR[rt]
+The 32-bit word value in GPR rt is multiplied by the 32-bit value in GPR rs, treating both operands as signed values, to produce a 64-bit result. The low-order 32-bit word of the result is placed into special register LO, and the highorder 32-bit word is splaced into special register HI.
+No arithmetic exception occurs under any circumstances.</p>
+<h5 id="multu">multu<a class="headerlink" href="#multu" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P192</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MULTU</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00 0000 0000</td>
+<td>MULTU 011001</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI, LO) ← GPR[rs] × GPR[rt] </p>
+<p>The 32-bit word value in GPR rt is multiplied by the 32-bit value in GPR rs, treating both operands as signed values, to produce a 64-bit result. The low-order 32-bit word of the result is placed into special register LO, and the highorder 32-bit word is splaced into special register HI.
+No arithmetic exception occurs under any circumstances.</p>
+<h3 id="lab4">lab4 指令<a class="headerlink" href="#lab4" title="Permanent link">&para;</a></h3>
+<h5 id="add">add<a class="headerlink" href="#add" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P45</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADD</td>
+<td>special 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>ADD  100000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] + GPR[rt] (exception occurs if overflow)</p>
+<ul>
+<li>If the addition results in 32-bit 2’s complement arithmetic overflow, the destination register is not modified and an Integer Overflow exception occurs.</li>
+</ul>
+<h5 id="addi">addi<a class="headerlink" href="#addi" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P47</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADDI</td>
+<td>001000</td>
+<td>rs</td>
+<td>rt</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← GPR[rs] + immediate(To add a constant to a 32-bit integer. If overflow occurs, then trap.)</p>
+<ul>
+<li>The 16-bit <strong>signed</strong> immediate is added to the 32-bit value in GPR rs to produce a 32-bit result.</li>
+</ul>
+<h5 id="sub">sub<a class="headerlink" href="#sub" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P242</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUB</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>SUB 100010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] − GPR[rt]
+The 32-bit word value in GPR rt is subtracted from the 32-bit value in GPR rs to produce a 32-bit result. If the subtraction results in 32-bit 2’s complement arithmetic overflow, then the destination register is not modified and an Integer Overflow exception occurs. If it does not overflow, the 32-bit result is placed into GPR rd.</p>
+<h5 id="eret-exception-return">eret: Exception Return<a class="headerlink" href="#eret-exception-return" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P122</th>
+<th>31:26</th>
+<th>25:24</th>
+<th>24: 6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERET</td>
+<td>COP0 010000</td>
+<td>CO 1</td>
+<td>0 000 0000 0000 0000 0000</td>
+<td>ERET 011000</td>
+</tr>
+</tbody>
+</table>
+<p>Description:
+ERET clears execution and instruction hazards, conditionally restores $SRSCtl_{CSS}$ from $SRSCtl_{ΠΣΣ}$ in a Release 2 implementation, and returns to the interrupted instruction at the completion of interrupt, exception, or error processing. ERET does not execute the next instruction (i.e., it has no delay slot).</p>
+<h5 id="mfc0-move-from-coprocessor-0">mfc0: Move from Coprocessor 0<a class="headerlink" href="#mfc0-move-from-coprocessor-0" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P163</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:3</th>
+<th>2:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MFC0</td>
+<td>COP0 010000</td>
+<td>MF 00000</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000000</td>
+<td>sel</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← CPR[0,rd,sel]
+The contents of the coprocessor 0 register specified by the combination of rd and sel are loaded into general register rt. Note that not all coprocessor 0 registers support the sel field. In those instances, the sel field must be zero.reference.</p>
+<h5 id="mtc0-move-to-coprocessor-0">mtc0: Move to Coprocessor 0<a class="headerlink" href="#mtc0-move-to-coprocessor-0" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P182</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:3</th>
+<th>2:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTC0</td>
+<td>COP0 010000</td>
+<td>MT 00100</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000000</td>
+<td>sel</td>
+</tr>
+</tbody>
+</table>
+<p>Description: CPR[0, rd, sel] ← GPR[rt]
+The contents of general register rt are loaded into the coprocessor 0 register specified by the combination of rd andsel. Not all coprocessor 0 registers support the the sel field. In those instances, the sel field must be set to zero.</p>
+<h5 id="break">break<a class="headerlink" href="#break" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P86</th>
+<th>31:26</th>
+<th>25:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BREAK</td>
+<td>SPECIAL 000000</td>
+<td>code</td>
+<td>BREAK 001101</td>
+</tr>
+</tbody>
+</table>
+<p>Description:
+A breakpoint exception occurs, immediately and unconditionally transferring control to the exception handler. The code field is available for use as software parameters, but is retrieved by the exception handler only by loading the contents of the memory word containing the instruction.</p>
+<h5 id="syscall">syscall<a class="headerlink" href="#syscall" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P261</th>
+<th>31:26</th>
+<th>25:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SYSCALL</td>
+<td>SPECIAL 000000</td>
+<td>code</td>
+<td>SYSCALL 001100</td>
+</tr>
+</tbody>
+</table>
+<p>Description:
+A system call exception occurs, immediately and unconditionally transferring control to the exception handler. The code field is available for use as software parameters, but is retrieved by the exception handler only by loading the contents of the memory word containing the instruction.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../%E8%B6%85%E6%A0%87%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8%E7%AC%94%E8%AE%B0/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 《超标量处理器》笔记" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              《超标量处理器》笔记
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../%E6%94%AF%E6%8C%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%A2%9D%E5%A4%96%E6%8C%87%E4%BB%A4/" class="md-footer__link md-footer__link--next" aria-label="Next: 支持操作系统的额外指令" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              支持操作系统的额外指令
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.29db7785.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1159 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.3">
+    
+    
+      
+        <title>CPU设计 - 2021龙芯杯</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cpu" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="2021龙芯杯" class="md-header__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            2021龙芯杯
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CPU设计
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="2021龙芯杯" class="md-nav__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    2021龙芯杯
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%BE%99%E8%8A%AF%E6%9D%AF%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        资料汇总
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          CPU设计
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        CPU设计
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    CPU设计
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    分支预测（新）
+  </a>
+  
+    <nav class="md-nav" aria-label="分支预测（新）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    部件设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    正确性判断
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    数据旁路
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    延迟执行（目前先不用）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    指令数据传输
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    CPU架构
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    取指
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    译码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    发射
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    数据获取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    执行和访存阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    执行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    访存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    退休
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    分支预测架构（旧）
+  </a>
+  
+    <nav class="md-nav" aria-label="分支预测架构（旧）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    正确性判断和更新
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    权衡与选择
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cache%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Cache设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Soc%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Soc框架设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A4%96%E8%AE%BE%E9%83%A8%E5%88%86%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        外设设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        其它资料
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="其它资料" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          其它资料
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%B6%85%E6%A0%87%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        《超标量处理器》笔记
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materials/%E6%8C%87%E4%BB%A4%E9%9B%86/" class="md-nav__link">
+        指令集
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materials/%E6%94%AF%E6%8C%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%A2%9D%E5%A4%96%E6%8C%87%E4%BB%A4/" class="md-nav__link">
+        支持操作系统的额外指令
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    CPU设计
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    分支预测（新）
+  </a>
+  
+    <nav class="md-nav" aria-label="分支预测（新）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    部件设计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    正确性判断
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    数据旁路
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    延迟执行（目前先不用）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    指令数据传输
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    CPU架构
+  </a>
+  
+    <nav class="md-nav" aria-label="CPU架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    取指
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    译码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    发射
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    数据获取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    执行和访存阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    执行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    访存
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    退休
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    分支预测架构（旧）
+  </a>
+  
+    <nav class="md-nav" aria-label="分支预测架构（旧）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    正确性判断和更新
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    权衡与选择
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>CPU设计</h1>
+                
+                <h2 id="cpu">CPU设计<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>2021/7/22</p>
+<p>此文档是我们小组的处理器实际采用的架构</p>
+</blockquote>
+<h3 id="_1">分支预测（新）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="_2">部件设计<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>所有的部件都根据当前的PC值来索引对应的信息，也就是在取指第一阶段利用部件的信息。</p>
+<p>BIT</p>
+<ul>
+<li>信息为一位：当前PC的下一个PC是否是<code>RAS</code>栈顶的地址（是否是函数返回）</li>
+<li>该器件的更新只在解码阶段：（1）是延迟槽（BB，即Branch Buffer有效，且当前pc与BB中存放的分支指令pc连续），若此时BB中存放的分支类型是函数返回，则把当前延迟槽所在的指令组作为索引更新BIT，并把指令组第二条指令置为无效（2）不是延迟槽（BB无效），此时根据预解码传来的信息是否是函数返回来更新BIT</li>
+</ul>
+<p>RAS</p>
+<p>若RAS更新后，后面的流水线异常了，或是分支预测失败了导致本次更新无效该怎么办？</p>
+<p>（1）跟PHT和BTB一样在（延迟）执行阶段更新，确保其正确性</p>
+<p>（2）检查点机制</p>
+<ul>
+<li>
+<p>目前采用方法（1）</p>
+</li>
+<li>
+<p>带有计数器的栈，保存的是函数调用的地址</p>
+</li>
+<li>或该器件的更新只在执行阶段：若是函数调用就压栈，若是函数返回就出栈。</li>
+</ul>
+<p>PHT</p>
+<ul>
+<li>信息为两位饱和计数器，指出当前PC是会顺序取下一个PC（当饱和计数器位0或1是），还是会取BTB中的值（当饱和计数器的值为2或3）</li>
+<li>该器件的更新在执行阶段或延迟执行阶段：（1）分支指令的PC值8字节对齐，以分支指令所在指令组为索引来更新（2）分支指令的PC值4字节对齐，以分支指令+4（延迟槽）所在指令组为索引来更新</li>
+</ul>
+<p>BTB</p>
+<ul>
+<li>信息为32位地址：当前PC的下一个PC值，只会当PHT预测跳转的时候才会使用</li>
+<li>该器件的更新在执行阶段或延迟执行阶段：（1）分支指令的PC值8字节对齐，以分支指令所在指令组为索引来更新（2）分支指令的PC值4字节对齐，以分支指令+4（延迟槽）所在指令组为索引更新</li>
+</ul>
+<p>BB</p>
+<ul>
+<li>保存分支指令的实际的信息：有效位、分支指令的类型（是否是函数跳转和函数返回）、分支指令所在地址、地址有效位、分支指令跳转地址</li>
+<li>当指令组第二条为分支指令时保存，把有效位置为1，若下一条指令不是紧挨着的延迟槽，就把其bubble掉，并在延迟槽的地方取指，直到延迟槽的到来；等到延迟槽来了之后，在当前周期利用保存的信息，并在下个周期把有效位置0</li>
+</ul>
+<h4 id="_3">正确性判断<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>取指第二阶段：若分支指令在指令组第二条，则一定应该顺序取；若分支指令在指令组第一条，且为函数调用或返回，则一定不应该顺序取，若是函数返回，则一定应该取<code>RAS</code>栈顶的值。其它情况暂时无法判断</p>
+</li>
+<li>
+<p>解码阶段：（1）是延迟槽（BB有效，且当前pc与BB中的分支指令pc连续），按照BB中存放的信息来判断</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>当前指令组预测情况</th>
+<th>分支指令的实际情况</th>
+<th>行动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顺序取</td>
+<td>顺序取</td>
+<td>/</td>
+</tr>
+<tr>
+<td>不顺序取</td>
+<td>不顺序取</td>
+<td>指令组第二条指令置为无效</td>
+</tr>
+<tr>
+<td>顺序取</td>
+<td>不顺序取</td>
+<td>指令组第二条指令置为无效，且要重新取指、之前的指令置为无效</td>
+</tr>
+<tr>
+<td>不顺序取</td>
+<td>顺序取</td>
+<td>重新取指，之前的指令置为无效</td>
+</tr>
+<tr>
+<td>/</td>
+<td>暂时无法判断</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<p>（2）不是延迟槽（BB无效）：若指令组不包含分支指令则应该顺序取；若指令组第二条为分支指令，则应该顺序取；若指令组第一条为分支指令，直接判断是否跳转和跳转地址，无法判断的放到后面。</p>
+<ul>
+<li>执行（延迟执行）阶段：直接判断是否跳转和跳转的地址</li>
+</ul>
+<p><br></p>
+<h3 id="_4">数据旁路<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>目前先不考虑延迟执行</p>
+</blockquote>
+<p>当指令进入<code>FU</code>的时候将信息写入计分板</p>
+<ul>
+<li>**先考虑**两条紧挨着的计算指令有执行相关应该怎么处理，前一条指令计算出来直接旁路还是等一个周期再旁路呢？计算出来再旁路可能延迟会高⚡</li>
+<li>计分板：一共31行，每一行包含的是对应寄存器的状态（一共32个寄存器，但是不包括0号寄存器，所以是31行），因为每周期最多发射两条指令，所以需要四个读端口（对应每条指令的两个源寄存器）和两个写端口（对应每条指令的一个目的寄存器）</li>
+<li>计分板中一行包含的信息：pending（寄存器有效位，即寄存器是否是<code>FU</code>中某些的指令的目的寄存器）、相关指令所在行、相关指令所在列（每个周期自增，除非有stall信号）</li>
+<li>在读操作数的时候，需要用当前指令的源寄存器索引计分板，若pending位为1，则需要进行转发，若判断当前回合无法转发，则需要stall住，直到能从对应的行列处将数据转发过来，下表为不同类型的指令（对应不同行数）转发的最早阶段：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令类型</th>
+<th>转发的最早阶段</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALU</td>
+<td>1</td>
+<td>一般计算指令只需周期</td>
+</tr>
+<tr>
+<td>BRU</td>
+<td>/</td>
+<td>分支指令不转发其它指令</td>
+</tr>
+<tr>
+<td>AGU</td>
+<td>3</td>
+<td>访存数据只能在第三个阶段获得</td>
+</tr>
+<tr>
+<td>HILO</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>MLT</td>
+<td>3</td>
+<td>乘法为三周期流水线</td>
+</tr>
+<tr>
+<td>DIV</td>
+<td>1</td>
+<td>暂停流水线直到算完</td>
+</tr>
+<tr>
+<td>COP</td>
+<td>/</td>
+<td>异常指令</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3 id="_5">延迟执行（目前先不用）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以延迟执行的指令：在解码阶段之后不会出现异常的指令，比如部分计算</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>可能出现异常的指令</th>
+<th>出现异常的原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>什么时候需要延迟执行：当在读操作数的时候，指令操作数没有完全准备好，且此时指令允许延迟执行，需要在写入计分板的时候带上额外一位（允许）</li>
+</ul>
+<p><br></p>
+<h3 id="_6">指令数据传输<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ICache传来的指令组要8字节对齐，也就是包含两条指令</li>
+<li>接收到指令时，需要根据PC值来判断第一条指令是否有效，如果PC值只是4字节对齐而没有8字节对齐（如<code>bfc00004</code>），那么此时指令组第一条指令应该判定为无效</li>
+<li>当分支指令为8字节指令组的前四个字节的话（一条指令4个字节），此时延迟槽正好为后四个字节，不会出现问题，所以该指令组的分支预测正常进行</li>
+<li>当分支指令为指令组后四个字节的话，需要在下个周期把延迟槽取出来，也就是说该分支指令没有预测的必要，始终是顺序取，等到后面的延迟槽来了才应该真正开始分支预测</li>
+<li>综上，我们发现，分支预测应该是在延迟槽取来的那个周期进行，而不是分支指令本身取来的那个周期！！！</li>
+<li>但是延迟槽本身没有跳转的地址这样的信息，需要上个周期的分支指令的信息，因此需要在decode阶段放置一个BB（Branch Buffer）来存储上个周期的分支指令的信息，在当前周期处理延迟槽的同时利用这个信息进行分支预测的正确性判断</li>
+</ul>
+<p><br></p>
+<h3 id="cpu_1">CPU架构<a class="headerlink" href="#cpu_1" title="Permanent link">&para;</a></h3>
+<p><img alt="CPU架构缩略图" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/CPU%E6%9E%B6%E6%9E%84%E7%BC%A9%E7%95%A5%E5%9B%BE.PNG" /></p>
+<p>与Cache的交互只在取指和访存两个阶段。一下每个阶段都对应**时钟一个周期**</p>
+<ol>
+<li>取指（1）：将计算好的PC发给ICache</li>
+<li>取指（2）：获取ICache中的指令组和其它信息</li>
+<li>译码：对指令进行译码，并对分支指令的地址进行计算</li>
+<li>发射：往队列尾部插入指令组，在头部根据控制逻辑发射一条或两条指令</li>
+<li>数据获取：通过寄存器堆和数据旁路获取数据</li>
+<li>执行：在<code>FU</code>中计算数据</li>
+<li>访存（1）：在<code>FU</code>中向DCache发送访存请求，延迟取数据</li>
+<li>访存（2）：在<code>FU</code>获取DCache中的数据或其它信息，延迟计算</li>
+<li>退休：将数据写回到寄存器堆</li>
+</ol>
+<p><br></p>
+<h4 id="_7">取指<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>第一个阶段发送第二个阶段接收的原因：让CPU流水线阶段与ICache的流水线阶段**匹配**，这样可以提高吞吐量，如果在同一个阶段发送并接收的话，CPU流水线就必须暂停，降低了效率。</p>
+<ul>
+<li>取指分为两个阶段，第一个阶段向ICache发送地址，在第二个阶段接受指令，因为指令传来需要一定时间，所以只对传来的指令进行简单的处理和判断。</li>
+<li>第一个阶段发送的数据：指令地址PC、地址有效位<code>valid</code></li>
+<li>以ICache返回的 <code>addr_ok</code> 作为是否接受到的标志，若未接收到，需继续发送数据，也就是把当前周期给stall（暂停）住，这个是用流水线控制逻辑实现的。</li>
+<li>根据当前的PC值，预测下一个PC值，并把是否是跳转指令、预测的分支指令类型、是否预测跳转以及跳转的地址传给后续的阶段来判断分支预测的正确性，以更新分支预测模块。</li>
+<li>第二个阶段传来的数据：指令组中的指令（两条）、指令组的有效位 <code>data_ok</code>、指令是否是分支指令<code>is_branch</code>（两位、需要ICache预解码）</li>
+<li>同时当第二个阶段没有传来<code>data_ok</code>的话，且第二个阶段是有指令在等待请求返回的，也就是流水线寄存器中的<code>valid</code>为1（表明该阶段是有效的，而非<code>nop</code>之类的无效指令），此时需要stall住第二阶段来等待数据返回，由于第二阶段stall住了，所以如果第一阶段也是有效的地址请求即<code>valid</code>为1，此时也要跟着stall住。</li>
+<li>返回的指令组8字节对齐，包含两条指令，若PC请求仅为4字节对齐而不是8字节对齐，此时指令组第一条指令为无效指令，因为PC应该是从第二条指令开始取。</li>
+</ul>
+<h4 id="_8">译码<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>判断指令的类型，以及源寄存器和目的寄存器的下标，放入到发射队列中</li>
+<li>若分支指令取来了，但是延迟槽没有取来，则把分支指令的信息传给BB，等到延迟槽来的时候，把BB保存的分支指令的信息传给延迟槽。</li>
+</ul>
+<h4 id="_9">发射<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>两个写端口、两个读端口的FIFO的双发循环队列，用head和tail下标的方式模拟循环队列。</li>
+<li>存放的数据：指令的地址、指令的各类操作数、是否为访存指令、是否为特权指令、是否为分支指令、是否预测跳转、预测跳转的地址</li>
+<li>以下不能同时发射两条指令的情况：</li>
+<li>两条连续的乘除法指令：只有一个乘法器和除法器</li>
+<li>访存指令：只有一个访存单元，而且DCache只有一个读写端口，没法同时处理两条访存指令</li>
+<li><code>CP0</code>、<code>TLB</code>等特权指令</li>
+<li>两条指令有数据相关：注意0号寄存器的假相关性（0号寄存器一直为零）</li>
+<li>分支指令和延迟槽必须一起发射，当第二条为分支指令或延迟槽还未取到发射队列的时候。</li>
+</ul>
+<h4 id="_10">数据获取<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>用两条指令的源寄存器下标获取源寄存器里的值，同时进行旁路（转发）从而获得所有的操作数，因为可能会有延迟读操作，所以当前周期读到的可能无效，同时对于不可避免的指令相关需要暂停流水线。</li>
+<li>寄存器堆有四个读端口、两个写端口</li>
+</ul>
+<h4 id="_11">执行和访存阶段<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>后续提到的<code>FU</code>囊括了读操作数阶段后的所有阶段，一共三个阶段，对于访存指令来说，，总共三个阶段，对于一般的计算指令来说，，对于乘法指令来说，下图是<code>FU</code>的缩略图，一共有三行，而实际一共有8行，每一行均有三个阶段。它们分别是</p>
+<ol>
+<li><code>ALU1</code>：计算单元1号，处理一般的计算指令，有一个执行阶段（计算）和两个延迟执行阶段（延迟读操作数和延迟计算）</li>
+<li><code>ALU2</code>：计算单元2号，同上</li>
+<li><code>BRU</code>：处理分支指令，有一个执行阶段（计算地址）和两个延迟执行阶段</li>
+<li><code>AGU</code>：处理访存指令，有一个执行阶段（计算地址）和两个访存阶段（发送和接收数据）</li>
+<li><code>HILO</code>：处理<code>hilo</code>寄存器和普通寄存器的交互，在提交写段写回寄存器</li>
+<li><code>MLT</code>：处理乘法指令，乘法指令需要三个周期才能算出结果，可以流水化</li>
+<li><code>DIV</code>：处理除法指令，除法指令需要n个周期才能得到结果，会暂停等到结果算出。</li>
+<li><code>COP</code>：处理异常指令，在访存阶段统一处理所有的异常</li>
+</ol>
+<p><img alt="FU架构缩略图" src="../%E8%B5%84%E6%96%99%E5%9B%BE%E7%89%87/FU%E6%9E%B6%E6%9E%84%E7%BC%A9%E7%95%A5%E5%9B%BE.PNG" /></p>
+<h4 id="_12">执行<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>获得可能的转发数据，生成指令的结果，计算访存地址</li>
+<li>对于需要延迟执行的指令，这个周期可以不管。</li>
+<li>对于分支指令，这里可以最终判断是否跳转以及跳转的地址，更新分支预测模块。</li>
+<li>多周期指令会暂停流水线</li>
+</ul>
+<h4 id="_13">访存<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>若访存后紧跟需要访存数据的指令，即访存相关，则需要暂停流水线很多个周期，为了提高效率，处理包括访存相关在内的各种指令相关，减少流水线暂停的周期，进行部分指令的延迟执行。如果指令在译码阶段后不会产生异常（例如 AND，XOR，ADDU 等），我们可以将这类指令的操作数读取放到到访存的第一阶段执行，执行放到访存的第二阶段。这样访存相关的暂停最短只要一个周期。我们还可以将分支指令也如此推迟。但是由于分支有可能预测失败，我们需要能够撤销其后的指令，若在访存第二阶段处理分支指令时发现分支预测失败，需要把这个信息传给DCache，防止改变DCache。</p>
+<p>当然，如果指令不能延迟执行，那么仍然需要暂停到操作数均可用为止。此时的指令相关不仅要考虑访存指令，还要考虑正在延迟执行的指令。</p>
+<p>在执行阶段计算结果。如果指令之间存在访存相关，并且指令是分支或者不会在执行阶段出现异常，那么其可以在流水线访存第一阶段读取操作数，在后一个阶段计算结果。</p>
+</blockquote>
+<ul>
+<li>访存有两个阶段对应于<code>FU</code>的第二和第三阶段，与取指的两个阶段类似</li>
+<li>访存第一阶段会发送的数据：地址有效位、是否为写请求、四位字节写使能、读写的地址、写入的数据</li>
+<li>访存第一阶段以 <code>Dache</code> 返回的 <code>addr_ok</code> 作为成功接收的标志</li>
+<li>第一阶段还会处理异常，并进行部分指令的延迟取数据</li>
+<li>访存第二阶段接受的信号：有效位 <code>data_ok</code> 和数据，其中<code>data_ok</code>作为成功完成当前访存的信号</li>
+<li>第二阶段还会进行部分指令的延迟计算</li>
+</ul>
+<h4 id="_14">退休<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>将数据写回到寄存器堆中</li>
+</ul>
+<p><br></p>
+<h3 id="_15">分支预测架构（旧）<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>主流的处理器都是基于两位的饱和计数器来实现的，采用！</p>
+<p>经测试，PHT为2KB时，即PC值中用来寻址PHT的位数为13位，此时分支预测准确率达到了93%，采用！</p>
+<p>MIPS 74kf 处理器：不进行目标地址的预测，而是在取指阶段根据ICache预解码的分支指令的信息直接计算目标地址，因为MIPS程序的绝大部分分支指令是直接跳转指令，可以很快算出目标地址。</p>
+<p>MIPS处理器中用<code>JAL</code>、<code>BAL</code>等指令作为CALL指令，用<code>jr ra</code>作为Return指令</p>
+</blockquote>
+<h4 id="_16">预测<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<ul>
+<li>部件有BIT、PHT、BTB、RAS，下述的<code>PC</code>索引位**仅为示例**，具体实现请参数化（<del>方便挤牙膏</del>）</li>
+<li>BIT：在取指第一阶段根据当前的<code>PC[13:2]</code>索引，内容有两位（是否是分支指令、是否是函数返回，即<code>jr ra</code>）</li>
+<li>PHT：在取指第一阶段根据当前的<code>PC[13:4]</code>索引，内容为两位饱和计数器（00：强不跳转，01：弱不跳转，10：弱跳转，11：强跳转）</li>
+<li>BTB：在取指第一阶段根据<code>PC[13:4]</code>索引，内容为32位的跳转的地址</li>
+<li>同一条分支指令它的PHT和BTB是一一对应的。</li>
+<li>RAS：在取指第一阶段获取栈顶数据，根据BIT中的一位信息（是否是函数返回）来使用，但是暂时不更新栈（因为有可能BIT中的信息是错的），在解码阶段（能够确保正确的情况下）根据指令的类型（call：<code>jal</code> <code>bal</code>、return：<code>jr ra</code>）把地址进行压栈或出栈，栈中每一项带有计数器（当压栈时，把栈顶和需要压栈的地址比较，相同就让计数器加一，栈指针不动，出栈时计数器减一，减到零才真正让栈指针往下一格）</li>
+</ul>
+<h4 id="_17">正确性判断和更新<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p>分支预测可能出现的问题：</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>具体表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>未能正确判断是否是分支指令</td>
+</tr>
+<tr>
+<td>2</td>
+<td>是否跳转预测错误</td>
+</tr>
+<tr>
+<td>3</td>
+<td>跳转地址预测错误</td>
+</tr>
+<tr>
+<td>4</td>
+<td>未能正确判断是否是函数返回</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>取指第二阶段根据ICache传来的预解码的是否是分支指令的信息<code>is_branch</code>能够判断编号为1的错误</li>
+<li>解码阶段根据分支指令类型能够判断编号2、4（部分分支指令一定跳转），根据简单加法器算出的地址能够判断编号3，根据RAS的地址能够判断编号3，同时更新RAS。</li>
+<li>执行阶段根据得到的结果能够完全判断编号2和3</li>
+<li>在预测错误时需要立刻重新取指，而上述部件的更新或者写入在执行阶段统一处理（除了RAS在解码阶段更新）</li>
+</ul>
+<p><br></p>
+<h3 id="_18">权衡与选择<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ol>
+<li>store指令需要返回<code>data_ok</code>吗？目前<code>dcache</code>对标<code>icache</code>，所以是需要返回<code>data_ok</code></li>
+<li>BIT（Branch Instruction Table）部件的选择：看过各种资料，分支预测这块的架构中好像都没有BIT这个部件，也就是直接判断一条指令是否是分支指令的部件。我们知道，分支预测是按照当前PC去预测下一个PC值，而且因为有大小的限制，不可能用PC的所有的位来索引，一定会有冲突，即不同的PC索引到同一个地方，而如果分支指令对应的PC和非分支指令对应的PC索引到同一个地方产生冲突的话，即每次非分支指令都会用到分支指令的预测结果，如果没有办法把它们区分开来，就会造成非分支指令，但是却预测跳转的错误。一般架构中好像是用BTB中tag比对后出现的miss（非分支指令一定会miss，所以只能顺序取，所以不会出现跳转的错误）来被动区分非分支指令和分支指令，这里我们打算主动区分，因为每个PC值只需要存放一位是否是分支指令的信息，所以可以存放很多。同时还可以存放分支指令类型的信息。</li>
+<li>分支与非分支指令的区分？主动：BIT，需要的空间多。被动：在BTB中利用tag比对会出现的miss，时间花费多</li>
+<li>取指时分支指令与延迟槽怎么处理？（1）ICache给的指令组中分支和延迟槽绑定，问题：分支和延迟槽不在同一个cache line（2）译码阶段若发现没有取到分支指令后的延迟槽，把分支的信息放在一个缓存中，等到下一周期取来了延迟槽再进行分支预测和正确性判断。目前我们采取的是方法（2）</li>
+<li>发射阶段若第二条是分支指令则不发射的原因：当分支预测失败后需要清空之前的指令，如果延迟槽慢分支指令一个周期的话，则延迟槽需要执行，而和延迟槽同周期发射的另一条指令则不需要执行，但他们是在同一个周期发射的，处理起来比较麻烦。</li>
+<li>针对分支指令（就是拿分支指令的PC来）进行分支预测：（1）因为一个指令组最多只有一条分支指令，所以不会出现需要多次预测的情况，可以直接用指令组对应的PC值（8字节对齐）来预测（2）虽然有可能不执行分支指令，而是直接执行分支指令后一条指令（即延迟槽）：比如说有一条分支指令跳转到延迟槽，这样用分支预测就不正确了，一个解决方法是存放指令组中分支指令的具体位置，但是可能性比较小，所以不进行特殊处理。</li>
+</ol>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../%E9%BE%99%E8%8A%AF%E6%9D%AF%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 资料汇总" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              资料汇总
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Cache%E8%AE%BE%E8%AE%A1/" class="md-footer__link md-footer__link--next" aria-label="Next: Cache设计" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Cache设计
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.29db7785.min.js"></script>
+      
+    
+  </body>
+</html>

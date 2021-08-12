@@ -1,0 +1,2424 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.3">
+    
+    
+      
+        <title>支持操作系统的额外指令 - 2021龙芯杯</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="2021龙芯杯" class="md-header__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            2021龙芯杯
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              支持操作系统的额外指令
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="2021龙芯杯" class="md-nav__button md-logo" aria-label="2021龙芯杯" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    2021龙芯杯
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E9%BE%99%E8%8A%AF%E6%9D%AF%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" class="md-nav__link">
+        资料汇总
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CPU%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        CPU设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cache%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Cache设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Soc%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        Soc框架设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%A4%96%E8%AE%BE%E9%83%A8%E5%88%86%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        外设设计
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        其它资料
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="其它资料" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          其它资料
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%B6%85%E6%A0%87%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        《超标量处理器》笔记
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%8C%87%E4%BB%A4%E9%9B%86/" class="md-nav__link">
+        指令集
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          支持操作系统的额外指令
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        支持操作系统的额外指令
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    额外指令
+  </a>
+  
+    <nav class="md-nav" aria-label="额外指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    算术指令：
+  </a>
+  
+    <nav class="md-nav" aria-label="算术指令：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clz-count-leading-zeros-in-word" class="md-nav__link">
+    clz: Count Leading Zeros in Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clo-count-leading-ones-in-word" class="md-nav__link">
+    clo: Count Leading Ones in Word
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    乘法相关指令
+  </a>
+  
+    <nav class="md-nav" aria-label="乘法相关指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mul-multiply-word-to-gpr" class="md-nav__link">
+    mul: Multiply Word to GPR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#madd-multiply-and-add-word-to-hilo" class="md-nav__link">
+    madd: Multiply and Add Word to Hi,Lo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maddu-multiply-and-add-unsigned-word-to-hilo" class="md-nav__link">
+    maddu: Multiply and Add Unsigned Word to Hi,Lo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msub-multiply-and-subtract-word-to-hilo" class="md-nav__link">
+    msub: Multiply and Subtract Word to Hi,Lo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msubu-multiply-and-subtract-word-to-hilo" class="md-nav__link">
+    msubu: Multiply and Subtract Word to Hi,Lo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    非对齐访存指令
+  </a>
+  
+    <nav class="md-nav" aria-label="非对齐访存指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lwl-load-word-left" class="md-nav__link">
+    lwl: Load Word Left
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lwr-load-word-right" class="md-nav__link">
+    lwr: load Word Right
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swl-store-word-left" class="md-nav__link">
+    swl:  Store Word Left
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swr-store-word-right" class="md-nav__link">
+    swr: Store Word Right
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    条件执行指令
+  </a>
+  
+    <nav class="md-nav" aria-label="条件执行指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#movn-move-conditional-on-not-zero" class="md-nav__link">
+    movn: Move Conditional on Not Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movz-move-conditional-on-zero" class="md-nav__link">
+    movz: Move Conditional on Zero
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlb" class="md-nav__link">
+    TLB 类型指令
+  </a>
+  
+    <nav class="md-nav" aria-label="TLB 类型指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tlbp-probe-tlb-for-matching-entry" class="md-nav__link">
+    tlbp: Probe TLB for Matching Entry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlbr-read-indexed-tlb-entry" class="md-nav__link">
+    tlbr: Read Indexed TLB Entry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlbwi-write-indexed-tlb-entry" class="md-nav__link">
+    tlbwi: Write Indexed TLB Entry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlbwr-write-random-tlb-entry" class="md-nav__link">
+    tlbwr(可不实现): Write Random TLB Entry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap" class="md-nav__link">
+    Trap 类型指令
+  </a>
+  
+    <nav class="md-nav" aria-label="Trap 类型指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teq-trap-if-equal" class="md-nav__link">
+    teq: Trap if Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teqi-trap-if-equal-immediate" class="md-nav__link">
+    teqi: Trap if Equal Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tge-trap-if-greater-or-equal" class="md-nav__link">
+    tge: Trap if Greater or Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgei-trap-if-greater-or-equal-immediate" class="md-nav__link">
+    tgei: Trap if Greater or Equal Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgeiu-trap-if-greater-or-equal-immediate-unsigned" class="md-nav__link">
+    tgeiu: Trap if Greater or Equal Immediate Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgeu-trap-if-greater-or-equal-unsigned" class="md-nav__link">
+    tgeu: Trap if Greater or Equal Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlt-trap-if-less-than" class="md-nav__link">
+    tlt: Trap if Less Than
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlti-trap-if-less-than-immediate" class="md-nav__link">
+    tlti: Trap if Less Than Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tltiu-trap-if-less-than-immediate-unsigned" class="md-nav__link">
+    tltiu: Trap if Less Than Immediate Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tltu-trap-if-less-than-unsigned" class="md-nav__link">
+    tltu: Trap if Less Than Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tne-trap-if-not-equal" class="md-nav__link">
+    tne: Trap if Not Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tnei-trap-if-not-equal-immediate" class="md-nav__link">
+    tnei: Trap if Not Equal Immediate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    缓存相关指令
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存相关指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache-perform-cache-operation" class="md-nav__link">
+    cache: Perform Cache Operation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefnop-prefetch" class="md-nav__link">
+    pref(可实现为nop): Prefetch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    多核同步指令
+  </a>
+  
+    <nav class="md-nav" aria-label="多核同步指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lllw-load-linked-word" class="md-nav__link">
+    ll(可实现为lw): Load Linked Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scsw-store-conditional-word" class="md-nav__link">
+    sc(可实现为sw): Store Conditional Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncnop" class="md-nav__link">
+    sync(可实现为nop)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch-likely" class="md-nav__link">
+    Branch likely 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="Branch likely 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beql-branch-on-equal-likely" class="md-nav__link">
+    beql: Branch on Equal Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgezall-branch-on-greater-than-or-equal-to-zero-and-link-likely" class="md-nav__link">
+    bgezall: Branch on Greater Than or Equal to Zero and Link Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgezl-branch-on-greater-than-or-equal-to-zero-likely" class="md-nav__link">
+    bgezl: Branch on Greater Than or Equal to Zero Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blezl-branch-on-less-than-or-equal-to-zero-likely" class="md-nav__link">
+    blezl: Branch on Less Than or Equal to Zero Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bltzall-branch-on-less-than-zero-and-link-likely" class="md-nav__link">
+    bltzall: Branch on Less Than Zero and Link Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#btlzl-branch-on-less-than-zero-likely" class="md-nav__link">
+    btlzl: Branch on Less Than Zero Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bnel-branch-on-not-equal-likely" class="md-nav__link">
+    bnel: Branch on Not Equal Likely
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    等待中断指令
+  </a>
+  
+    <nav class="md-nav" aria-label="等待中断指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    额外指令
+  </a>
+  
+    <nav class="md-nav" aria-label="额外指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    算术指令：
+  </a>
+  
+    <nav class="md-nav" aria-label="算术指令：">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clz-count-leading-zeros-in-word" class="md-nav__link">
+    clz: Count Leading Zeros in Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clo-count-leading-ones-in-word" class="md-nav__link">
+    clo: Count Leading Ones in Word
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    乘法相关指令
+  </a>
+  
+    <nav class="md-nav" aria-label="乘法相关指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mul-multiply-word-to-gpr" class="md-nav__link">
+    mul: Multiply Word to GPR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#madd-multiply-and-add-word-to-hilo" class="md-nav__link">
+    madd: Multiply and Add Word to Hi,Lo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maddu-multiply-and-add-unsigned-word-to-hilo" class="md-nav__link">
+    maddu: Multiply and Add Unsigned Word to Hi,Lo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msub-multiply-and-subtract-word-to-hilo" class="md-nav__link">
+    msub: Multiply and Subtract Word to Hi,Lo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msubu-multiply-and-subtract-word-to-hilo" class="md-nav__link">
+    msubu: Multiply and Subtract Word to Hi,Lo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    非对齐访存指令
+  </a>
+  
+    <nav class="md-nav" aria-label="非对齐访存指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lwl-load-word-left" class="md-nav__link">
+    lwl: Load Word Left
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lwr-load-word-right" class="md-nav__link">
+    lwr: load Word Right
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swl-store-word-left" class="md-nav__link">
+    swl:  Store Word Left
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swr-store-word-right" class="md-nav__link">
+    swr: Store Word Right
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    条件执行指令
+  </a>
+  
+    <nav class="md-nav" aria-label="条件执行指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#movn-move-conditional-on-not-zero" class="md-nav__link">
+    movn: Move Conditional on Not Zero
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movz-move-conditional-on-zero" class="md-nav__link">
+    movz: Move Conditional on Zero
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlb" class="md-nav__link">
+    TLB 类型指令
+  </a>
+  
+    <nav class="md-nav" aria-label="TLB 类型指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tlbp-probe-tlb-for-matching-entry" class="md-nav__link">
+    tlbp: Probe TLB for Matching Entry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlbr-read-indexed-tlb-entry" class="md-nav__link">
+    tlbr: Read Indexed TLB Entry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlbwi-write-indexed-tlb-entry" class="md-nav__link">
+    tlbwi: Write Indexed TLB Entry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlbwr-write-random-tlb-entry" class="md-nav__link">
+    tlbwr(可不实现): Write Random TLB Entry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trap" class="md-nav__link">
+    Trap 类型指令
+  </a>
+  
+    <nav class="md-nav" aria-label="Trap 类型指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teq-trap-if-equal" class="md-nav__link">
+    teq: Trap if Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teqi-trap-if-equal-immediate" class="md-nav__link">
+    teqi: Trap if Equal Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tge-trap-if-greater-or-equal" class="md-nav__link">
+    tge: Trap if Greater or Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgei-trap-if-greater-or-equal-immediate" class="md-nav__link">
+    tgei: Trap if Greater or Equal Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgeiu-trap-if-greater-or-equal-immediate-unsigned" class="md-nav__link">
+    tgeiu: Trap if Greater or Equal Immediate Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tgeu-trap-if-greater-or-equal-unsigned" class="md-nav__link">
+    tgeu: Trap if Greater or Equal Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlt-trap-if-less-than" class="md-nav__link">
+    tlt: Trap if Less Than
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlti-trap-if-less-than-immediate" class="md-nav__link">
+    tlti: Trap if Less Than Immediate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tltiu-trap-if-less-than-immediate-unsigned" class="md-nav__link">
+    tltiu: Trap if Less Than Immediate Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tltu-trap-if-less-than-unsigned" class="md-nav__link">
+    tltu: Trap if Less Than Unsigned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tne-trap-if-not-equal" class="md-nav__link">
+    tne: Trap if Not Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tnei-trap-if-not-equal-immediate" class="md-nav__link">
+    tnei: Trap if Not Equal Immediate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    缓存相关指令
+  </a>
+  
+    <nav class="md-nav" aria-label="缓存相关指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache-perform-cache-operation" class="md-nav__link">
+    cache: Perform Cache Operation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefnop-prefetch" class="md-nav__link">
+    pref(可实现为nop): Prefetch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    多核同步指令
+  </a>
+  
+    <nav class="md-nav" aria-label="多核同步指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lllw-load-linked-word" class="md-nav__link">
+    ll(可实现为lw): Load Linked Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scsw-store-conditional-word" class="md-nav__link">
+    sc(可实现为sw): Store Conditional Word
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncnop" class="md-nav__link">
+    sync(可实现为nop)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch-likely" class="md-nav__link">
+    Branch likely 指令
+  </a>
+  
+    <nav class="md-nav" aria-label="Branch likely 指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beql-branch-on-equal-likely" class="md-nav__link">
+    beql: Branch on Equal Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgezall-branch-on-greater-than-or-equal-to-zero-and-link-likely" class="md-nav__link">
+    bgezall: Branch on Greater Than or Equal to Zero and Link Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bgezl-branch-on-greater-than-or-equal-to-zero-likely" class="md-nav__link">
+    bgezl: Branch on Greater Than or Equal to Zero Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blezl-branch-on-less-than-or-equal-to-zero-likely" class="md-nav__link">
+    blezl: Branch on Less Than or Equal to Zero Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bltzall-branch-on-less-than-zero-and-link-likely" class="md-nav__link">
+    bltzall: Branch on Less Than Zero and Link Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#btlzl-branch-on-less-than-zero-likely" class="md-nav__link">
+    btlzl: Branch on Less Than Zero Likely
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bnel-branch-on-not-equal-likely" class="md-nav__link">
+    bnel: Branch on Not Equal Likely
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    等待中断指令
+  </a>
+  
+    <nav class="md-nav" aria-label="等待中断指令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>支持操作系统的额外指令</h1>
+                
+                <h2 id="_1">额外指令<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>参考资料：<a href="../Volume%20II_%20MIPS32%20Instruction%20Set.pdf">Volume II_ MIPS32 Instruction Set</a>
+</p>
+</blockquote>
+<h3 id="_2">算术指令：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h5 id="clz-count-leading-zeros-in-word"><code>clz</code>: Count Leading Zeros in Word<a class="headerlink" href="#clz-count-leading-zeros-in-word" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P102</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clz</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>CLZ 100000</td>
+</tr>
+</tbody>
+</table>
+<p>Bits 31..0 of GPR rs are scanned from most significant to least significant bit. The number of leading zeros is counted and the result is written to GPR rd.(detailed operation please refer to the document.)</p>
+<h5 id="clo-count-leading-ones-in-word"><code>clo</code>: Count Leading Ones in Word<a class="headerlink" href="#clo-count-leading-ones-in-word" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P101</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clo</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>CLZ 100001</td>
+</tr>
+</tbody>
+</table>
+<p>Bits 31..0 of GPR rs are scanned from most significant to least significant bit. The number of leading ones is counted and the result is written to GPR rd.(detailed operation please refer to the document.)</p>
+<h3 id="_3">乘法相关指令<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h5 id="mul-multiply-word-to-gpr"><code>mul</code>: Multiply Word to GPR<a class="headerlink" href="#mul-multiply-word-to-gpr" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P189</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mul</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td>MUL 000010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rd] ← GPR[rs] × GPR[rt]</p>
+<p>The 32-bit word value in GPR rs is multiplied by the 32-bit value in GPR rt, treating both operands as signed values, to produce a 64-bit result. The least significant 32 bits of the product are written to GPR rd. The contents of HI and LO are  UNPREDICTABLE after the operation. No arithmetic exception occurs under any circumstances.</p>
+<h5 id="madd-multiply-and-add-word-to-hilo"><code>madd</code>: Multiply and Add Word to Hi,Lo<a class="headerlink" href="#madd-multiply-and-add-word-to-hilo" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P160</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>madd</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00000</td>
+<td>0 00000</td>
+<td>MADD 000000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI,LO) ← (HI,LO) + (GPR[rs] × GPR[rt])
+The 32-bit word value in GPR rs is multiplied by the 32-bit word value in GPR rt, treating both operands as <strong>signed</strong> values, to produce a 64-bit result. The product is added to the 64-bit concatenated values of HI and LO. The most significant 32 bits of the result are written into HI and the least signficant 32 bits are written into LO. No arithmetic exception occurs under any circumstances.</p>
+<h5 id="maddu-multiply-and-add-unsigned-word-to-hilo"><code>maddu</code>: Multiply and Add Unsigned Word to Hi,Lo<a class="headerlink" href="#maddu-multiply-and-add-unsigned-word-to-hilo" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P162</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maddu</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00000</td>
+<td>0 00000</td>
+<td>MADDU 000001</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI,LO) ← (HI,LO) + (GPR[rs] × GPR[rt])</p>
+<p>The 32-bit word value in GPR rs is multiplied by the 32-bit word value in GPR rt, treating both operands as <strong>unsigned</strong> values, to produce a 64-bit result.</p>
+<h5 id="msub-multiply-and-subtract-word-to-hilo"><code>msub</code>: Multiply and Subtract Word to Hi,Lo<a class="headerlink" href="#msub-multiply-and-subtract-word-to-hilo" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P179</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msub</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00000</td>
+<td>0 00000</td>
+<td>MADDU 000100</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI,LO) ← (HI,LO) - (GPR[rs] × GPR[rt])
+The 32-bit word value in GPR rs is multiplied by the 32-bit value in GPR rt, treating both operands as <strong>signed</strong> values, to produce a 64-bit result.</p>
+<h5 id="msubu-multiply-and-subtract-word-to-hilo"><code>msubu</code>: Multiply and Subtract Word to Hi,Lo<a class="headerlink" href="#msubu-multiply-and-subtract-word-to-hilo" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P181</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th align="center">5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msub</td>
+<td>SPECIAL2 011100</td>
+<td>rs</td>
+<td>rt</td>
+<td>0 00000</td>
+<td>0 00000</td>
+<td align="center">MADDU 000101</td>
+</tr>
+</tbody>
+</table>
+<p>Description: (HI,LO) ← (HI,LO) - (GPR[rs] × GPR[rt])
+The 32-bit word value in GPR rs is multiplied by the 32-bit value in GPR rt, treating both operands as <strong>usigned</strong> values, to produce a 64-bit result.</p>
+<h3 id="_4">非对齐访存指令<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h5 id="lwl-load-word-left"><code>lwl</code>: Load Word Left<a class="headerlink" href="#lwl-load-word-left" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P155</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lwl</td>
+<td>100010</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>To load the most-significant part of a word as a signed value from an unaligned memory address
+Description: GPR[rt] ← GPR[rt] MERGE memory[GPR[base] + offset]
+The 16-bit signed offset is added to the contents of GPR base to form an effective address (EffAddr). EffAddr is the address of the most-significant of 4 consecutive bytes forming a word (W) in memory starting at an arbitrary byte boundary.</p>
+<p>(detailed operation please refer to the document.)</p>
+<h5 id="lwr-load-word-right"><code>lwr</code>: load Word Right<a class="headerlink" href="#lwr-load-word-right" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P157</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lwl</td>
+<td>100110</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>To load the least-significant part of a word from an unaligned memory address as a signed value.
+Description: GPR[rt] ← GPR[rt] MERGE memory[GPR[base] + offset]</p>
+<h5 id="swl-store-word-left"><code>swl</code>:  Store Word Left<a class="headerlink" href="#swl-store-word-left" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P249</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lwl</td>
+<td>101010</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>To store the most-significant part of a word to an unaligned memory address
+Description: memory[GPR[base] + offset] ← GPR[rt]</p>
+<h5 id="swr-store-word-right"><code>swr</code>: Store Word Right<a class="headerlink" href="#swr-store-word-right" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P251</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lwr</td>
+<td>101110</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>To store the least-significant part of a word to an unaligned memory address
+Description: memory[GPR[base] + offset] ← GPR[rt]</p>
+<h3 id="_5">条件执行指令<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h5 id="movn-move-conditional-on-not-zero"><code>movn</code>: Move Conditional on Not Zero<a class="headerlink" href="#movn-move-conditional-on-not-zero" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P173</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th align="center">5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>movn</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td align="center">MOVN 001011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rt] ≠ 0 then GPR[rd] ← GPR[rs]
+If the value in GPR rt is not equal to zero, then the contents of GPR rs are placed into GPR rd.</p>
+<h5 id="movz-move-conditional-on-zero"><code>movz</code>: Move Conditional on Zero<a class="headerlink" href="#movz-move-conditional-on-zero" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P177</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th align="center">5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>movz</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>0 00000</td>
+<td align="center">MOVN 001010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rt] = 0 then GPR[rd] ← GPR[rs]
+If the value in GPR rt is equal to zero, then the contents of GPR rs are placed into GPR rd.</p>
+<h3 id="tlb">TLB 类型指令<a class="headerlink" href="#tlb" title="Permanent link">&para;</a></h3>
+<h5 id="tlbp-probe-tlb-for-matching-entry"><code>tlbp</code>: Probe TLB for Matching Entry<a class="headerlink" href="#tlbp-probe-tlb-for-matching-entry" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P268</th>
+<th>31:26</th>
+<th>25</th>
+<th>24:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tlbp</td>
+<td>COP0 010000</td>
+<td>CO 1</td>
+<td>0 000 0000 0000 0000 0000</td>
+<td>TLBP 001000</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Probe TLB for Matching Entry. To find a matching entry in the TLB.</p>
+<p>Description:
+The Index register is loaded with the address of the TLB entry whose contents match the contents of the EntryHi register.
+If no TLB entry matches, the high-order bit of the Index register is set.</p>
+<h5 id="tlbr-read-indexed-tlb-entry"><code>tlbr</code>: Read Indexed TLB Entry<a class="headerlink" href="#tlbr-read-indexed-tlb-entry" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P269</th>
+<th>31:26</th>
+<th>25</th>
+<th>24:6</th>
+<th align="center">5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tlbr</td>
+<td>COP0 010000</td>
+<td>CO 1</td>
+<td>0 000 0000 0000 0000 0000</td>
+<td align="center">TLBR 000001</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Read Indexed TLB Entry. To read an entry from the TLB.</p>
+<p>Description:
+The EntryHi, EntryLo0, EntryLo1, and PageMask registers are loaded with the contents of the TLB entry pointed to by the Index register.</p>
+<h5 id="tlbwi-write-indexed-tlb-entry"><code>tlbwi</code>: Write Indexed TLB Entry<a class="headerlink" href="#tlbwi-write-indexed-tlb-entry" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P271</th>
+<th>31:26</th>
+<th>25</th>
+<th>24:6</th>
+<th align="center">5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tlbwi</td>
+<td>COP0 010000</td>
+<td>CO 1</td>
+<td>0 000 0000 0000 0000 0000</td>
+<td align="center">TLBWI 000010</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Write Indexed TLB Entry. To write a TLB entry indexed by the Index register</p>
+<p>Description:
+The TLB entry pointed to by the Index register is written from the contents of the EntryHi, EntryLo0, EntryLo1, and PageMask registers. It is implementation dependent whether multiple TLB matches are detected on a TLBWI</p>
+<h5 id="tlbwr-write-random-tlb-entry"><code>tlbwr</code>(可不实现): Write Random TLB Entry<a class="headerlink" href="#tlbwr-write-random-tlb-entry" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P273</th>
+<th>31:26</th>
+<th>25</th>
+<th>24:6</th>
+<th align="center">5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tlbwi</td>
+<td>COP0 010000</td>
+<td>CO 1</td>
+<td>0 000 0000 0000 0000 0000</td>
+<td align="center">TLBWI 000110</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Write Random TLB Entry. To write a TLB entry indexed by the Random register.</p>
+<p>The TLB entry pointed to by the Random register is written from the contents of the EntryHi, EntryLo0, EntryLo1, and PageMask registers. It is implementation dependent whether multiple TLB matches are detected on a TLBWR.</p>
+<h3 id="trap">Trap 类型指令<a class="headerlink" href="#trap" title="Permanent link">&para;</a></h3>
+<h5 id="teq-trap-if-equal"><code>teq</code>: Trap if Equal<a class="headerlink" href="#teq-trap-if-equal" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P262</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>teq</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>code</td>
+<td>TEQ 110100</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] = GPR[rt] then Trap
+Compare the contents of GPR rs and GPR rt as signed integers; if GPR rs is equal to GPR rt, then take a Trap exception.</p>
+<h5 id="teqi-trap-if-equal-immediate"><code>teqi</code>: Trap if Equal Immediate<a class="headerlink" href="#teqi-trap-if-equal-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P263</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>teqi</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>TEQI 01100</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] = immediate then Trap
+Compare the contents of GPR rs and the 16-bit signed immediate as signed integers; if GPR rs is equal to immediate, then take a Trap exception.</p>
+<h5 id="tge-trap-if-greater-or-equal"><code>tge</code>: Trap if Greater or Equal<a class="headerlink" href="#tge-trap-if-greater-or-equal" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P264</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tge</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>code</td>
+<td>TGE 110000</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≥ GPR[rt] then Trap
+Compare the contents of GPR rs and GPR rt as <strong>signed</strong> integers; if GPR rs is equal to GPR rt, then take a Trap exception.</p>
+<h5 id="tgei-trap-if-greater-or-equal-immediate"><code>tgei</code>: Trap if Greater or Equal Immediate<a class="headerlink" href="#tgei-trap-if-greater-or-equal-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P265</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tgei</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>TGEIU 01000</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≥ immediate then Trap
+Compare the contents of GPR rs and the 16-bit signed immediate as <strong>signed</strong> integers; if GPR rs is equal to immediate, then take a Trap exception.</p>
+<h5 id="tgeiu-trap-if-greater-or-equal-immediate-unsigned"><code>tgeiu</code>: Trap if Greater or Equal Immediate Unsigned<a class="headerlink" href="#tgeiu-trap-if-greater-or-equal-immediate-unsigned" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P266</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tgeiu</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>TGEIU 01001</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≥ immediate then Trap
+Compare the contents of GPR rs and the 16-bit signed immediate as <strong>unsigned</strong> integers; if GPR rs is equal to immediate, then take a Trap exception.</p>
+<h5 id="tgeu-trap-if-greater-or-equal-unsigned"><code>tgeu</code>: Trap if Greater or Equal Unsigned<a class="headerlink" href="#tgeu-trap-if-greater-or-equal-unsigned" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P267</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tgeu</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>code</td>
+<td>TGEU 110001</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≥ GPR[rt] then Trap
+Compare the contents of GPR rs and GPR rt as unsigned integers; if GPR rs is greater than or equal to GPR rt, then take a Trap exception.</p>
+<h5 id="tlt-trap-if-less-than"><code>tlt</code>: Trap if Less Than<a class="headerlink" href="#tlt-trap-if-less-than" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P274</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tlt</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>code</td>
+<td>TLT 110010</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &lt; GPR[rt] then Trap
+Compare the contents of GPR rs and GPR rt as signed integers; if GPR rs is less than GPR rt, then take a Trap exception.</p>
+<h5 id="tlti-trap-if-less-than-immediate"><code>tlti</code>: Trap if Less Than Immediate<a class="headerlink" href="#tlti-trap-if-less-than-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P275</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tlti</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>TLTI 01010</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &lt; immediate then Trap
+Compare the contents of GPR rs and the 16-bit signed immediate as signed integers; if GPR rs is less than immediate, then take a Trap exception.</p>
+<h5 id="tltiu-trap-if-less-than-immediate-unsigned"><code>tltiu</code>: Trap if Less Than Immediate Unsigned<a class="headerlink" href="#tltiu-trap-if-less-than-immediate-unsigned" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P275</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tltiu</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>TLTIU 01011</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &lt; immediate then Trap
+Compare the contents of GPR rs and the 16-bit sign-extended immediate as unsigned integers; if GPR rs is less than immediate, then take a Trap exception.</p>
+<h5 id="tltu-trap-if-less-than-unsigned"><code>tltu</code>: Trap if Less Than Unsigned<a class="headerlink" href="#tltu-trap-if-less-than-unsigned" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P277</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tltu</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>code</td>
+<td>TLTU 110011</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] &lt; GPR[rt] then Trap
+Compare the contents of GPR rs and GPR rt as unsigned integers; if GPR rs is less than GPR rt, then take a Trap exception.</p>
+<h5 id="tne-trap-if-not-equal"><code>tne</code>: Trap if Not Equal<a class="headerlink" href="#tne-trap-if-not-equal" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P278</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tne</td>
+<td>SPECIAL 000000</td>
+<td>rs</td>
+<td>rt</td>
+<td>code</td>
+<td>TNE 110110</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≠ GPR[rt] then Trap
+Compare the contents of GPR rs and GPR rt as signed integers; if GPR rs is not equal to GPR rt, then take a Trap exception.</p>
+<h5 id="tnei-trap-if-not-equal-immediate"><code>tnei</code>: Trap if Not Equal Immediate<a class="headerlink" href="#tnei-trap-if-not-equal-immediate" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P279</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tnei</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>TNEI 01110</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] ≠ immediate then Trap
+Compare the contents of GPR rs and the 16-bit signed immediate as signed integers; if GPR rs is not equal to immediate, then take a Trap exception.</p>
+<h3 id="_6">缓存相关指令<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h5 id="cache-perform-cache-operation"><code>cache</code>: Perform Cache Operation<a class="headerlink" href="#cache-perform-cache-operation" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P91</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cache</td>
+<td>101111</td>
+<td>base</td>
+<td>op</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description:
+The 16-bit offset is sign-extended and added to the contents of the base register to form an effective address. The effective address is used in one of the following ways based on the operation to be performed and the type of cache as described in the following table.(refer to the document for details)</p>
+<h5 id="prefnop-prefetch"><code>pref</code>(可实现为<code>nop</code>): Prefetch<a class="headerlink" href="#prefnop-prefetch" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P205</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pref</td>
+<td>110011</td>
+<td>base</td>
+<td>hint</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: prefetch_memory(GPR[base] + offset)
+PREF adds the 16-bit signed offset to the contents of GPR base to form an effective byte address. The hint field supplies information about the way that the data is expected to be used.(refer to the document for details)</p>
+<h3 id="_7">多核同步指令<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h5 id="lllw-load-linked-word"><code>ll</code>(可实现为<code>lw</code>): Load Linked Word<a class="headerlink" href="#lllw-load-linked-word" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P149</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ll</td>
+<td>110000</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: GPR[rt] ← memory[GPR[base] + offset]</p>
+<h5 id="scsw-store-conditional-word"><code>sc</code>(可实现为<code>sw</code>): Store Conditional Word<a class="headerlink" href="#scsw-store-conditional-word" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P149</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sc</td>
+<td>111000</td>
+<td>base</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if atomic_update then memory[GPR[base] + offset] ← GPR[rt], GPR[rt] ← 1 else GPR[rt] ← 0</p>
+<h5 id="syncnop"><code>sync</code>(可实现为<code>nop</code>)<a class="headerlink" href="#syncnop" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P254</th>
+<th>31:26</th>
+<th>25:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sync</td>
+<td>SPECIAL 000000</td>
+<td>0 00 0000 0000 0000 0</td>
+<td>stype</td>
+<td>SYNC 001111</td>
+</tr>
+</tbody>
+</table>
+<h3 id="branch-likely">Branch likely 指令<a class="headerlink" href="#branch-likely" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>这部分指令可通过修改软件代码的方式去除</p>
+</blockquote>
+<h5 id="beql-branch-on-equal-likely"><code>beql</code>: Branch on Equal Likely<a class="headerlink" href="#beql-branch-on-equal-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P269</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beql</td>
+<td>010100</td>
+<td>rs</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Description: if GPR[rs] = GPR[rt] then branch_likely
+An 18-bit signed offset (the 16-bit offset field shifted left 2 bits) is added to the address of the instruction following the branch (not the branch itself), in the branch delay slot, to form a PC-relative effective target address. </p>
+<p>If the contents of GPR rs and GPR rt are equal, branch to the target address after the instruction in the delay slot is executed. If the branch is not taken, the instruction in the delay slot is not executed.</p>
+<h5 id="bgezall-branch-on-greater-than-or-equal-to-zero-and-link-likely"><code>bgezall</code>: Branch on Greater Than or Equal to Zero and Link Likely<a class="headerlink" href="#bgezall-branch-on-greater-than-or-equal-to-zero-and-link-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P72</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bgezall</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BGEZALL 10011</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Greater Than or Equal to Zero and Link Likely To test a GPR then do a PC-relative conditional procedure call; execute the delay slot only if the branch is taken.</p>
+<p>Description: if GPR[rs] ≥ 0 then procedure_call_likely</p>
+<h5 id="bgezl-branch-on-greater-than-or-equal-to-zero-likely"><code>bgezl</code>: Branch on Greater Than or Equal to Zero Likely<a class="headerlink" href="#bgezl-branch-on-greater-than-or-equal-to-zero-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P74</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bgezl</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BGEZL 00011</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Greater Than or Equal to Zero Likely
+To test a GPR then do a PC-relative conditional branch; execute the delay slot only if the branch is taken.</p>
+<p>Description: if GPR[rs] ≥ 0 then branch_likely</p>
+<p><code>bgtzl</code>: Branch on Greater Than Zero Likely</p>
+<table>
+<thead>
+<tr>
+<th>P76</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bgtzl</td>
+<td>010111</td>
+<td>rs</td>
+<td>0 00000</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Greater Than Zero Likely
+To test a GPR then do a PC-relative conditional branch; execute the delay slot only if the branch is taken.
+Description: if GPR[rs] &gt; 0 then branch_likely</p>
+<h5 id="blezl-branch-on-less-than-or-equal-to-zero-likely"><code>blezl</code>: Branch on Less Than or Equal to Zero Likely<a class="headerlink" href="#blezl-branch-on-less-than-or-equal-to-zero-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P78</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blezl</td>
+<td>010110</td>
+<td>rs</td>
+<td>0 00000</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Less Than or Equal to Zero Likely
+To test a GPR then do a PC-relative conditional branch; execute the delay slot only if the branch is taken.
+Description: if GPR[rs] ≤ 0 then branch_likely</p>
+<h5 id="bltzall-branch-on-less-than-zero-and-link-likely"><code>bltzall</code>: Branch on Less Than Zero and Link Likely<a class="headerlink" href="#bltzall-branch-on-less-than-zero-and-link-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P81</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bltzall</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BLTZALL 10010</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Less Than Zero and Link Likely
+To test a GPR then do a PC-relative conditional procedure call; execute the delay slot only if the branch is taken.
+Description: if GPR[rs] &lt; 0 then procedure_call_likely</p>
+<h5 id="btlzl-branch-on-less-than-zero-likely"><code>btlzl</code>: Branch on Less Than Zero Likely<a class="headerlink" href="#btlzl-branch-on-less-than-zero-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P83</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bltzl</td>
+<td>REGIMM 000001</td>
+<td>rs</td>
+<td>BLTZL 00010</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Less Than Zero Likely
+To test a GPR then do a PC-relative conditional branch; execute the delay slot only if the branch is taken.
+Description: if GPR[rs] &lt; 0 then branch_likely</p>
+<h5 id="bnel-branch-on-not-equal-likely"><code>bnel</code>: Branch on Not Equal Likely<a class="headerlink" href="#bnel-branch-on-not-equal-likely" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>P85</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bnel</td>
+<td>010101</td>
+<td>rs</td>
+<td>rt</td>
+<td>offset</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Branch on Not Equal Likely
+To compare GPRs then do a PC-relative conditional branch; execute the delay slot only if the branch is taken.
+Description: if GPR[rs] ≠ GPR[rt] then branch_likely</p>
+<h3 id="_8">等待中断指令<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h5 id="wait">wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>(可实现为阻塞所有流水线，只有中断使能为高时，才跳转到异常处理程序)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>P282</th>
+<th>31:26</th>
+<th>25</th>
+<th>24:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wait</td>
+<td>COP0 010000</td>
+<td>CO 1</td>
+<td>Implementation-dependent code</td>
+<td>WAIT 100000</td>
+</tr>
+</tbody>
+</table>
+<p>Purpose: Enter Standby Mode
+Wait for Event</p>
+<p>The WAIT instruction is typically implemented by stalling the pipeline at the completion of the instruction and entering
+a lower power mode.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../%E6%8C%87%E4%BB%A4%E9%9B%86/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 指令集" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              指令集
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.29db7785.min.js"></script>
+      
+    
+  </body>
+</html>
